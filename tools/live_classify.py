@@ -8,7 +8,7 @@ import numpy as np, cv2
 
 OUT = sys.argv[1]; os.makedirs(os.path.join(OUT, "snap"), exist_ok=True)
 arg = lambda k, d: int(sys.argv[sys.argv.index(k) + 1]) if k in sys.argv else d
-SNAP, FULL, HUD = arg("--snap-every", 15), arg("--full-every", 60), arg("--hud-every", 5)
+SNAP, FULL, HUD, OFFG = arg("--snap-every", 15), arg("--full-every", 60), arg("--hud-every", 5), arg("--offgame-every", 3)
 RA, BA, DEAD = 0.30, 0.15, 0.06
 root = os.path.join(os.path.dirname(__file__), "..")
 cfg = json.load(open(os.path.join(root, "data/minimap_sites_2026_worlds.json"), encoding="utf-8"))
@@ -36,6 +36,7 @@ while True:
     w.writerow(rec); f.flush()
     if SNAP and n % SNAP == 0: cv2.imwrite(os.path.join(OUT, "snap", f"mm_{RUN}_{n:07d}.png"), mm)
     if FULL and n % FULL == 0: cv2.imwrite(os.path.join(OUT, "snap", f"full_{RUN}_{n:07d}.jpg"), fr, [cv2.IMWRITE_JPEG_QUALITY, 88])
+    if OFFG and not lay and n % OFFG == 0: cv2.imwrite(os.path.join(OUT, "snap", f"off_{RUN}_{n:07d}.jpg"), fr, [cv2.IMWRITE_JPEG_QUALITY, 85])   # 非比賽畫面（BP、局間）：禁用辨識素材
     if HUD and n % HUD == 0: cv2.imwrite(os.path.join(OUT, "snap", f"hud_{RUN}_{n:07d}.png"), fr[0:110, 500:1420])   # 上方計分列（物件計數、龍、時鐘）
     lat.append(time.time() - t0); n += 1
     if n % 60 == 0:

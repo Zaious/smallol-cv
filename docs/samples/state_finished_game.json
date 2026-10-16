@@ -1,8 +1,143 @@
 {
  "status": "finished",
  "game": "115660588583171785",
- "updated": "2026-10-16T09:18:16Z",
+ "updated": "2026-10-16T10:22:31Z",
  "videoLagSec": 31.0,
+ "series": {
+  "bestOf": 5,
+  "game": 3,
+  "matchId": "115660588583040710",
+  "teams": {
+   "B": {
+    "code": "MVK",
+    "wins": null
+   },
+   "R": {
+    "code": "FUR",
+    "wins": null
+   }
+  },
+  "winsNote": "服務未在本局開始前看到系列賽，無法確定開局前勝場"
+ },
+ "draft": {
+  "current": {
+   "game": 3,
+   "B": {
+    "team": "MVK",
+    "bans": [
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "picks": [
+     "Zaahen",
+     "JarvanIV",
+     "KogMaw",
+     "Jhin",
+     "Camille"
+    ]
+   },
+   "R": {
+    "team": "FUR",
+    "bans": [
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "picks": [
+     "KSante",
+     "Naafiri",
+     "Ryze",
+     "Kaisa",
+     "Leona"
+    ]
+   },
+   "turn": null
+  },
+  "earlier": [
+   {
+    "game": 1,
+    "B": {
+     "team": "MVK",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Olaf",
+      "Vi",
+      "Cassiopeia",
+      "Ashe",
+      "Seraphine"
+     ]
+    },
+    "R": {
+     "team": "FUR",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Jax",
+      "Trundle",
+      "Galio",
+      "Yunara",
+      "Lulu"
+     ]
+    }
+   },
+   {
+    "game": 2,
+    "B": {
+     "team": "MVK",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Rumble",
+      "LeeSin",
+      "Viktor",
+      "Lucian",
+      "Milio"
+     ]
+    },
+    "R": {
+     "team": "FUR",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Ornn",
+      "MonkeyKing",
+      "Syndra",
+      "Xayah",
+      "Rakan"
+     ]
+    }
+   }
+  ],
+  "picksOrder": "role",
+  "bansSupported": false,
+  "turnSupported": false
+ },
  "clockSource": "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）",
  "gameClock": "27:06",
  "timers": {

@@ -38,6 +38,26 @@
 | `timers.grubsWindow` / `heraldWindow` | string | 規則 | 三蟲 8:00–14:45、預示者 15:00–19:45（被誰拿：尚未支援） |
 | `events` | 陣列 | feed | `{type: dragon/baron/inhibitor/tower, team, element?, sec, gameTime}`，`team` 為**取得者** |
 
+## 系列賽與 BP（v0.1，2026-10-16 加入；依 DesktopLOL `docs/CONTRACT_PROPOSAL.md`）
+
+`series` 與 `draft` 在 `in_game`、`finished`、`waiting` 時都會附上（服務需有 `LOL_API_KEY` 環境變數；沒有時兩欄不出現）。
+BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播）時 `status` 為 `waiting`，此時只有 `status`、`updated`、`series`、`draft`。
+
+| 欄位 | 型別 | 來源 | 說明 |
+| --- | --- | --- | --- |
+| `series.bestOf` | number | esports-api getEventDetails（`strategy.count`） | 1/3/5 |
+| `series.game` | number | 同上 | 本局是第幾局 |
+| `series.matchId` | string | 同上 | 官方系列賽 ID（提案外新增） |
+| `series.teams.B` / `.R` | `{code, wins}` | 同上（每局的 `side`） | **這一局**誰在藍方、誰在紅方（會換邊）。`wins` = 本局開始前的勝場 |
+| `series.winsNote` | string（可無） | 服務 | 服務沒在本局開始前看到系列賽時出現，此時 `wins` 為 null |
+| `draft.current` | `{game, B, R, turn}` | | 本局 |
+| `draft.current.B.picks` | string[5] | feed `gameMetadata`（免金鑰） | Data Dragon 英雄 ID（已驗證：8 局 60 個 ID 全部對得上 16.20.1，例：`KSante` `MonkeyKing` `Velkoz`）。**開局後才有**；BP 中為 5 個 null |
+| `draft.current.B.bans` | (string\|null)[5] | — | **尚未支援**：feed 沒有禁用（搜尋 0 命中），畫面辨識還沒做。目前一律 5 個 null |
+| `draft.current.turn` | null | — | **尚未支援**：BP 進行中的下一手需要畫面辨識。目前一律 null |
+| `draft.earlier` | `{game, B, R}[]` | feed `gameMetadata` | 同系列已結束的局（全局 BP 鎖定名單由此而來）；各局的 B/R 是**那一局**的藍紅方 |
+| `draft.picksOrder` | `"role"` | 服務 | **與提案不同**：picks 的順序是位置（上、野、中、下、輔），不是 BP 順序。feed 只給位置，不給選角順序 |
+| `draft.bansSupported` / `turnSupported` | boolean | 服務 | 目前皆為 false；支援後改為 true |
+
 `site` 值：`top_outer` `top_inner` `top_inhib_tower` `mid_outer` `mid_inner` `mid_inhib_tower` `bot_outer` `bot_inner` `bot_inhib_tower` `nexus_t1` `nexus_t2`。
 
 ## 已知限制（v0）

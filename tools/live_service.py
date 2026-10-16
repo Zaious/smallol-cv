@@ -45,6 +45,93 @@ def hud_clock_reads(st0, t_end):
             if c is not None: out.append((w, c - w))
     return sorted(out)
 
+# ── 系列賽與 BP（esports-api 需要 x-api-key：只讀環境變數 LOL_API_KEY，不寫進任何檔案）──
+import urllib.request
+KEY = os.environ.get("LOL_API_KEY")
+_API_CACHE = {}
+def _get(url, key=False, ttl=30):
+    now = time.time(); c = _API_CACHE.get(url)
+    if c and now - c[0] < ttl: return c[1]
+    req = urllib.request.Request(url, headers={"x-api-key": KEY} if key else {})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        d = json.loads(r.read().decode("utf-8")) if r.status == 200 else None
+    _API_CACHE[url] = (now, d); return d
+
+def live_matches():
+    if not KEY: return []
+    d = _get("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", key=True)
+    return [e["match"]["id"] for e in (d or {}).get("data", {}).get("schedule", {}).get("events", []) or [] if e.get("match")]
+
+def match_details(mid):
+    d = _get(f"https://esports-api.lolesports.com/persisted/gw/getEventDetails?hl=en-US&id={mid}", key=True)
+    return d["data"]["event"]["match"]
+
+SCACHE = os.path.join(D, "series_cache.json")
+def _scache():
+    try: return json.load(open(SCACHE, encoding="utf-8"))
+    except Exception: return {"games": {}, "matchOf": {}}
+
+def game_picks(gid):
+    """已開局小局的選角（feed gameMetadata，免金鑰）：依位置順序（上、野、中、下、輔），不是 BP 順序。"""
+    d = _get(f"https://feed.lolesports.com/livestats/v1/window/{gid}", ttl=3600)
+    if not d: return None
+    m = d["gameMetadata"]; out = {}
+    for side, k in (("B", "blueTeamMetadata"), ("R", "redTeamMetadata")):
+        ps = sorted(m[k]["participantMetadata"], key=lambda p: p["participantId"])
+        out[side] = {"teamId": m[k]["esportsTeamId"], "picks": [p["championId"] for p in ps], "roles": [p["role"] for p in ps]}
+    return out
+
+def series_and_draft(gid):
+    """回傳 (series, draft, live_game_state)。gid=None 時找進行中的系列賽的下一局（BP 中）。"""
+    if not KEY: return None, None, None
+    cache = _scache(); mid = cache["matchOf"].get(gid) if gid else None
+    if not mid and gid:                                        # feed 記錄器的 log 有 game → match 對應（服務中途重啟時用）
+        import re
+        try:
+            for l in open(os.path.join(D, "feed.log"), encoding="utf-8"):
+                m_ = re.search(rf"game {gid} .*match (\d+)", l)
+                if m_: mid = m_.group(1)
+        except FileNotFoundError: pass
+    if not mid:
+        for m_id in live_matches():
+            md = match_details(m_id)
+            if gid is None or any(g["id"] == gid for g in md["games"]): mid = m_id; break
+    if not mid: return None, None, None
+    md = match_details(mid); code = {t["id"]: t["code"] for t in md["teams"]}; wins = {t["id"]: (t.get("result") or {}).get("gameWins", 0) for t in md["teams"]}
+    games = sorted(md["games"], key=lambda g: g["number"])
+    if gid: cur = next(g for g in games if g["id"] == gid)
+    else:
+        cur = next((g for g in games if g["state"] == "inProgress"), None) or next((g for g in games if g["state"] == "unstarted"), None)
+        if not cur: return None, None, None
+    side = {("B" if t["side"] == "blue" else "R"): t["id"] for t in cur["teams"]}
+    # 勝場：本局開始前的值。第一次看到本局（尚未結束）時記下 gameWins；之後一律用記下的值
+    gc = cache["games"].get(cur["id"])
+    if gc is None and cur["state"] != "completed":
+        gc = {"match": mid, "winsAtStart": wins}; cache["games"][cur["id"]] = gc
+    for g in games: cache["matchOf"][g["id"]] = mid
+    json.dump(cache, open(SCACHE, "w", encoding="utf-8"))
+    ws = gc["winsAtStart"] if gc else None
+    series = {"bestOf": md["strategy"]["count"], "game": cur["number"], "matchId": mid,
+              "teams": {s_: {"code": code.get(tid), "wins": (ws or {}).get(tid)} for s_, tid in side.items()}}
+    if not ws: series["winsNote"] = "服務未在本局開始前看到系列賽，無法確定開局前勝場"
+    def side_draft(gid_, sd):
+        pk = game_picks(gid_) if gid_ else None
+        out = {}
+        for s_, tid in sd.items():
+            p = next((v for v in (pk or {}).values() if v["teamId"] == tid), None)
+            out[s_] = {"team": code.get(tid), "bans": [None] * 5, "picks": p["picks"] if p else [None] * 5}
+        return out
+    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side), "turn": None}
+    earlier = []
+    for g in games:
+        if g["number"] < cur["number"] and g["state"] == "completed":
+            sd = {("B" if t["side"] == "blue" else "R"): t["id"] for t in g["teams"]}
+            earlier.append({"game": g["number"], **side_draft(g["id"], sd)})
+    draft = {"current": current, "earlier": earlier,
+             "picksOrder": "role", "bansSupported": False, "turnSupported": False}
+    return series, draft, cur["state"]
+
+
 def load_feed(gid):
     return [json.loads(l) for l in open(f"{D}/feed_{gid}.jsonl", encoding="utf-8")]
 
@@ -154,11 +241,27 @@ def objectives(feed, clock_of):
 
 def update(gid=None):
     gid = gid or current_game()
-    if not gid: return {"status": "idle", "updated": iso(time.time())}
+    if not gid:
+        # 沒有進行中的小局：若有進行中的系列賽（BP 中、局間），回 waiting 並附系列賽與 BP
+        try: series, draft, _ = series_and_draft(None)
+        except Exception as e: series, draft = None, None
+        if series: return {"status": "waiting", "updated": iso(time.time()), "series": series, "draft": draft}
+        return {"status": "idle", "updated": iso(time.time())}
     feed = load_feed(gid)
-    if not any(x["state"] == "in_game" for x in feed): return {"status": "waiting", "game": gid, "updated": iso(time.time())}
+    if not any(x["state"] == "in_game" for x in feed):
+        st = {"status": "waiting", "game": gid, "updated": iso(time.time())}
+        try:
+            series, draft, _ = series_and_draft(gid)
+            if series: st["series"], st["draft"] = series, draft
+        except Exception as e: st["seriesError"] = repr(e)[:200]
+        return st
     finished = feed[-1]["state"] == "finished"
     st = {"status": "finished" if finished else "in_game", "game": gid, "updated": iso(time.time()), "videoLagSec": LAG}
+    try:
+        series, draft, _ = series_and_draft(gid)
+        if series: st["series"], st["draft"] = series, draft
+    except Exception as e:
+        st["seriesError"] = repr(e)[:200]
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
     reads = hud_clock_reads(st0, end if finished else time.time())
     if len(reads) >= 5:
