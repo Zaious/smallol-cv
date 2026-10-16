@@ -313,6 +313,10 @@ if __name__ == "__main__":
             new = update()
             with LOCK: old = dict(STATE); STATE.clear(); STATE.update(new)
             log_new_events(old, new)
+            if new.get("status") == "waiting":                 # 真實 waiting 樣本（BP 中／局間）：每局各存一份，給桌面工具對合約
+                os.makedirs(f"{D}/samples", exist_ok=True)
+                sp = f'{D}/samples/waiting_{new.get("series", {}).get("matchId", "x")}_g{new.get("series", {}).get("game", 0)}.json'
+                if not os.path.exists(sp): json.dump(new, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             json.dump(new, open(f"{D}/state.json.tmp", "w", encoding="utf-8"), ensure_ascii=False); os.replace(f"{D}/state.json.tmp", f"{D}/state.json")
         except Exception as e:
             with LOCK: STATE["error"] = repr(e)
