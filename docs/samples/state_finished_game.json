@@ -1,7 +1,7 @@
 {
  "status": "finished",
  "game": "115660588583171785",
- "updated": "2026-10-16T10:22:31Z",
+ "updated": "2026-10-16T10:46:44Z",
  "videoLagSec": 31.0,
  "series": {
   "bestOf": 5,
@@ -137,6 +137,229 @@
   "picksOrder": "role",
   "bansSupported": false,
   "turnSupported": false
+ },
+ "players": {
+  "B": [
+   {
+    "role": "top",
+    "name": "MVK Kratos",
+    "champion": "Zaahen",
+    "level": 17,
+    "kills": 2,
+    "deaths": 1,
+    "assists": 7,
+    "cs": 232,
+    "gold": 11699,
+    "hp": 1895,
+    "maxHp": 3440,
+    "items": [
+     3078,
+     3363,
+     3111,
+     6631,
+     2019,
+     3155,
+     2055
+    ]
+   },
+   {
+    "role": "jungle",
+    "name": "MVK Gury",
+    "champion": "JarvanIV",
+    "level": 15,
+    "kills": 5,
+    "deaths": 2,
+    "assists": 10,
+    "cs": 205,
+    "gold": 12150,
+    "hp": 1931,
+    "maxHp": 2084,
+    "items": [
+     6692,
+     3111,
+     6699,
+     3026,
+     2055
+    ]
+   },
+   {
+    "role": "mid",
+    "name": "MVK Chika",
+    "champion": "KogMaw",
+    "level": 16,
+    "kills": 7,
+    "deaths": 2,
+    "assists": 10,
+    "cs": 245,
+    "gold": 13571,
+    "hp": 2000,
+    "maxHp": 2533,
+    "items": [
+     2510,
+     3020,
+     3363,
+     4645,
+     4632,
+     3041,
+     1058
+    ]
+   },
+   {
+    "role": "bottom",
+    "name": "MVK Harky",
+    "champion": "Jhin",
+    "level": 15,
+    "kills": 5,
+    "deaths": 0,
+    "assists": 10,
+    "cs": 288,
+    "gold": 13798,
+    "hp": 2035,
+    "maxHp": 2224,
+    "items": [
+     1086,
+     6697,
+     3363,
+     3046,
+     3036,
+     1037,
+     2055
+    ]
+   },
+   {
+    "role": "support",
+    "name": "MVK SiuLoong",
+    "champion": "Camille",
+    "level": 11,
+    "kills": 3,
+    "deaths": 3,
+    "assists": 7,
+    "cs": 27,
+    "gold": 8180,
+    "hp": 489,
+    "maxHp": 2483,
+    "items": [
+     3364,
+     1001,
+     3073,
+     3814,
+     2055
+    ]
+   }
+  ],
+  "R": [
+   {
+    "role": "top",
+    "name": "FUR Guigo",
+    "champion": "KSante",
+    "level": 14,
+    "kills": 0,
+    "deaths": 7,
+    "assists": 1,
+    "cs": 190,
+    "gold": 7619,
+    "hp": 2842,
+    "maxHp": 3239,
+    "items": [
+     1120,
+     3076,
+     6662,
+     3047,
+     1057,
+     3364,
+     3067
+    ]
+   },
+   {
+    "role": "jungle",
+    "name": "FUR Tatu",
+    "champion": "Naafiri",
+    "level": 13,
+    "kills": 2,
+    "deaths": 4,
+    "assists": 5,
+    "cs": 179,
+    "gold": 9688,
+    "hp": 2122,
+    "maxHp": 2224,
+    "items": [
+     3364,
+     6699,
+     3071,
+     3111,
+     2055,
+     2019,
+     1036
+    ]
+   },
+   {
+    "role": "mid",
+    "name": "FUR Tutsz",
+    "champion": "Ryze",
+    "level": 16,
+    "kills": 1,
+    "deaths": 2,
+    "assists": 5,
+    "cs": 244,
+    "gold": 9659,
+    "hp": 21,
+    "maxHp": 3019,
+    "items": [
+     1056,
+     6657,
+     3009,
+     3364,
+     3802,
+     1026
+    ]
+   },
+   {
+    "role": "bottom",
+    "name": "FUR Ayu",
+    "champion": "Kaisa",
+    "level": 13,
+    "kills": 3,
+    "deaths": 2,
+    "assists": 1,
+    "cs": 241,
+    "gold": 12010,
+    "hp": 0,
+    "maxHp": 1821,
+    "items": [
+     6672,
+     3363,
+     3006,
+     3124,
+     3302,
+     1052,
+     1029,
+     2055
+    ]
+   },
+   {
+    "role": "support",
+    "name": "FUR JoJo",
+    "champion": "Leona",
+    "level": 11,
+    "kills": 2,
+    "deaths": 7,
+    "assists": 6,
+    "cs": 29,
+    "gold": 7248,
+    "hp": 0,
+    "maxHp": 2547,
+    "items": [
+     3364,
+     3109,
+     3047,
+     1011,
+     3067,
+     2055,
+     2031
+    ]
+   }
+  ],
+  "asOf": "2026-10-16T01:28:32.295Z"
  },
  "clockSource": "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）",
  "gameClock": "27:06",

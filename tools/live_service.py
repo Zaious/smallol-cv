@@ -81,6 +81,25 @@ def game_picks(gid):
         out[side] = {"teamId": m[k]["esportsTeamId"], "picks": [p["championId"] for p in ps], "roles": [p["role"] for p in ps]}
     return out
 
+def players_snapshot(gid, ref_ts):
+    """選手數據（feed，免金鑰）：window 的 participants（等級、KDA、CS、金錢、血量）＋ details 的 items（Data Dragon 裝備 id）。
+    取 ref_ts（本服務已收到的最新 feed 時間戳）所在 10 秒窗口的最後一幀。participantId 1–5 藍方、6–10 紅方（8 局皆如此）。"""
+    t = dt.datetime.fromtimestamp(int(ref_ts // 10 * 10), dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    w = _get(f"https://feed.lolesports.com/livestats/v1/window/{gid}?startingTime={t}", ttl=5)
+    d = _get(f"https://feed.lolesports.com/livestats/v1/details/{gid}?startingTime={t}", ttl=5)
+    if not w or not w.get("frames"): return None
+    meta = {p["participantId"]: (side, p) for side, k in (("B", "blueTeamMetadata"), ("R", "redTeamMetadata")) for p in w["gameMetadata"][k]["participantMetadata"]}
+    wf = w["frames"][-1]; items = {}
+    if d and d.get("frames"): items = {p["participantId"]: p["items"] for p in d["frames"][-1]["participants"]}
+    out = {"B": [], "R": [], "asOf": wf["rfc460Timestamp"]}
+    for team in ("blueTeam", "redTeam"):
+        for p in wf[team]["participants"]:
+            side, m = meta[p["participantId"]]
+            out[side].append({"role": m["role"], "name": m["summonerName"], "champion": m["championId"], "level": p["level"],
+                              "kills": p["kills"], "deaths": p["deaths"], "assists": p["assists"], "cs": p["creepScore"], "gold": p["totalGold"],
+                              "hp": p["currentHealth"], "maxHp": p["maxHealth"], "items": items.get(p["participantId"])})
+    return out
+
 def series_and_draft(gid):
     """回傳 (series, draft, live_game_state)。gid=None 時找進行中的系列賽的下一局（BP 中）。"""
     if not KEY: return None, None, None
@@ -262,6 +281,11 @@ def update(gid=None):
         if series: st["series"], st["draft"] = series, draft
     except Exception as e:
         st["seriesError"] = repr(e)[:200]
+    try:
+        pl = players_snapshot(gid, ts(feed[-1]["ts"]))
+        if pl: st["players"] = pl
+    except Exception as e:
+        st["playersError"] = repr(e)[:200]
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
     reads = hud_clock_reads(st0, end if finished else time.time())
     if len(reads) >= 5:
