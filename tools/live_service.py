@@ -393,6 +393,10 @@ if __name__ == "__main__":
             new = update()
             with LOCK: old = dict(STATE); STATE.clear(); STATE.update(new)
             log_new_events(old, new)
+            # 狀態紀錄：內容有變（不計 updated）才附加一行，供事後重看「桌面工具每一刻會看到什麼」
+            strip = lambda x: {k: v for k, v in x.items() if k != "updated"}
+            if strip(new) != strip(old):
+                with open(f"{D}/statelog.jsonl", "a", encoding="utf-8") as f: f.write(json.dumps(new, ensure_ascii=False) + "\n")
             if new.get("status") == "waiting":                 # 真實 waiting 樣本（BP 中／局間）：每局各存一份，給桌面工具對合約
                 os.makedirs(f"{D}/samples", exist_ok=True)
                 sp = f'{D}/samples/waiting_{new.get("series", {}).get("matchId", "x")}_g{new.get("series", {}).get("game", 0)}.json'
