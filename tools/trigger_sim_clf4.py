@@ -50,6 +50,7 @@ def feasible(s, D, t):
     k = TIERS.index("_".join(p[2:])); return all(f"{team}_{lane}_{TIERS[j]}" in D[team] for j in range(k))
 
 D = {"R": {}, "B": {}}; events = []
+NEXUS_RESPAWN = 180; consumed = {"R": 0, "B": 0}; respawns = []
 run_alive = {s_: 0 for s_ in TOW}; dead_since = {s_: 0 for s_ in TOW}; first_dead = {s_: None for s_ in TOW}; alive_run_seen = {s_: False for s_ in TOW}
 for i, t in enumerate(t_all):
     if hidden[i] or t < G0 + 14 * 60: continue
@@ -62,10 +63,15 @@ for i, t in enumerate(t_all):
             dead_since[s_] += 1
             if first_dead[s_] is None: first_dead[s_] = int(t)
     for team in "RB":
-        for s_ in list(D[team]):                              # 撤銷：塔不會重生；需連續 REVOKE_RUN 秒存活
+        for s_ in list(D[team]):                              # 撤銷：外／內／水晶塔不會重生；需連續 REVOKE_RUN 秒存活
             if run_alive[s_] >= REVOKE_RUN and D[team][s_][0] < t - 2:
-                del D[team][s_]; events.append((team, int(t), s_, "撤銷", None))
-        K = known(tower_ev[team], t)
+                if "_nexus_" in s_ and t - D[team][s_][1] >= NEXUS_RESPAWN - 20:
+                    # 主堡塔被摧毀 3 分鐘後會重生（26.1 起 40% 血量）：那次摧毀仍計入 feed 塔數，之後可再次命名（clf4 新增）
+                    consumed[team] += 1; respawns.append((team, s_, D[team][s_][1], int(t)))
+                    del D[team][s_]; events.append((team, int(t), s_, "重生", None))
+                else:
+                    del D[team][s_]; events.append((team, int(t), s_, "撤銷", None))
+        K = known(tower_ev[team], t) - consumed[team]
         while len(D[team]) < K:
             cands = []
             for s_ in TOW:
@@ -76,7 +82,7 @@ for i, t in enumerate(t_all):
             D[team][s_] = (int(t), first_dead[s_]); events.append((team, int(t), s_, "命名", first_dead[s_]))
 def complete_by_elimination(team, t_end):
     """名額未滿時，從路線前綴可選的站點裡挑最近 30 個有效秒平均存活機率最低者補滿；一座一座補，補完後前綴更新。"""
-    K = known(tower_ev[team], t_end); added = []
+    K = known(tower_ev[team], t_end) - consumed[team]; added = []
     valid_idx = [j for j in range(len(rows)) if not hidden[j] and t_all[j] <= t_end][-30:]
     # 主堡塔優先（clf4 新增）：水晶被破之後 feed 又記到的塔損失，優先補給主堡塔（最多 2 座，扣掉已命名者）。
     # 起因：英雄頭像圍住主堡塔時，頭像外框被判成存活，補滿誤挑其他路的塔（MVK vs FUR 第 1 局）。
@@ -101,11 +107,14 @@ if "--complete" in sys.argv:
 print(f"{CSV.split('/')[-1]}  lead={LEAD:.0f}s  比賽結束 遊戲 {gt(END - G0)}  撤銷 {sum(1 for e in events if e[3]=='撤銷')} 次")
 delays = []
 for team in "RB":
-    K = known(tower_ev[team], END)
+    K = known(tower_ev[team], END) - consumed[team]
     seq = sorted(D[team].items(), key=lambda kv: kv[1][1])
     delays += [nm - on for _, (nm, on) in seq]
     print(f"  {team} 隊 feed {K} / 命名 {len(D[team])} {'OK' if len(D[team]) == K else 'DIFF'}：" + "  ".join(f"{s[2:]}@{gt(on - G0)}(+{nm - on}s)" for s, (nm, on) in seq))
 if COMPLETED: print("  排除法補上：", {t: c for t, c in COMPLETED.items() if c})
+if respawns: print("  主堡塔重生：", [(tm, s_[2:], gt(a - G0), gt(b - G0)) for tm, s_, a, b in respawns])
 if delays: print(f"  命名延遲（從影片開始顯示消失到命名）：中位數 {int(np.median(delays))} 秒，最大 {int(max(delays))} 秒")
 if OUTJSON:
-    json.dump({tm: {s: {"named": v[0] - G0, "onset": v[1] - G0} for s, v in D[tm].items()} for tm in "RB"}, open(OUTJSON, "w"), ensure_ascii=False)
+    out = {tm: {s: {"named": v[0] - G0, "onset": v[1] - G0} for s, v in D[tm].items()} for tm in "RB"}
+    out["respawns"] = [{"team": tm, "site": s_[2:], "destroyed": a - G0, "respawnSeen": b - G0} for tm, s_, a, b in respawns]
+    json.dump(out, open(OUTJSON, "w"), ensure_ascii=False)

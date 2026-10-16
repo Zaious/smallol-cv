@@ -93,7 +93,11 @@ def tower_naming(gid, feed, finished):
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
     if r.returncode != 0: return None, r.stderr[-300:]
     named = json.load(open(f"{tmp}/named.json", encoding="utf-8"))
-    return {tm: sorted(({"site": s[2:], "gameTime": gclock(v["onset"]), "sec": v["onset"]} for s, v in named[tm].items()), key=lambda x: x["sec"]) for tm in "RB"}, None
+    out = {tm: sorted(({"site": s[2:], "gameTime": gclock(v["onset"]), "sec": v["onset"]} for s, v in named[tm].items()), key=lambda x: x["sec"]) for tm in "RB"}
+    # 主堡塔：被摧毀 3 分鐘後重生（26.1 起 40% 血量）；倒數以命名的消失時間 + 規則推算，重生由畫面確認後從已摧毀清單移除
+    out["nexusTurretsDown"] = [{"teamLost": tm, "site": x["site"], "respawnAt": gclock(x["sec"] + RULES["nexusTurretRespawn"])} for tm in "RB" for x in out[tm] if x["site"].startswith("nexus")]
+    out["nexusRespawnsSeen"] = [{**r, "destroyedAt": gclock(r["destroyed"]), "respawnSeenAt": gclock(r["respawnSeen"])} for r in named.get("respawns", [])]
+    return out, None
 
 def objectives(feed, clock_of):
     """clock_of(feed 時間戳秒) -> 遊戲時鐘秒。"""
