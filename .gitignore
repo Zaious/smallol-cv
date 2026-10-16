@@ -1,0 +1,14 @@
+# 錄影與抽出的畫格不提交（CLAUDE.md 第 5 條）
+vod/
+recordings/
+frames/
+
+# 英雄頭像：不放進 repo，由使用者自行放在本機資料夾（見 README 的下載來源）
+hero-icons/
+hero-art/
+data/
+
+# 金鑰與本機設定
+.env
+*.key
+config.local.*
