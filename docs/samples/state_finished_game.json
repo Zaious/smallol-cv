@@ -1,0 +1,247 @@
+{
+ "status": "finished",
+ "game": "115660588583171785",
+ "updated": "2026-10-16T09:18:16Z",
+ "videoLagSec": 31.0,
+ "clockSource": "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）",
+ "gameClock": "27:06",
+ "timers": {
+  "nextDragon": {
+   "kind": "elemental",
+   "element": "chemtech",
+   "elementNote": null,
+   "spawnAt": "31:08",
+   "sec": 1868
+  },
+  "nextBaron": {
+   "spawnAt": "28:31",
+   "sec": 1711
+  },
+  "activeBuffs": [],
+  "inhibitorsDown": [
+   {
+    "teamLost": "R",
+    "respawnAt": "29:48"
+   },
+   {
+    "teamLost": "R",
+    "respawnAt": "31:55"
+   }
+  ],
+  "grubsWindow": "8:00–14:45",
+  "heraldWindow": "15:00–19:45",
+  "note": "計時依規則表推算；三蟲與預示者是否被擊殺、由誰擊殺，feed 不提供，尚未從畫面讀取"
+ },
+ "dragons": {
+  "B": [
+   "ocean",
+   "chemtech",
+   "chemtech"
+  ],
+  "R": [
+   "hextech"
+  ]
+ },
+ "riftElement": "chemtech",
+ "soul": null,
+ "elderKills": {
+  "B": 0,
+  "R": 0
+ },
+ "barons": {
+  "B": 1,
+  "R": 0
+ },
+ "inhibitors": {
+  "B": 2,
+  "R": 0
+ },
+ "towersDestroyedBy": {
+  "B": 10,
+  "R": 0
+ },
+ "kills": {
+  "B": 22,
+  "R": 8
+ },
+ "gold": {
+  "B": 59398,
+  "R": 46224
+ },
+ "events": [
+  {
+   "type": "dragon",
+   "team": "R",
+   "element": "hextech",
+   "sec": 555,
+   "gameTime": "9:15"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 823,
+   "gameTime": "13:43"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 834,
+   "gameTime": "13:54"
+  },
+  {
+   "type": "dragon",
+   "team": "B",
+   "element": "ocean",
+   "sec": 900,
+   "gameTime": "15:00"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 958,
+   "gameTime": "15:58"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1054,
+   "gameTime": "17:34"
+  },
+  {
+   "type": "dragon",
+   "team": "B",
+   "element": "chemtech",
+   "sec": 1228,
+   "gameTime": "20:28"
+  },
+  {
+   "type": "baron",
+   "team": "B",
+   "sec": 1351,
+   "gameTime": "22:31"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1421,
+   "gameTime": "23:41"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1471,
+   "gameTime": "24:31"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1485,
+   "gameTime": "24:45"
+  },
+  {
+   "type": "inhibitor",
+   "team": "B",
+   "sec": 1488,
+   "gameTime": "24:48"
+  },
+  {
+   "type": "dragon",
+   "team": "B",
+   "element": "chemtech",
+   "sec": 1568,
+   "gameTime": "26:08"
+  },
+  {
+   "type": "inhibitor",
+   "team": "B",
+   "sec": 1615,
+   "gameTime": "26:55"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1615,
+   "gameTime": "26:55"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1615,
+   "gameTime": "26:55"
+  },
+  {
+   "type": "tower",
+   "team": "B",
+   "sec": 1619,
+   "gameTime": "26:59"
+  }
+ ],
+ "towersLost": {
+  "R": [
+   {
+    "site": "bot_outer",
+    "gameTime": "14:11",
+    "sec": 851
+   },
+   {
+    "site": "mid_outer",
+    "gameTime": "18:29",
+    "sec": 1109
+   },
+   {
+    "site": "top_outer",
+    "gameTime": "19:42",
+    "sec": 1182
+   },
+   {
+    "site": "bot_inner",
+    "gameTime": "23:37",
+    "sec": 1417
+   },
+   {
+    "site": "mid_inner",
+    "gameTime": "24:38",
+    "sec": 1478
+   },
+   {
+    "site": "mid_inhib_tower",
+    "gameTime": "25:25",
+    "sec": 1525
+   },
+   {
+    "site": "top_inner",
+    "gameTime": "25:38",
+    "sec": 1538
+   },
+   {
+    "site": "bot_inhib_tower",
+    "gameTime": "26:35",
+    "sec": 1595
+   },
+   {
+    "site": "nexus_t1",
+    "gameTime": "27:16",
+    "sec": 1636
+   },
+   {
+    "site": "nexus_t2",
+    "gameTime": "27:16",
+    "sec": 1636
+   }
+  ],
+  "B": [],
+  "nexusTurretsDown": [
+   {
+    "teamLost": "R",
+    "site": "nexus_t1",
+    "respawnAt": "30:16"
+   },
+   {
+    "teamLost": "R",
+    "site": "nexus_t2",
+    "respawnAt": "30:16"
+   }
+  ],
+  "nexusRespawnsSeen": []
+ }
+}
