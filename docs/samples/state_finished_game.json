@@ -1,7 +1,7 @@
 {
  "status": "finished",
  "game": "115660588583171785",
- "updated": "2026-10-16T17:04:02Z",
+ "updated": "2026-10-16T17:10:48Z",
  "videoLagSec": 31.0,
  "series": {
   "bestOf": 5,
@@ -535,6 +535,72 @@
    "gameTime": "26:59"
   }
  ],
- "towersLost": null,
- "towersError": "畫面資料不足"
+ "towersLost": {
+  "R": [
+   {
+    "site": "bot_outer",
+    "gameTime": "14:11",
+    "sec": 851
+   },
+   {
+    "site": "mid_outer",
+    "gameTime": "18:29",
+    "sec": 1109
+   },
+   {
+    "site": "top_outer",
+    "gameTime": "19:42",
+    "sec": 1182
+   },
+   {
+    "site": "bot_inner",
+    "gameTime": "23:37",
+    "sec": 1417
+   },
+   {
+    "site": "mid_inner",
+    "gameTime": "24:38",
+    "sec": 1478
+   },
+   {
+    "site": "mid_inhib_tower",
+    "gameTime": "25:25",
+    "sec": 1525
+   },
+   {
+    "site": "top_inner",
+    "gameTime": "25:38",
+    "sec": 1538
+   },
+   {
+    "site": "bot_inhib_tower",
+    "gameTime": "26:35",
+    "sec": 1595
+   },
+   {
+    "site": "nexus_t1",
+    "gameTime": "27:16",
+    "sec": 1636
+   },
+   {
+    "site": "nexus_t2",
+    "gameTime": "27:16",
+    "sec": 1636
+   }
+  ],
+  "B": [],
+  "nexusTurretsDown": [
+   {
+    "teamLost": "R",
+    "site": "nexus_t1",
+    "respawnAt": "30:16"
+   },
+   {
+    "teamLost": "R",
+    "site": "nexus_t2",
+    "respawnAt": "30:16"
+   }
+  ],
+  "nexusRespawnsSeen": []
+ }
 }

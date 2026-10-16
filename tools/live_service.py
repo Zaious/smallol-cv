@@ -226,6 +226,7 @@ def cv_rows(st0, t_end):
         if not rows: continue
         off = np.array([ts(r["wall_utc"]) - int(r["n"]) for r in rows])
         for i, r in enumerate(rows):
+            if "R_top_outer_A" not in r: continue                # 缺塔欄位的列（例如只有版面欄位）不用，避免整個塔命名失效
             w = int(r["n"]) + float(np.median(off[max(0, i - 300):i + 300])) - LAG
             if not (st0 - 60 <= w <= t_end): continue
             out[int(round(w - st0)) + G0] = r
