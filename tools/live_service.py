@@ -133,22 +133,77 @@ def series_and_draft(gid):
     series = {"bestOf": md["strategy"]["count"], "game": cur["number"], "matchId": mid,
               "teams": {s_: {"code": code.get(tid), "wins": (ws or {}).get(tid)} for s_, tid in side.items()}}
     if not ws: series["winsNote"] = "服務未在本局開始前看到系列賽，無法確定開局前勝場"
-    def side_draft(gid_, sd):
+    def side_draft(gid_, sd, bans=None):
         pk = game_picks(gid_) if gid_ else None
         out = {}
         for s_, tid in sd.items():
             p = next((v for v in (pk or {}).values() if v["teamId"] == tid), None)
-            out[s_] = {"team": code.get(tid), "bans": [None] * 5, "picks": p["picks"] if p else [None] * 5}
+            out[s_] = {"team": code.get(tid), "bans": (bans or {}).get(s_) or [None] * 5, "picks": p["picks"] if p else [None] * 5}
         return out
-    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side), "turn": None}
+    def game_bans(g):
+        """該局的禁用（畫面辨識）：已開局者取開局前 20 分鐘的 BP 畫面做最終判定；BP 中者只回穩定出現的格子。"""
+        try:
+            st0 = feed_start(g["id"])
+            if st0 is not None: return draft_bans(st0 + LAG - 1200, st0 + LAG, final=True)
+            if g["state"] != "completed": return draft_bans(time.time() - 1200, time.time(), final=False)
+        except Exception as e:
+            print(iso(time.time()), "禁用辨識例外", repr(e), flush=True)
+        return None
+    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side, game_bans(cur)), "turn": None}
     earlier = []
     for g in games:
         if g["number"] < cur["number"] and g["state"] == "completed":
             sd = {("B" if t["side"] == "blue" else "R"): t["id"] for t in g["teams"]}
-            earlier.append({"game": g["number"], **side_draft(g["id"], sd)})
+            earlier.append({"game": g["number"], **side_draft(g["id"], sd, game_bans(g))})
     draft = {"current": current, "earlier": earlier,
-             "picksOrder": "role", "bansSupported": False, "turnSupported": False}
+             "picksOrder": "role", "bansSupported": True, "bansOrder": "ban", "turnSupported": False}
     return series, draft, cur["state"]
+
+def feed_start(gid):
+    """本服務記錄到的該局 feed 第一個 in_game 時間戳（秒）；沒有記錄時回 None。"""
+    p = f"{D}/feed_{gid}.jsonl"
+    if not os.path.exists(p): return None
+    for l in open(p, encoding="utf-8"):
+        x = json.loads(l)
+        if x["state"] == "in_game": return ts(x["ts"])
+    return None
+
+_BAN_CACHE = {}
+def draft_bans(t_from, t_to, final):
+    """從擷取存下的非比賽畫面（off_<RUN>_<n>.jpg，每 3 秒）辨識禁用。畫面牆鐘以各擷取段的格數 n 錨定。
+    final=True：BP 列最後 3 張可見畫格加總，10 格一對一指派（Day 1 共 8 局 80/80）。
+    final=False（BP 進行中）：某格在最近 3 張可見畫格的第一名相同且分數 >= 0.45 才回報，否則 null（避免把閃爍中的待選畫面報成禁用；此模式尚未驗證）。
+    回傳 {"B": [禁用 1–5], "R": [禁用 1–5]}（依禁用順序；左側隊伍＝藍方）或 None。"""
+    import bans26 as BN
+    frames = []
+    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+        run = os.path.basename(p)[9:-4]
+        offs = sorted(glob.glob(f"{D}/snap/off_{run}_*.jpg"))
+        if not offs: continue
+        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        if not rows: continue
+        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows]))
+        for fp in offs:
+            w = int(fp[-11:-4]) + anchor
+            if t_from <= w <= t_to: frames.append((w, fp))
+    vis = []
+    for w, fp in sorted(frames):
+        if fp not in _BAN_CACHE:
+            im = cv2.imread(fp); _BAN_CACHE[fp] = BN.slot_scores(im) if im is not None and BN.visible(im) else None
+        if _BAN_CACHE[fp] is not None: vis.append(_BAN_CACHE[fp])
+    if not vis: return None
+    if final:
+        from scipy.optimize import linear_sum_assignment
+        _, c = linear_sum_assignment(-sum(vis[-3:])); res = [BN.NAMES[i] for i in c]
+    else:
+        res = []
+        for j in range(10):
+            tops = [int(S[j].argmax()) for S in vis[-3:]]
+            ok = len(vis) >= 3 and len(set(tops)) == 1 and all(S[j].max() >= 0.45 for S in vis[-3:])
+            res.append(BN.NAMES[tops[-1]] if ok else None)
+        dup = {n for n in res if n and res.count(n) > 1}
+        res = [None if n in dup else n for n in res]
+    return {"B": res[:5], "R": res[5:][::-1]}
 
 
 def load_feed(gid):

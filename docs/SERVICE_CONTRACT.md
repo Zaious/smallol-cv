@@ -52,11 +52,12 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `series.winsNote` | string（可無） | 服務 | 服務沒在本局開始前看到系列賽時出現，此時 `wins` 為 null |
 | `draft.current` | `{game, B, R, turn}` | | 本局 |
 | `draft.current.B.picks` | string[5] | feed `gameMetadata`（免金鑰） | Data Dragon 英雄 ID（已驗證：8 局 60 個 ID 全部對得上 16.20.1，例：`KSante` `MonkeyKing` `Velkoz`）。**開局後才有**；BP 中為 5 個 null |
-| `draft.current.B.bans` | (string\|null)[5] | — | **尚未支援**：feed 沒有禁用（搜尋 0 命中），畫面辨識還沒做。目前一律 5 個 null |
+| `draft.current.B.bans` | (string\|null)[5] | 畫面辨識（v0.3） | 依禁用順序（第 1–5 手）；Data Dragon 英雄 ID。**開局後**：BP 列最後 3 張畫面、10 格一對一指派（Day 1 共 8 局 80/80 對照 Leaguepedia，其中規則凍結後的盲測 40/40）。**BP 進行中**：只回報連續 3 張（約 9 秒）穩定的格子，其餘 null（此模式尚未驗證）。服務沒有該局的 BP 畫面時為 5 個 null |
 | `draft.current.turn` | null | — | **尚未支援**：BP 進行中的下一手需要畫面辨識。目前一律 null |
 | `draft.earlier` | `{game, B, R}[]` | feed `gameMetadata` | 同系列已結束的局（全局 BP 鎖定名單由此而來）；各局的 B/R 是**那一局**的藍紅方 |
 | `draft.picksOrder` | `"role"` | 服務 | **與提案不同**：picks 的順序是位置（上、野、中、下、輔），不是 BP 順序。feed 只給位置，不給選角順序 |
-| `draft.bansSupported` / `turnSupported` | boolean | 服務 | 目前皆為 false；支援後改為 true |
+| `draft.bansSupported` / `turnSupported` | boolean | 服務 | v0.3 起 `bansSupported` 為 true；`turnSupported` 仍為 false |
+| `draft.bansOrder` | `"ban"` | 服務 | v0.3 新增：bans 依禁用順序排列（藍紅兩方各自的第 1–5 手） |
 
 ## 選手（v0.2，2026-10-16 加入；依 DesktopLOL `docs/CONTRACT_PROPOSAL.md`「選手」一節）
 
