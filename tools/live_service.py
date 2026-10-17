@@ -543,6 +543,10 @@ class H(BaseHTTPRequestHandler):
             except Exception as e: body = json.dumps({"error": repr(e)[:200]}, ensure_ascii=False).encode("utf-8")
         elif path in ("/", "/state.json"):
             with LOCK: body = json.dumps(STATE, ensure_ascii=False).encode("utf-8")
+        elif path == "/teams.json":
+            fp = os.path.join(ROOT, "data", "archive", "teamsheet.json")      # tools/build_teamsheet.py 產生
+            if not os.path.exists(fp): self.send_response(404); self.end_headers(); return
+            body = open(fp, "rb").read()
         elif path.startswith("/history/"):
             # 歷史資料（tools/archive.py 產生）：/history/teams.json、/history/players.json、/history/games.json、/history/game/<gameId>.json
             A = os.path.join(ROOT, "data", "archive"); rel = path[len("/history/"):]

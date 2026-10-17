@@ -135,5 +135,8 @@ def main():
                 c["games"] += 1; c["wins"] += bool(win); c["k"] += p["kills"]; c["d"] += p["deaths"]; c["a"] += p["assists"]
     json.dump({"updated": svc.iso(dt.datetime.now().timestamp()), "scope": "Worlds 2026（本服務有記錄的小局）", "players": players}, open(f"{OUT}/players.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"完成：{len(games)} 局、{len(teams)} 隊、{len(players)} 位選手")
+    try:                                                     # 順便更新隊伍資料檔的本屆上場局數（只讀本地檔，不打 Leaguepedia）
+        import build_teamsheet; build_teamsheet.main()
+    except Exception as e: print("隊伍資料檔更新失敗", repr(e))
 
 if __name__ == "__main__": main()
