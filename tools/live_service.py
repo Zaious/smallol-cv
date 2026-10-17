@@ -95,7 +95,7 @@ def players_snapshot(gid, ref_ts):
     for team in ("blueTeam", "redTeam"):
         for p in wf[team]["participants"]:
             side, m = meta[p["participantId"]]
-            out[side].append({"role": m["role"], "name": m["summonerName"], "champion": m["championId"], "level": p["level"],
+            out[side].append({"role": m["role"], "name": m["summonerName"].strip(), "champion": m["championId"], "level": p["level"],   # feed 有時名字帶尾端空白（"C9 Loki "）
                               "kills": p["kills"], "deaths": p["deaths"], "assists": p["assists"], "cs": p["creepScore"], "gold": p["totalGold"],
                               "hp": p["currentHealth"], "maxHp": p["maxHealth"], "items": items.get(p["participantId"])})
     return out
