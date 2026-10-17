@@ -1,0 +1,102 @@
+{
+ "status": "waiting",
+ "updated": "2026-10-16T18:59:17Z",
+ "series": {
+  "bestOf": 5,
+  "game": 2,
+  "matchId": "115660588583171790",
+  "teams": {
+   "B": {
+    "code": "MVK",
+    "wins": 0
+   },
+   "R": {
+    "code": "KC",
+    "wins": 1
+   }
+  }
+ },
+ "draft": {
+  "current": {
+   "game": 2,
+   "B": {
+    "team": "MVK",
+    "bans": [
+     "Olaf",
+     "Nocturne",
+     "Cassiopeia",
+     "MonkeyKing",
+     null
+    ],
+    "picks": [
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "R": {
+    "team": "KC",
+    "bans": [
+     "Pantheon",
+     "Karma",
+     "Orianna",
+     null,
+     null
+    ],
+    "picks": [
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "turn": null
+  },
+  "earlier": [
+   {
+    "game": 1,
+    "B": {
+     "team": "KC",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Jayce",
+      "Vi",
+      "Syndra",
+      "Draven",
+      "Nautilus"
+     ]
+    },
+    "R": {
+     "team": "MVK",
+     "bans": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "picks": [
+      "Ambessa",
+      "Maokai",
+      "KSante",
+      "Tristana",
+      "Lulu"
+     ]
+    }
+   }
+  ],
+  "picksOrder": "role",
+  "bansSupported": true,
+  "bansOrder": "ban",
+  "turnSupported": false
+ }
+}
