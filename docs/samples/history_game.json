@@ -1,0 +1,499 @@
+{
+ "gameId": "115660588583171792",
+ "matchId": "115660588583171790",
+ "stage": "Play-Ins",
+ "game": 2,
+ "bestOf": 5,
+ "start": "2026-10-16T19:01:17Z",
+ "durationSec": 1988,
+ "duration": "33:08",
+ "teams": {
+  "B": "KC",
+  "R": "MVK"
+ },
+ "sources": {
+  "winner": "leaguepedia",
+  "players": "feed",
+  "bans": "cv",
+  "final": "feed",
+  "voidgrubs": "leaguepedia",
+  "heralds": "leaguepedia",
+  "towersLost": "cv"
+ },
+ "winner": "B",
+ "players": {
+  "B": [
+   {
+    "role": "top",
+    "name": "KC Canna",
+    "champion": "Galio",
+    "level": 18,
+    "kills": 1,
+    "deaths": 4,
+    "assists": 12,
+    "cs": 226,
+    "gold": 11224,
+    "hp": 1036,
+    "maxHp": 3157,
+    "items": [
+     3152,
+     3047,
+     3363,
+     4005,
+     3157
+    ]
+   },
+   {
+    "role": "jungle",
+    "name": "KC Yike",
+    "champion": "LeeSin",
+    "level": 17,
+    "kills": 5,
+    "deaths": 1,
+    "assists": 8,
+    "cs": 266,
+    "gold": 14799,
+    "hp": 2807,
+    "maxHp": 2807,
+    "items": [
+     6692,
+     3047,
+     3071,
+     6333,
+     2019,
+     2055
+    ]
+   },
+   {
+    "role": "mid",
+    "name": "KC kyeahoo",
+    "champion": "Ahri",
+    "level": 17,
+    "kills": 6,
+    "deaths": 1,
+    "assists": 6,
+    "cs": 306,
+    "gold": 14452,
+    "hp": 2339,
+    "maxHp": 2339,
+    "items": [
+     1082,
+     3364,
+     3118,
+     3089,
+     3157,
+     1058,
+     2139
+    ]
+   },
+   {
+    "role": "bottom",
+    "name": "KC Caliste",
+    "champion": "Ashe",
+    "level": 16,
+    "kills": 5,
+    "deaths": 3,
+    "assists": 10,
+    "cs": 339,
+    "gold": 18036,
+    "hp": 2221,
+    "maxHp": 2221,
+    "items": [
+     1086,
+     2523,
+     3046,
+     3363,
+     3031,
+     3036,
+     1038
+    ]
+   },
+   {
+    "role": "support",
+    "name": "KC Busio",
+    "champion": "Seraphine",
+    "level": 14,
+    "kills": 4,
+    "deaths": 2,
+    "assists": 14,
+    "cs": 40,
+    "gold": 10326,
+    "hp": 1533,
+    "maxHp": 2783,
+    "items": [
+     3364,
+     6620,
+     3222,
+     3158,
+     3109,
+     1028
+    ]
+   }
+  ],
+  "R": [
+   {
+    "role": "top",
+    "name": "MVK Kratos",
+    "champion": "TwistedFate",
+    "level": 17,
+    "kills": 3,
+    "deaths": 4,
+    "assists": 1,
+    "cs": 273,
+    "gold": 14247,
+    "hp": 2366,
+    "maxHp": 2366,
+    "items": [
+     6672,
+     3094,
+     3363,
+     3009,
+     2523,
+     3031,
+     2055
+    ]
+   },
+   {
+    "role": "jungle",
+    "name": "MVK SanSan",
+    "champion": "Qiyana",
+    "level": 16,
+    "kills": 3,
+    "deaths": 4,
+    "assists": 4,
+    "cs": 237,
+    "gold": 13576,
+    "hp": 2319,
+    "maxHp": 2319,
+    "items": [
+     3364,
+     2520,
+     3111,
+     6699,
+     6695,
+     3123,
+     1036
+    ]
+   },
+   {
+    "role": "mid",
+    "name": "MVK Chika",
+    "champion": "Rumble",
+    "level": 16,
+    "kills": 2,
+    "deaths": 6,
+    "assists": 2,
+    "cs": 239,
+    "gold": 10417,
+    "hp": 2924,
+    "maxHp": 2924,
+    "items": [
+     1082,
+     3363,
+     6653,
+     4633,
+     4632
+    ]
+   },
+   {
+    "role": "bottom",
+    "name": "MVK Harky",
+    "champion": "Ezreal",
+    "level": 17,
+    "kills": 2,
+    "deaths": 3,
+    "assists": 3,
+    "cs": 354,
+    "gold": 15163,
+    "hp": 2686,
+    "maxHp": 2686,
+    "items": [
+     1086,
+     3078,
+     3363,
+     3158,
+     3140,
+     2517,
+     3110
+    ]
+   },
+   {
+    "role": "support",
+    "name": "MVK SiuLoong",
+    "champion": "Pyke",
+    "level": 11,
+    "kills": 1,
+    "deaths": 4,
+    "assists": 3,
+    "cs": 43,
+    "gold": 8345,
+    "hp": 0,
+    "maxHp": 1635,
+    "items": [
+     3364,
+     3179,
+     3009,
+     3140,
+     3134,
+     1028,
+     2055,
+     2055
+    ]
+   }
+  ],
+  "asOf": "2026-10-16T19:34:26.012Z"
+ },
+ "bans": {
+  "B": [
+   "Olaf",
+   "Nocturne",
+   "Cassiopeia",
+   "MonkeyKing",
+   "Yone"
+  ],
+  "R": [
+   "Pantheon",
+   "Karma",
+   "Orianna",
+   "Ryze",
+   "Jax"
+  ]
+ },
+ "final": {
+  "B": {
+   "kills": 21,
+   "gold": 68837,
+   "towers": 8,
+   "inhibitors": 1,
+   "barons": 1,
+   "dragons": [
+    "cloud",
+    "chemtech",
+    "chemtech"
+   ]
+  },
+  "R": {
+   "kills": 11,
+   "gold": 61748,
+   "towers": 4,
+   "inhibitors": 0,
+   "barons": 1,
+   "dragons": [
+    "ocean",
+    "chemtech"
+   ]
+  }
+ },
+ "voidgrubs": {
+  "B": 1,
+  "R": 2
+ },
+ "heralds": {
+  "B": 1,
+  "R": 0
+ },
+ "towersLost": {
+  "B": [
+   {
+    "site": "bot_outer",
+    "gameTime": "22:33",
+    "sec": 1353
+   },
+   {
+    "site": "top_outer",
+    "gameTime": "24:18",
+    "sec": 1458
+   },
+   {
+    "site": "mid_outer",
+    "gameTime": "27:42",
+    "sec": 1662
+   },
+   {
+    "site": "top_inner",
+    "gameTime": "31:10",
+    "sec": 1870
+   }
+  ],
+  "R": [
+   {
+    "site": "top_outer",
+    "gameTime": "21:32",
+    "sec": 1292
+   },
+   {
+    "site": "mid_inner",
+    "gameTime": "24:03",
+    "sec": 1443
+   },
+   {
+    "site": "mid_outer",
+    "gameTime": "26:31",
+    "sec": 1591
+   },
+   {
+    "site": "bot_outer",
+    "gameTime": "28:12",
+    "sec": 1692
+   },
+   {
+    "site": "bot_inner",
+    "gameTime": "29:00",
+    "sec": 1740
+   },
+   {
+    "site": "mid_inhib_tower",
+    "gameTime": "32:35",
+    "sec": 1955
+   },
+   {
+    "site": "nexus_t1",
+    "gameTime": "33:02",
+    "sec": 1982
+   },
+   {
+    "site": "nexus_t2",
+    "gameTime": "33:02",
+    "sec": 1982
+   }
+  ]
+ },
+ "goldDiffPerMin": [
+  [
+   0,
+   0
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   2,
+   115
+  ],
+  [
+   3,
+   -220
+  ],
+  [
+   4,
+   -471
+  ],
+  [
+   5,
+   -963
+  ],
+  [
+   6,
+   -1139
+  ],
+  [
+   7,
+   -809
+  ],
+  [
+   8,
+   -955
+  ],
+  [
+   9,
+   -802
+  ],
+  [
+   10,
+   -1552
+  ],
+  [
+   11,
+   -901
+  ],
+  [
+   12,
+   -700
+  ],
+  [
+   13,
+   -1347
+  ],
+  [
+   14,
+   -1950
+  ],
+  [
+   15,
+   -2826
+  ],
+  [
+   16,
+   -2547
+  ],
+  [
+   17,
+   -1521
+  ],
+  [
+   18,
+   -1753
+  ],
+  [
+   19,
+   -1146
+  ],
+  [
+   20,
+   -918
+  ],
+  [
+   21,
+   -1355
+  ],
+  [
+   22,
+   -1589
+  ],
+  [
+   23,
+   62
+  ],
+  [
+   24,
+   1127
+  ],
+  [
+   25,
+   1587
+  ],
+  [
+   26,
+   1888
+  ],
+  [
+   27,
+   1852
+  ],
+  [
+   28,
+   1436
+  ],
+  [
+   29,
+   892
+  ],
+  [
+   30,
+   1872
+  ],
+  [
+   31,
+   2386
+  ],
+  [
+   32,
+   2356
+  ],
+  [
+   33,
+   7039
+  ]
+ ]
+}

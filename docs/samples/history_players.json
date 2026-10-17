@@ -1,0 +1,2284 @@
+{
+ "updated": "2026-10-17T04:10:11Z",
+ "scope": "Worlds 2026（本服務有記錄的小局）",
+ "players": {
+  "KC Canna": {
+   "team": "KC",
+   "role": "top",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Rumble",
+     "win": false,
+     "k": 0,
+     "d": 4,
+     "a": 0
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Jayce",
+     "win": true,
+     "k": 5,
+     "d": 4,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Kled",
+     "win": false,
+     "k": 0,
+     "d": 4,
+     "a": 1
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Renekton",
+     "win": true,
+     "k": 1,
+     "d": 0,
+     "a": 8
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Ambessa",
+     "win": true,
+     "k": 3,
+     "d": 1,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Jayce",
+     "win": true,
+     "k": 2,
+     "d": 1,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Galio",
+     "win": true,
+     "k": 1,
+     "d": 4,
+     "a": 12
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Kennen",
+     "win": true,
+     "k": 6,
+     "d": 2,
+     "a": 1
+    }
+   ],
+   "pool": {
+    "Rumble": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 0
+    },
+    "Jayce": {
+     "games": 2,
+     "wins": 2,
+     "k": 7,
+     "d": 5,
+     "a": 7
+    },
+    "Kled": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 1
+    },
+    "Renekton": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 0,
+     "a": 8
+    },
+    "Ambessa": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 1,
+     "a": 7
+    },
+    "Galio": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 4,
+     "a": 12
+    },
+    "Kennen": {
+     "games": 1,
+     "wins": 1,
+     "k": 6,
+     "d": 2,
+     "a": 1
+    }
+   }
+  },
+  "KC Yike": {
+   "team": "KC",
+   "role": "jungle",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "LeeSin",
+     "win": false,
+     "k": 0,
+     "d": 1,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Vi",
+     "win": true,
+     "k": 1,
+     "d": 4,
+     "a": 11
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Naafiri",
+     "win": false,
+     "k": 1,
+     "d": 5,
+     "a": 2
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Qiyana",
+     "win": true,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Trundle",
+     "win": true,
+     "k": 5,
+     "d": 1,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Vi",
+     "win": true,
+     "k": 1,
+     "d": 1,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "LeeSin",
+     "win": true,
+     "k": 5,
+     "d": 1,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "JarvanIV",
+     "win": true,
+     "k": 5,
+     "d": 1,
+     "a": 5
+    }
+   ],
+   "pool": {
+    "LeeSin": {
+     "games": 2,
+     "wins": 1,
+     "k": 5,
+     "d": 2,
+     "a": 9
+    },
+    "Vi": {
+     "games": 2,
+     "wins": 2,
+     "k": 2,
+     "d": 5,
+     "a": 15
+    },
+    "Naafiri": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 5,
+     "a": 2
+    },
+    "Qiyana": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    "Trundle": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 1,
+     "a": 10
+    },
+    "JarvanIV": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 1,
+     "a": 5
+    }
+   }
+  },
+  "KC kyeahoo": {
+   "team": "KC",
+   "role": "mid",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Syndra",
+     "win": false,
+     "k": 1,
+     "d": 3,
+     "a": 0
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Cassiopeia",
+     "win": true,
+     "k": 2,
+     "d": 4,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Anivia",
+     "win": false,
+     "k": 2,
+     "d": 8,
+     "a": 1
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Orianna",
+     "win": true,
+     "k": 2,
+     "d": 2,
+     "a": 5
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Ahri",
+     "win": true,
+     "k": 6,
+     "d": 1,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Syndra",
+     "win": true,
+     "k": 3,
+     "d": 0,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Ahri",
+     "win": true,
+     "k": 6,
+     "d": 1,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Viktor",
+     "win": true,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "Syndra": {
+     "games": 2,
+     "wins": 1,
+     "k": 4,
+     "d": 3,
+     "a": 1
+    },
+    "Cassiopeia": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 4,
+     "a": 5
+    },
+    "Anivia": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 8,
+     "a": 1
+    },
+    "Orianna": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 2,
+     "a": 5
+    },
+    "Ahri": {
+     "games": 2,
+     "wins": 2,
+     "k": 12,
+     "d": 2,
+     "a": 14
+    },
+    "Viktor": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    }
+   }
+  },
+  "KC Caliste": {
+   "team": "KC",
+   "role": "bottom",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "MissFortune",
+     "win": false,
+     "k": 0,
+     "d": 6,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Varus",
+     "win": true,
+     "k": 4,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Lucian",
+     "win": false,
+     "k": 2,
+     "d": 2,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Xayah",
+     "win": true,
+     "k": 11,
+     "d": 1,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Kaisa",
+     "win": true,
+     "k": 3,
+     "d": 1,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Draven",
+     "win": true,
+     "k": 3,
+     "d": 1,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Ashe",
+     "win": true,
+     "k": 5,
+     "d": 3,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Xayah",
+     "win": true,
+     "k": 2,
+     "d": 0,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "MissFortune": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 6,
+     "a": 1
+    },
+    "Varus": {
+     "games": 1,
+     "wins": 1,
+     "k": 4,
+     "d": 2,
+     "a": 6
+    },
+    "Lucian": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 2,
+     "a": 3
+    },
+    "Xayah": {
+     "games": 2,
+     "wins": 2,
+     "k": 13,
+     "d": 1,
+     "a": 6
+    },
+    "Kaisa": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 1,
+     "a": 10
+    },
+    "Draven": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 1,
+     "a": 4
+    },
+    "Ashe": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 3,
+     "a": 10
+    }
+   }
+  },
+  "KC Busio": {
+   "team": "KC",
+   "role": "support",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Nautilus",
+     "win": false,
+     "k": 0,
+     "d": 6,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Velkoz",
+     "win": true,
+     "k": 2,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Nami",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 5
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Rakan",
+     "win": true,
+     "k": 0,
+     "d": 1,
+     "a": 9
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Rell",
+     "win": true,
+     "k": 0,
+     "d": 4,
+     "a": 14
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Nautilus",
+     "win": true,
+     "k": 0,
+     "d": 1,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Seraphine",
+     "win": true,
+     "k": 4,
+     "d": 2,
+     "a": 14
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Rakan",
+     "win": true,
+     "k": 0,
+     "d": 0,
+     "a": 9
+    }
+   ],
+   "pool": {
+    "Nautilus": {
+     "games": 2,
+     "wins": 1,
+     "k": 0,
+     "d": 7,
+     "a": 8
+    },
+    "Velkoz": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 2,
+     "a": 6
+    },
+    "Nami": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 3,
+     "a": 5
+    },
+    "Rakan": {
+     "games": 2,
+     "wins": 2,
+     "k": 0,
+     "d": 1,
+     "a": 18
+    },
+    "Rell": {
+     "games": 1,
+     "wins": 1,
+     "k": 0,
+     "d": 4,
+     "a": 14
+    },
+    "Seraphine": {
+     "games": 1,
+     "wins": 1,
+     "k": 4,
+     "d": 2,
+     "a": 14
+    }
+   }
+  },
+  "C9 Thanatos": {
+   "team": "C9",
+   "role": "top",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Gnar",
+     "win": true,
+     "k": 1,
+     "d": 0,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Camille",
+     "win": false,
+     "k": 4,
+     "d": 5,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Olaf",
+     "win": true,
+     "k": 5,
+     "d": 1,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Zaahen",
+     "win": false,
+     "k": 2,
+     "d": 1,
+     "a": 1
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "KSante",
+     "win": false,
+     "k": 4,
+     "d": 2,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Rumble",
+     "win": true,
+     "k": 2,
+     "d": 0,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "KSante",
+     "win": false,
+     "k": 2,
+     "d": 4,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Renekton",
+     "win": false,
+     "k": 2,
+     "d": 2,
+     "a": 2
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Aatrox",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 5
+    }
+   ],
+   "pool": {
+    "Gnar": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 0,
+     "a": 5
+    },
+    "Camille": {
+     "games": 1,
+     "wins": 0,
+     "k": 4,
+     "d": 5,
+     "a": 6
+    },
+    "Olaf": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 1,
+     "a": 3
+    },
+    "Zaahen": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 1,
+     "a": 1
+    },
+    "KSante": {
+     "games": 2,
+     "wins": 0,
+     "k": 6,
+     "d": 6,
+     "a": 3
+    },
+    "Rumble": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 0,
+     "a": 9
+    },
+    "Renekton": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 2,
+     "a": 2
+    },
+    "Aatrox": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 5
+    }
+   }
+  },
+  "C9 Blaber": {
+   "team": "C9",
+   "role": "jungle",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "XinZhao",
+     "win": true,
+     "k": 4,
+     "d": 0,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "MonkeyKing",
+     "win": false,
+     "k": 1,
+     "d": 4,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "JarvanIV",
+     "win": true,
+     "k": 7,
+     "d": 0,
+     "a": 14
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Sejuani",
+     "win": false,
+     "k": 0,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Lillia",
+     "win": false,
+     "k": 0,
+     "d": 4,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Qiyana",
+     "win": true,
+     "k": 3,
+     "d": 4,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "LeeSin",
+     "win": false,
+     "k": 6,
+     "d": 3,
+     "a": 0
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Naafiri",
+     "win": false,
+     "k": 3,
+     "d": 3,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Trundle",
+     "win": false,
+     "k": 3,
+     "d": 4,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "XinZhao": {
+     "games": 1,
+     "wins": 1,
+     "k": 4,
+     "d": 0,
+     "a": 10
+    },
+    "MonkeyKing": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 4,
+     "a": 9
+    },
+    "JarvanIV": {
+     "games": 1,
+     "wins": 1,
+     "k": 7,
+     "d": 0,
+     "a": 14
+    },
+    "Sejuani": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 2,
+     "a": 6
+    },
+    "Lillia": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 3
+    },
+    "Qiyana": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 4,
+     "a": 8
+    },
+    "LeeSin": {
+     "games": 1,
+     "wins": 0,
+     "k": 6,
+     "d": 3,
+     "a": 0
+    },
+    "Naafiri": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 3,
+     "a": 3
+    },
+    "Trundle": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 4,
+     "a": 3
+    }
+   }
+  },
+  "C9 Loki ": {
+   "team": "C9",
+   "role": "mid",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Locke",
+     "win": true,
+     "k": 11,
+     "d": 0,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Akali",
+     "win": false,
+     "k": 5,
+     "d": 2,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Annie",
+     "win": true,
+     "k": 1,
+     "d": 2,
+     "a": 14
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Sylas",
+     "win": false,
+     "k": 0,
+     "d": 5,
+     "a": 4
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Yone",
+     "win": false,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Syndra",
+     "win": true,
+     "k": 7,
+     "d": 2,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Sylas",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Orianna",
+     "win": false,
+     "k": 1,
+     "d": 3,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Locke",
+     "win": false,
+     "k": 3,
+     "d": 4,
+     "a": 1
+    }
+   ],
+   "pool": {
+    "Locke": {
+     "games": 2,
+     "wins": 1,
+     "k": 14,
+     "d": 4,
+     "a": 4
+    },
+    "Akali": {
+     "games": 1,
+     "wins": 0,
+     "k": 5,
+     "d": 2,
+     "a": 1
+    },
+    "Annie": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 2,
+     "a": 14
+    },
+    "Sylas": {
+     "games": 2,
+     "wins": 0,
+     "k": 0,
+     "d": 8,
+     "a": 8
+    },
+    "Yone": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    },
+    "Syndra": {
+     "games": 1,
+     "wins": 1,
+     "k": 7,
+     "d": 2,
+     "a": 4
+    },
+    "Orianna": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 3,
+     "a": 3
+    }
+   }
+  },
+  "C9 Tactical": {
+   "team": "C9",
+   "role": "bottom",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Ezreal",
+     "win": true,
+     "k": 3,
+     "d": 0,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Kalista",
+     "win": false,
+     "k": 6,
+     "d": 1,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Jhin",
+     "win": true,
+     "k": 7,
+     "d": 1,
+     "a": 7
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Yunara",
+     "win": false,
+     "k": 3,
+     "d": 4,
+     "a": 2
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Ziggs",
+     "win": false,
+     "k": 3,
+     "d": 3,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Lucian",
+     "win": true,
+     "k": 5,
+     "d": 2,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Caitlyn",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 0
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Ezreal",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 0
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Ziggs",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "Ezreal": {
+     "games": 2,
+     "wins": 1,
+     "k": 3,
+     "d": 3,
+     "a": 9
+    },
+    "Kalista": {
+     "games": 1,
+     "wins": 0,
+     "k": 6,
+     "d": 1,
+     "a": 5
+    },
+    "Jhin": {
+     "games": 1,
+     "wins": 1,
+     "k": 7,
+     "d": 1,
+     "a": 7
+    },
+    "Yunara": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 4,
+     "a": 2
+    },
+    "Ziggs": {
+     "games": 2,
+     "wins": 0,
+     "k": 3,
+     "d": 6,
+     "a": 5
+    },
+    "Lucian": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 2,
+     "a": 9
+    },
+    "Caitlyn": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 0
+    }
+   }
+  },
+  "C9 Vulcan": {
+   "team": "C9",
+   "role": "support",
+   "games": [
+    {
+     "gameId": "115660588583171787",
+     "champion": "Karma",
+     "win": true,
+     "k": 1,
+     "d": 1,
+     "a": 16
+    },
+    {
+     "gameId": "115660588583171788",
+     "champion": "Renata",
+     "win": false,
+     "k": 0,
+     "d": 2,
+     "a": 13
+    },
+    {
+     "gameId": "115660588583171789",
+     "champion": "Alistar",
+     "win": true,
+     "k": 2,
+     "d": 1,
+     "a": 12
+    },
+    {
+     "gameId": "116299649500204436",
+     "champion": "Lulu",
+     "win": false,
+     "k": 1,
+     "d": 3,
+     "a": 4
+    },
+    {
+     "gameId": "116299649500204437",
+     "champion": "Shen",
+     "win": false,
+     "k": 0,
+     "d": 4,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Milio",
+     "win": true,
+     "k": 2,
+     "d": 2,
+     "a": 14
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Bard",
+     "win": false,
+     "k": 0,
+     "d": 0,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Alistar",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 2
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Nautilus",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 4
+    }
+   ],
+   "pool": {
+    "Karma": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 1,
+     "a": 16
+    },
+    "Renata": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 2,
+     "a": 13
+    },
+    "Alistar": {
+     "games": 2,
+     "wins": 1,
+     "k": 2,
+     "d": 4,
+     "a": 14
+    },
+    "Lulu": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 3,
+     "a": 4
+    },
+    "Shen": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 6
+    },
+    "Milio": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 2,
+     "a": 14
+    },
+    "Bard": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 0,
+     "a": 5
+    },
+    "Nautilus": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 3,
+     "a": 4
+    }
+   }
+  },
+  "MVK Kratos": {
+   "team": "MVK",
+   "role": "top",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Olaf",
+     "win": true,
+     "k": 2,
+     "d": 2,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Rumble",
+     "win": true,
+     "k": 8,
+     "d": 2,
+     "a": 13
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Zaahen",
+     "win": true,
+     "k": 2,
+     "d": 1,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Ambessa",
+     "win": false,
+     "k": 0,
+     "d": 1,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "TwistedFate",
+     "win": false,
+     "k": 3,
+     "d": 4,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Yorick",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 1
+    }
+   ],
+   "pool": {
+    "Olaf": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 2,
+     "a": 1
+    },
+    "Rumble": {
+     "games": 1,
+     "wins": 1,
+     "k": 8,
+     "d": 2,
+     "a": 13
+    },
+    "Zaahen": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 1,
+     "a": 7
+    },
+    "Ambessa": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 1,
+     "a": 1
+    },
+    "TwistedFate": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 4,
+     "a": 1
+    },
+    "Yorick": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 1
+    }
+   }
+  },
+  "MVK Gury": {
+   "team": "MVK",
+   "role": "jungle",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Vi",
+     "win": true,
+     "k": 2,
+     "d": 2,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "LeeSin",
+     "win": true,
+     "k": 8,
+     "d": 3,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "JarvanIV",
+     "win": true,
+     "k": 5,
+     "d": 2,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Maokai",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "Vi": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 2,
+     "a": 7
+    },
+    "LeeSin": {
+     "games": 1,
+     "wins": 1,
+     "k": 8,
+     "d": 3,
+     "a": 6
+    },
+    "JarvanIV": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 2,
+     "a": 10
+    },
+    "Maokai": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 3,
+     "a": 3
+    }
+   }
+  },
+  "MVK Chika": {
+   "team": "MVK",
+   "role": "mid",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Cassiopeia",
+     "win": true,
+     "k": 6,
+     "d": 3,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Viktor",
+     "win": true,
+     "k": 4,
+     "d": 2,
+     "a": 12
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "KogMaw",
+     "win": true,
+     "k": 7,
+     "d": 2,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "KSante",
+     "win": false,
+     "k": 1,
+     "d": 1,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Rumble",
+     "win": false,
+     "k": 2,
+     "d": 6,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "KogMaw",
+     "win": false,
+     "k": 3,
+     "d": 6,
+     "a": 1
+    }
+   ],
+   "pool": {
+    "Cassiopeia": {
+     "games": 1,
+     "wins": 1,
+     "k": 6,
+     "d": 3,
+     "a": 1
+    },
+    "Viktor": {
+     "games": 1,
+     "wins": 1,
+     "k": 4,
+     "d": 2,
+     "a": 12
+    },
+    "KogMaw": {
+     "games": 2,
+     "wins": 1,
+     "k": 10,
+     "d": 8,
+     "a": 11
+    },
+    "KSante": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 1,
+     "a": 1
+    },
+    "Rumble": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 6,
+     "a": 2
+    }
+   }
+  },
+  "MVK Harky": {
+   "team": "MVK",
+   "role": "bottom",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Ashe",
+     "win": true,
+     "k": 0,
+     "d": 1,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Lucian",
+     "win": true,
+     "k": 6,
+     "d": 4,
+     "a": 11
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Jhin",
+     "win": true,
+     "k": 5,
+     "d": 0,
+     "a": 10
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Tristana",
+     "win": false,
+     "k": 3,
+     "d": 3,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Ezreal",
+     "win": false,
+     "k": 2,
+     "d": 3,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Lucian",
+     "win": false,
+     "k": 2,
+     "d": 0,
+     "a": 2
+    }
+   ],
+   "pool": {
+    "Ashe": {
+     "games": 1,
+     "wins": 1,
+     "k": 0,
+     "d": 1,
+     "a": 8
+    },
+    "Lucian": {
+     "games": 2,
+     "wins": 1,
+     "k": 8,
+     "d": 4,
+     "a": 13
+    },
+    "Jhin": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 0,
+     "a": 10
+    },
+    "Tristana": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 3,
+     "a": 1
+    },
+    "Ezreal": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 3,
+     "a": 3
+    }
+   }
+  },
+  "MVK SiuLoong": {
+   "team": "MVK",
+   "role": "support",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Seraphine",
+     "win": true,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Milio",
+     "win": true,
+     "k": 1,
+     "d": 2,
+     "a": 20
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Camille",
+     "win": true,
+     "k": 3,
+     "d": 3,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171791",
+     "champion": "Lulu",
+     "win": false,
+     "k": 0,
+     "d": 1,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171792",
+     "champion": "Pyke",
+     "win": false,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "Milio",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 3
+    }
+   ],
+   "pool": {
+    "Seraphine": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    "Milio": {
+     "games": 2,
+     "wins": 1,
+     "k": 2,
+     "d": 4,
+     "a": 23
+    },
+    "Camille": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 3,
+     "a": 7
+    },
+    "Lulu": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 1,
+     "a": 3
+    },
+    "Pyke": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 4,
+     "a": 3
+    }
+   }
+  },
+  "FUR Guigo": {
+   "team": "FUR",
+   "role": "top",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Jax",
+     "win": false,
+     "k": 4,
+     "d": 4,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Ornn",
+     "win": false,
+     "k": 0,
+     "d": 8,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "KSante",
+     "win": false,
+     "k": 0,
+     "d": 7,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Ambessa",
+     "win": false,
+     "k": 0,
+     "d": 3,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Olaf",
+     "win": true,
+     "k": 3,
+     "d": 5,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Volibear",
+     "win": true,
+     "k": 2,
+     "d": 1,
+     "a": 8
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Jax",
+     "win": true,
+     "k": 2,
+     "d": 4,
+     "a": 6
+    }
+   ],
+   "pool": {
+    "Jax": {
+     "games": 2,
+     "wins": 1,
+     "k": 6,
+     "d": 8,
+     "a": 8
+    },
+    "Ornn": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 8,
+     "a": 6
+    },
+    "KSante": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 7,
+     "a": 1
+    },
+    "Ambessa": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 3,
+     "a": 3
+    },
+    "Olaf": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 5,
+     "a": 3
+    },
+    "Volibear": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 1,
+     "a": 8
+    }
+   }
+  },
+  "FUR Tatu": {
+   "team": "FUR",
+   "role": "jungle",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Trundle",
+     "win": false,
+     "k": 3,
+     "d": 1,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "MonkeyKing",
+     "win": false,
+     "k": 1,
+     "d": 5,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Naafiri",
+     "win": false,
+     "k": 2,
+     "d": 4,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "JarvanIV",
+     "win": false,
+     "k": 1,
+     "d": 4,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Sejuani",
+     "win": true,
+     "k": 3,
+     "d": 0,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Chogath",
+     "win": true,
+     "k": 3,
+     "d": 2,
+     "a": 7
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Vi",
+     "win": true,
+     "k": 5,
+     "d": 0,
+     "a": 6
+    }
+   ],
+   "pool": {
+    "Trundle": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 1,
+     "a": 3
+    },
+    "MonkeyKing": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 5,
+     "a": 6
+    },
+    "Naafiri": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 4,
+     "a": 5
+    },
+    "JarvanIV": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 4,
+     "a": 8
+    },
+    "Sejuani": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 0,
+     "a": 7
+    },
+    "Chogath": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 2,
+     "a": 7
+    },
+    "Vi": {
+     "games": 1,
+     "wins": 1,
+     "k": 5,
+     "d": 0,
+     "a": 6
+    }
+   }
+  },
+  "FUR Tutsz": {
+   "team": "FUR",
+   "role": "mid",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Galio",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Syndra",
+     "win": false,
+     "k": 4,
+     "d": 4,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Ryze",
+     "win": false,
+     "k": 1,
+     "d": 2,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Ahri",
+     "win": false,
+     "k": 2,
+     "d": 5,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Akali",
+     "win": true,
+     "k": 3,
+     "d": 3,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Viktor",
+     "win": true,
+     "k": 6,
+     "d": 2,
+     "a": 7
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "TwistedFate",
+     "win": true,
+     "k": 2,
+     "d": 0,
+     "a": 5
+    }
+   ],
+   "pool": {
+    "Galio": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 6
+    },
+    "Syndra": {
+     "games": 1,
+     "wins": 0,
+     "k": 4,
+     "d": 4,
+     "a": 1
+    },
+    "Ryze": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 5
+    },
+    "Ahri": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 5,
+     "a": 5
+    },
+    "Akali": {
+     "games": 1,
+     "wins": 1,
+     "k": 3,
+     "d": 3,
+     "a": 2
+    },
+    "Viktor": {
+     "games": 1,
+     "wins": 1,
+     "k": 6,
+     "d": 2,
+     "a": 7
+    },
+    "TwistedFate": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 0,
+     "a": 5
+    }
+   }
+  },
+  "FUR Ayu": {
+   "team": "FUR",
+   "role": "bottom",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Yunara",
+     "win": false,
+     "k": 2,
+     "d": 4,
+     "a": 3
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Xayah",
+     "win": false,
+     "k": 6,
+     "d": 7,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Kaisa",
+     "win": false,
+     "k": 3,
+     "d": 2,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Kalista",
+     "win": false,
+     "k": 6,
+     "d": 4,
+     "a": 0
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Yunara",
+     "win": true,
+     "k": 3,
+     "d": 1,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Sivir",
+     "win": true,
+     "k": 2,
+     "d": 1,
+     "a": 9
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "MissFortune",
+     "win": true,
+     "k": 7,
+     "d": 0,
+     "a": 5
+    }
+   ],
+   "pool": {
+    "Yunara": {
+     "games": 2,
+     "wins": 1,
+     "k": 5,
+     "d": 5,
+     "a": 8
+    },
+    "Xayah": {
+     "games": 1,
+     "wins": 0,
+     "k": 6,
+     "d": 7,
+     "a": 7
+    },
+    "Kaisa": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 2,
+     "a": 1
+    },
+    "Kalista": {
+     "games": 1,
+     "wins": 0,
+     "k": 6,
+     "d": 4,
+     "a": 0
+    },
+    "Sivir": {
+     "games": 1,
+     "wins": 1,
+     "k": 2,
+     "d": 1,
+     "a": 9
+    },
+    "MissFortune": {
+     "games": 1,
+     "wins": 1,
+     "k": 7,
+     "d": 0,
+     "a": 5
+    }
+   }
+  },
+  "FUR JoJo": {
+   "team": "FUR",
+   "role": "support",
+   "games": [
+    {
+     "gameId": "115660588583040711",
+     "champion": "Lulu",
+     "win": false,
+     "k": 0,
+     "d": 0,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171784",
+     "champion": "Rakan",
+     "win": false,
+     "k": 2,
+     "d": 4,
+     "a": 11
+    },
+    {
+     "gameId": "115660588583171785",
+     "champion": "Leona",
+     "win": false,
+     "k": 2,
+     "d": 7,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171795",
+     "champion": "Renata",
+     "win": false,
+     "k": 1,
+     "d": 3,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171796",
+     "champion": "Lulu",
+     "win": true,
+     "k": 0,
+     "d": 0,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171797",
+     "champion": "Karma",
+     "win": true,
+     "k": 1,
+     "d": 0,
+     "a": 13
+    },
+    {
+     "gameId": "116299649500204440",
+     "champion": "Rell",
+     "win": true,
+     "k": 0,
+     "d": 3,
+     "a": 11
+    }
+   ],
+   "pool": {
+    "Lulu": {
+     "games": 2,
+     "wins": 1,
+     "k": 0,
+     "d": 0,
+     "a": 15
+    },
+    "Rakan": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 4,
+     "a": 11
+    },
+    "Leona": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 7,
+     "a": 6
+    },
+    "Renata": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 3,
+     "a": 7
+    },
+    "Karma": {
+     "games": 1,
+     "wins": 1,
+     "k": 1,
+     "d": 0,
+     "a": 13
+    },
+    "Rell": {
+     "games": 1,
+     "wins": 1,
+     "k": 0,
+     "d": 3,
+     "a": 11
+    }
+   }
+  },
+  "MVK SanSan": {
+   "team": "MVK",
+   "role": "jungle",
+   "games": [
+    {
+     "gameId": "115660588583171792",
+     "champion": "Qiyana",
+     "win": false,
+     "k": 3,
+     "d": 4,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171793",
+     "champion": "MonkeyKing",
+     "win": false,
+     "k": 0,
+     "d": 4,
+     "a": 4
+    }
+   ],
+   "pool": {
+    "Qiyana": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 4,
+     "a": 4
+    },
+    "MonkeyKing": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 4
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,1303 @@
+{
+ "updated": "2026-10-17T04:10:11Z",
+ "teams": {
+  "KC": [
+   {
+    "gameId": "115660588583171787",
+    "start": "2026-10-15T18:16:34Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "B",
+    "opponent": "C9",
+    "win": false,
+    "bans": [
+     "Vi",
+     "KSante",
+     "Skarner",
+     "Orianna",
+     "Sylas"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Rumble"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "LeeSin"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Syndra"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "MissFortune"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Nautilus"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171788",
+    "start": "2026-10-15T19:14:55Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "R",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "KSante",
+     "Lulu",
+     "Olaf",
+     "JarvanIV"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Jayce"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "Vi"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Cassiopeia"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Varus"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Velkoz"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171789",
+    "start": "2026-10-15T20:17:24Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "B",
+    "opponent": "C9",
+    "win": false,
+    "bans": [
+     "Orianna",
+     "Lulu",
+     "Qiyana",
+     "KSante",
+     "Aurora"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Kled"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "Naafiri"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Anivia"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Lucian"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Nami"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204436",
+    "start": "2026-10-15T21:14:06Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "R",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "KSante",
+     "Pantheon",
+     "Vayne",
+     "Skarner"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Renekton"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "Qiyana"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Orianna"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Xayah"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Rakan"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204437",
+    "start": "2026-10-15T22:16:01Z",
+    "stage": "Play-Ins",
+    "game": 5,
+    "side": "B",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "Maokai",
+     "Pantheon",
+     "Poppy",
+     "Kindred"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Ambessa"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "Trundle"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Ahri"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Kaisa"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Rell"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171791",
+    "start": "2026-10-16T18:11:38Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "B",
+    "opponent": "MVK",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "Olaf",
+     "LeeSin",
+     "Yone",
+     "Yunara"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Jayce"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "Vi"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Syndra"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Draven"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Nautilus"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171792",
+    "start": "2026-10-16T19:01:17Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "B",
+    "opponent": "MVK",
+    "win": true,
+    "bans": [
+     "Olaf",
+     "Nocturne",
+     "Cassiopeia",
+     "MonkeyKing",
+     "Yone"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Galio"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "LeeSin"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Ahri"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Ashe"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Seraphine"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171793",
+    "start": "2026-10-16T19:53:54Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "R",
+    "opponent": "MVK",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "Camille",
+     "Olaf",
+     "Vayne",
+     "Taliyah"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "KC Canna",
+      "champion": "Kennen"
+     },
+     {
+      "role": "jungle",
+      "player": "KC Yike",
+      "champion": "JarvanIV"
+     },
+     {
+      "role": "mid",
+      "player": "KC kyeahoo",
+      "champion": "Viktor"
+     },
+     {
+      "role": "bottom",
+      "player": "KC Caliste",
+      "champion": "Xayah"
+     },
+     {
+      "role": "support",
+      "player": "KC Busio",
+      "champion": "Rakan"
+     }
+    ]
+   }
+  ],
+  "C9": [
+   {
+    "gameId": "115660588583171787",
+    "start": "2026-10-15T18:16:34Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "R",
+    "opponent": "KC",
+    "win": true,
+    "bans": [
+     "Seraphine",
+     "Nocturne",
+     "Qiyana",
+     "Jhin",
+     "Akali"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Gnar"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "XinZhao"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Locke"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Ezreal"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Karma"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171788",
+    "start": "2026-10-15T19:14:55Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "B",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Seraphine",
+     "Caitlyn",
+     "Qiyana",
+     "Lucian",
+     "Rakan"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Camille"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "MonkeyKing"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Akali"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Kalista"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Renata"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171789",
+    "start": "2026-10-15T20:17:24Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "R",
+    "opponent": "KC",
+    "win": true,
+    "bans": [
+     "Seraphine",
+     "Caitlyn",
+     "Viktor",
+     "Vayne",
+     "Sylas"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Olaf"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "JarvanIV"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Annie"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Jhin"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Alistar"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204436",
+    "start": "2026-10-15T21:14:06Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "B",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Seraphine",
+     "Caitlyn",
+     "Viktor",
+     "Aphelios",
+     "Draven"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Zaahen"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "Sejuani"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Sylas"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Yunara"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Lulu"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204437",
+    "start": "2026-10-15T22:16:01Z",
+    "stage": "Play-Ins",
+    "game": 5,
+    "side": "R",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Seraphine",
+     "Caitlyn",
+     "Vayne",
+     "Leblanc",
+     "Khazix"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "KSante"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "Lillia"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Yone"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Ziggs"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Shen"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171795",
+    "start": "2026-10-16T20:53:43Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "R",
+    "opponent": "FUR",
+    "win": true,
+    "bans": [
+     "Seraphine",
+     "Skarner",
+     "KSante",
+     "Vi",
+     "Akali"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Rumble"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "Qiyana"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Syndra"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Lucian"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Milio"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171796",
+    "start": "2026-10-16T21:52:46Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "B",
+    "opponent": "FUR",
+    "win": false,
+    "bans": [
+     "Seraphine",
+     "Ezreal",
+     "Pantheon",
+     "Skarner",
+     "Gnar"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "KSante"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "LeeSin"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Sylas"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Caitlyn"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Bard"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171797",
+    "start": "2026-10-16T22:47:31Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "R",
+    "opponent": "FUR",
+    "win": false,
+    "bans": [
+     "Ashe",
+     "Xayah",
+     "Jayce",
+     "Vayne",
+     "Varus"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Renekton"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "Naafiri"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Orianna"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Ezreal"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Alistar"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204440",
+    "start": "2026-10-16T23:43:17Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "R",
+    "opponent": "FUR",
+    "win": false,
+    "bans": [
+     "Seraphine",
+     "Galio",
+     "Skarner",
+     "Aurora",
+     "Cassiopeia"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "C9 Thanatos",
+      "champion": "Aatrox"
+     },
+     {
+      "role": "jungle",
+      "player": "C9 Blaber",
+      "champion": "Trundle"
+     },
+     {
+      "role": "mid",
+      "player": "C9 Loki ",
+      "champion": "Locke"
+     },
+     {
+      "role": "bottom",
+      "player": "C9 Tactical",
+      "champion": "Ziggs"
+     },
+     {
+      "role": "support",
+      "player": "C9 Vulcan",
+      "champion": "Nautilus"
+     }
+    ]
+   }
+  ],
+  "MVK": [
+   {
+    "gameId": "115660588583040711",
+    "start": "2026-10-15T23:11:17Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "B",
+    "opponent": "FUR",
+    "win": true,
+    "bans": [
+     "Ezreal",
+     "Pantheon",
+     "Akali",
+     "Sylas",
+     "Locke"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Olaf"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "Vi"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Cassiopeia"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Ashe"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Seraphine"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171784",
+    "start": "2026-10-16T00:06:04Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "B",
+    "opponent": "FUR",
+    "win": true,
+    "bans": [
+     "Ezreal",
+     "Renata",
+     "Akali",
+     "Pantheon",
+     "Ambessa"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Rumble"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "LeeSin"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Viktor"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Lucian"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Milio"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171785",
+    "start": "2026-10-16T01:01:25Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "B",
+    "opponent": "FUR",
+    "win": true,
+    "bans": [
+     "Ezreal",
+     "Renata",
+     "Sylas",
+     "Poppy",
+     "Shen"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Zaahen"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "JarvanIV"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "KogMaw"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Jhin"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Camille"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171791",
+    "start": "2026-10-16T18:11:38Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "R",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Rumble",
+     "Seraphine",
+     "Cassiopeia",
+     "Gnar",
+     "Ezreal"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Ambessa"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "Maokai"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "KSante"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Tristana"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Lulu"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171792",
+    "start": "2026-10-16T19:01:17Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "R",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Pantheon",
+     "Karma",
+     "Orianna",
+     "Ryze",
+     "Jax"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "TwistedFate"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK SanSan",
+      "champion": "Qiyana"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Rumble"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Ezreal"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Pyke"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171793",
+    "start": "2026-10-16T19:53:54Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "B",
+    "opponent": "KC",
+    "win": false,
+    "bans": [
+     "Orianna",
+     "Caitlyn",
+     "Gnar",
+     "Cassiopeia",
+     "Renekton"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Yorick"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK SanSan",
+      "champion": "MonkeyKing"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "KogMaw"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Lucian"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Milio"
+     }
+    ]
+   }
+  ],
+  "FUR": [
+   {
+    "gameId": "115660588583040711",
+    "start": "2026-10-15T23:11:17Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "R",
+    "opponent": "MVK",
+    "win": false,
+    "bans": [
+     "Pyke",
+     "Nocturne",
+     "JarvanIV",
+     "Maokai",
+     "LeeSin"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Jax"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Trundle"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Galio"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Yunara"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Lulu"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171784",
+    "start": "2026-10-16T00:06:04Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "R",
+    "opponent": "MVK",
+    "win": false,
+    "bans": [
+     "Nocturne",
+     "JarvanIV",
+     "Caitlyn",
+     "Locke",
+     "Leblanc"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Ornn"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "MonkeyKing"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Syndra"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Xayah"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Rakan"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171785",
+    "start": "2026-10-16T01:01:25Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "R",
+    "opponent": "MVK",
+    "win": false,
+    "bans": [
+     "Locke",
+     "Nocturne",
+     "Yone",
+     "Orianna",
+     "Vayne"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "KSante"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Naafiri"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Ryze"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Kaisa"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Leona"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171795",
+    "start": "2026-10-16T20:53:43Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "B",
+    "opponent": "C9",
+    "win": false,
+    "bans": [
+     "Nocturne",
+     "Cassiopeia",
+     "Karma",
+     "XinZhao",
+     "Maokai"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Ambessa"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "JarvanIV"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Ahri"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Kalista"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Renata"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171796",
+    "start": "2026-10-16T21:52:46Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "R",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Maokai",
+     "Nocturne",
+     "Vi",
+     "Camille",
+     "TwistedFate"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Olaf"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Sejuani"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Akali"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Yunara"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Lulu"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171797",
+    "start": "2026-10-16T22:47:31Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "B",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "Cassiopeia",
+     "Locke",
+     "Seraphine",
+     "Gnar"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Volibear"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Chogath"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Viktor"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Sivir"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Karma"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204440",
+    "start": "2026-10-16T23:43:17Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "B",
+    "opponent": "C9",
+    "win": true,
+    "bans": [
+     "Nocturne",
+     "Yone",
+     "Jayce",
+     "XinZhao",
+     "Gnar"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Jax"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Vi"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "TwistedFate"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "MissFortune"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Rell"
+     }
+    ]
+   }
+  ]
+ }
+}
