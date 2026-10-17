@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, "..
 ts = lambda s: dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 gclock = lambda sec: f"{int(sec)//60}:{int(sec)%60:02d}"
-STATE = {"status": "starting"}; LOCK = threading.Lock()
+STATE = {"status": "starting"}; LOCK = threading.Lock(); _ARCHIVED = set()
 sys.path.insert(0, HERE)
 from hud_clock import read_clock, read_clock_safe
 import cv2
@@ -496,10 +496,57 @@ def log_new_events(old, new):
             for x in (new.get("towersLost") or {}).get(tm, []):
                 if f'tw|{tm}|{x["site"]}' not in seen: f.write(json.dumps({"game": new["game"], "at": new["updated"], "type": "tower_named", "teamLost": tm, **x}, ensure_ascii=False) + "\n")
 
+WORLDS_LEAGUE = "98767975604431411"
+_SCHED = {"at": 0, "data": None}
+def schedule():
+    """Worlds 2026 賽程（官方 getSchedule，5 分鐘快取）。比分放在 result 欄位，桌面工具可整欄隱藏（不爆雷）。"""
+    if _SCHED["data"] and time.time() - _SCHED["at"] < 300: return _SCHED["data"]
+    if not KEY: return {"error": "服務沒有 LOL_API_KEY，無法取得賽程"}
+    evs, url, seen = [], f"https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=en-US&leagueId={WORLDS_LEAGUE}", set()
+    for _ in range(4):                                         # 目前頁＋往後最多 3 頁（淘汰賽可能在下一頁）
+        d = _get(url, key=True, ttl=300)["data"]["schedule"]
+        for e in d["events"]:
+            if e["startTime"] >= "2026-01-01" and e.get("match") and e["match"]["id"] not in seen: seen.add(e["match"]["id"]); evs.append(e)
+        nxt = (d.get("pages") or {}).get("newer")
+        if not nxt: break
+        url = f"https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=en-US&leagueId={WORLDS_LEAGUE}&pageToken={nxt}"
+    out = []
+    for e in sorted(evs, key=lambda e: e["startTime"]):
+        m = e["match"]; teams = [{"code": t["code"], "name": t["name"], "image": t.get("image")} for t in m["teams"]]
+        wins = [(t.get("result") or {}).get("gameWins") for t in m["teams"]]
+        res = None
+        if e["state"] in ("inProgress", "completed"):
+            res = {"wins": wins, "winner": next((t["code"] for t in m["teams"] if (t.get("result") or {}).get("outcome") == "win"), None)}
+        out.append({"matchId": m["id"], "start": e["startTime"], "state": e["state"], "stage": e.get("blockName"),
+                    "bestOf": (m.get("strategy") or {}).get("count"), "teams": teams, "result": res})
+    data = {"updated": iso(time.time()), "league": "Worlds 2026", "matches": out,
+            "note": "result 為比分與勝方（不爆雷時整欄隱藏）；隊伍代碼 TBD 表示尚未確定"}
+    _SCHED.update(at=time.time(), data=data); return data
+
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path.split("?")[0] not in ("/", "/state.json"): self.send_response(404); self.end_headers(); return
-        with LOCK: body = json.dumps(STATE, ensure_ascii=False).encode("utf-8")
+        path = self.path.split("?")[0]
+        if path == "/schedule.json":
+            try: body = json.dumps(schedule(), ensure_ascii=False).encode("utf-8")
+            except Exception as e: body = json.dumps({"error": repr(e)[:200]}, ensure_ascii=False).encode("utf-8")
+        elif path in ("/", "/state.json"):
+            with LOCK: body = json.dumps(STATE, ensure_ascii=False).encode("utf-8")
+        elif path.startswith("/history/"):
+            # 歷史資料（tools/archive.py 產生）：/history/teams.json、/history/players.json、/history/games.json、/history/game/<gameId>.json
+            A = os.path.join(ROOT, "data", "archive"); rel = path[len("/history/"):]
+            if rel in ("teams.json", "players.json"): fp = os.path.join(A, rel)
+            elif rel == "games.json":
+                idx = []
+                for p in glob.glob(os.path.join(A, "games", "*.json")):
+                    r = json.load(open(p, encoding="utf-8"))
+                    idx.append({k: r.get(k) for k in ("gameId", "matchId", "stage", "game", "bestOf", "start", "duration", "teams", "winner")})
+                body = json.dumps({"games": sorted(idx, key=lambda x: x["start"])}, ensure_ascii=False).encode("utf-8"); fp = None
+            elif rel.startswith("game/") and rel[5:-5].isdigit() and rel.endswith(".json"): fp = os.path.join(A, "games", rel[5:])
+            else: fp = ""
+            if fp is not None:
+                if not fp or not os.path.exists(fp): self.send_response(404); self.end_headers(); return
+                body = open(fp, "rb").read()
+        else: self.send_response(404); self.end_headers(); return
         self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers(); self.wfile.write(body)
     def log_message(self, *a): pass
@@ -514,6 +561,11 @@ if __name__ == "__main__":
             new = update()
             with LOCK: old = dict(STATE); STATE.clear(); STATE.update(new)
             log_new_events(old, new)
+            # 一局結束（狀態第一次變成 finished）約 2 分鐘後，在背景重建歷史資料庫（tools/archive.py）
+            if new.get("status") == "finished" and new.get("game") and new["game"] not in _ARCHIVED:
+                _ARCHIVED.add(new["game"])
+                threading.Timer(120, lambda: subprocess.Popen([sys.executable, os.path.join(HERE, "archive.py")], cwd=ROOT,
+                                stdout=open(os.path.join(D, "archive.log"), "a"), stderr=subprocess.STDOUT)).start()
             # 狀態紀錄：內容有變（不計 updated）才附加一行，供事後重看「桌面工具每一刻會看到什麼」
             strip = lambda x: {k: v for k, v in x.items() if k != "updated"}
             if strip(new) != strip(old):

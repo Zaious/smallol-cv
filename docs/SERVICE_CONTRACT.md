@@ -94,6 +94,24 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 
 驗證（Day 1、Day 2 共 9 局）：下一條龍屬性 161/170 張畫面正確，其餘 9 張讀不到（多為重播字卡蓋住），沒有讀成錯誤屬性。模板由人工目視分群標定，答案取自 feed 的龍事件；但測試畫面與建模板的畫面是同一批，真正的盲測待 Day 3。
 
+## 賽程與歷史（v0.6，2026-10-17 加入）
+
+另開的端點，給「沒有比賽時」用。都是 GET、回 JSON。
+
+| 端點 | 內容 |
+| --- | --- |
+| `/schedule.json` | Worlds 2026 全賽程（官方 getSchedule，5 分鐘快取）。`matches[]`：`matchId`、`start`（UTC）、`state`（`unstarted`／`inProgress`／`completed`）、`stage`（Play-Ins／Swiss／Quarterfinals／Semifinals／Finals）、`bestOf`、`teams[]`（`code`、`name`、`image`；未定為 `TBD`）、**`result`**（`{wins: [n, n], winner}`，未開打為 null）。**不爆雷：整個 `result` 不顯示即可**，其他欄位不含比分 |
+| `/history/games.json` | 已結束小局的索引：`gameId`、`matchId`、`stage`、`game`、`bestOf`、`start`、`duration`、`teams`（`{B, R}` 代碼）、`winner`（`"B"`／`"R"`）|
+| `/history/game/<gameId>.json` | 單局回顧：上列欄位＋`bans`、`players`（同 `state.json` 的 players，最終值）、`final`（兩隊擊殺、金錢、打掉的塔／水晶、巴龍、龍）、`voidgrubs`、`heralds`、`towersLost`（哪幾座塔，畫面辨識）、`goldDiffPerMin`（`[[分鐘, 藍−紅金錢], …]`）、`sources`（每個欄位的來源） |
+| `/history/teams.json` | `teams.<代碼>[]`：每局的 `side`、`opponent`、`win`、`bans`、`picks[]`（`role`、`player`、`champion`）|
+| `/history/players.json` | `players.<選手名>`：`team`、`role`、`games[]`（`champion`、`win`、`k`、`d`、`a`）、`pool.<英雄>`（`games`、`wins`、`k`、`d`、`a`）|
+
+資料來源與驗證：
+- 勝方：Leaguepedia；限流抓不到時用本服務的塔命名（主堡塔被打掉的一方輸），`sources.winner = "cv_nexus"`。Play-In 4 個系列賽 15 局推算的勝負，加總與官方系列賽比分全部一致。
+- 禁用：本服務直播當下的辨識（`cv`）＞錄影版畫面辨識（`cv_vod`，Day 1 共 80/80）＞ Leaguepedia。
+- 每局結束約 2 分鐘後，服務自動重建歷史資料；範圍只含本服務有記錄 feed 的小局（Worlds 2026 Play-In 起）。
+- **比分會出現在 `/history/*` 的 `winner`、`win`、`final`、`goldDiffPerMin`**：不爆雷模式下，這些也要藏起來。
+
 `site` 值：`top_outer` `top_inner` `top_inhib_tower` `mid_outer` `mid_inner` `mid_inhib_tower` `bot_outer` `bot_inner` `bot_inhib_tower` `nexus_t1` `nexus_t2`。
 
 ## 已知限制（v0）
