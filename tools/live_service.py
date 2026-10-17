@@ -253,7 +253,7 @@ def tower_naming(gid, feed, finished, lag=LAG):
     cmd = [sys.executable, os.path.join(HERE, "trigger_sim_clf4.py"), f"{tmp}/clf.csv", f"{tmp}/events.txt", str(G0), ig[0]["ts"], str(lag), "--thr", "0.7", "--live", "--json", f"{tmp}/named.json"]
     if finished: cmd.append("--complete")
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
-    if r.returncode != 0: return None, r.stderr[-300:]
+    if r.returncode != 0: return None, (r.stderr or r.stdout or f"trigger_sim 結束碼 {r.returncode}")[-300:]
     named = json.load(open(f"{tmp}/named.json", encoding="utf-8"))
     out = {tm: sorted(({"site": s[2:], "gameTime": gclock(v["onset"]), "sec": v["onset"]} for s, v in named[tm].items()), key=lambda x: x["sec"]) for tm in "RB"}
     # 主堡塔：被摧毀 3 分鐘後重生（26.1 起 40% 血量）；倒數以命名的消失時間 + 規則推算，重生由畫面確認後從已摧毀清單移除

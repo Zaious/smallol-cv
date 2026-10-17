@@ -11,10 +11,10 @@ arg = lambda k, d: int(sys.argv[sys.argv.index(k) + 1]) if k in sys.argv else d
 SNAP, FULL, HUD, OFFG = arg("--snap-every", 15), arg("--full-every", 60), arg("--hud-every", 5), arg("--offgame-every", 3)
 RA, BA, DEAD = 0.30, 0.15, 0.06
 root = os.path.join(os.path.dirname(__file__), "..")
-cfg = json.load(open(os.path.join(root, "data/minimap_sites_2026_worlds.json"), encoding="utf-8"))
+cfg = json.load(open(os.path.join(root, "assets/minimap_sites_2026_worlds.json"), encoding="utf-8"))
 X0, Y0, K, MM = int(1085 * 1.5), int(525 * 1.5), 1.5 / 5, 285
 sites = [(s["id"], int(round(s["x"] * K)), int(round(s["y"] * K))) for s in cfg["sites"] if s["kind"] == "tower"]
-med = cv2.imread(os.path.join(root, "data/minimap_median_gray_postplate.png"), 0).astype(np.float32); med -= med.mean(); mednorm = np.sqrt((med * med).sum())
+med = cv2.imread(os.path.join(root, "assets/minimap_median_gray_postplate.png"), 0).astype(np.float32); med -= med.mean(); mednorm = np.sqrt((med * med).sum())
 RUN = dt.datetime.now(dt.timezone.utc).strftime("%m%dT%H%M")
 cols = ["n", "wall_utc", "layout"] + [f"{s}_{c}" for s, _, _ in sites for c in "ADO"] + [f"{s}_frac" for s, _, _ in sites]
 f = open(os.path.join(OUT, f"clf_live_{RUN}.csv"), "w", newline="", encoding="utf-8"); w = csv.DictWriter(f, fieldnames=cols); w.writeheader()

@@ -14,7 +14,7 @@ ALIVE_RUN, NEED_DEAD_TOTAL, REVOKE_RUN = 4, 8, 5
 TIERS = ["outer", "inner", "inhib_tower"]
 
 rows = list(csv.DictReader(open(CSV)))
-cfg = json.load(open("data/minimap_sites_2025_worlds.json", encoding="utf-8"))
+cfg = json.load(open(__import__("os").path.join(__import__("os").path.dirname(__file__), "..", "assets", "minimap_sites_2026_worlds.json"), encoding="utf-8"))   # 只取站點 ID（與 2025 相同）
 TOW = [s["id"] for s in cfg["sites"] if s["kind"] == "tower"]
 start = dt.datetime.fromisoformat(START_ISO.replace("Z", "+00:00"))
 tower_ev = {"R": [], "B": []}; inhib_ev = {"R": [], "B": []}; last_ev = 0.0

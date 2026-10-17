@@ -1,0 +1,207 @@
+{
+ "profile": "worlds2025_finals_g1_720p",
+ "crop_origin_in_frame": [
+  1085,
+  525
+ ],
+ "scale_note": "x,y 為 5 倍放大底圖座標（除以 5 為底圖像素，再加 crop_origin 為畫格座標）",
+ "sites": [
+  {
+   "id": "R_top_outer",
+   "team": "R",
+   "kind": "tower",
+   "x": 311.52,
+   "y": 88.78
+  },
+  {
+   "id": "R_top_inner",
+   "team": "R",
+   "kind": "tower",
+   "x": 539.66,
+   "y": 120.73
+  },
+  {
+   "id": "R_top_inhib_tower",
+   "team": "R",
+   "kind": "tower",
+   "x": 699.58,
+   "y": 101.39
+  },
+  {
+   "id": "R_top_inhibitor",
+   "team": "R",
+   "kind": "inhibitor",
+   "x": 749.85,
+   "y": 103.33
+  },
+  {
+   "id": "R_mid_outer",
+   "team": "R",
+   "kind": "tower",
+   "x": 604.54,
+   "y": 414.58
+  },
+  {
+   "id": "R_mid_inner",
+   "team": "R",
+   "kind": "tower",
+   "x": 655.96,
+   "y": 326.15
+  },
+  {
+   "id": "R_mid_inhib_tower",
+   "team": "R",
+   "kind": "tower",
+   "x": 741.89,
+   "y": 256.3
+  },
+  {
+   "id": "R_mid_inhibitor",
+   "team": "R",
+   "kind": "inhibitor",
+   "x": 771.72,
+   "y": 226.24
+  },
+  {
+   "id": "R_bot_outer",
+   "team": "R",
+   "kind": "tower",
+   "x": 916.36,
+   "y": 677.85
+  },
+  {
+   "id": "R_bot_inner",
+   "team": "R",
+   "kind": "tower",
+   "x": 881.44,
+   "y": 444.94
+  },
+  {
+   "id": "R_bot_inhib_tower",
+   "team": "R",
+   "kind": "tower",
+   "x": 900.35,
+   "y": 301.67
+  },
+  {
+   "id": "R_bot_inhibitor",
+   "team": "R",
+   "kind": "inhibitor",
+   "x": 898.01,
+   "y": 250.34
+  },
+  {
+   "id": "R_nexus_t1",
+   "team": "R",
+   "kind": "tower",
+   "x": 835.56,
+   "y": 141.5
+  },
+  {
+   "id": "R_nexus_t2",
+   "team": "R",
+   "kind": "tower",
+   "x": 864.56,
+   "y": 175.61
+  },
+  {
+   "id": "B_top_outer",
+   "team": "B",
+   "kind": "tower",
+   "x": 100.3,
+   "y": 309.17
+  },
+  {
+   "id": "B_top_inner",
+   "team": "B",
+   "kind": "tower",
+   "x": 135.33,
+   "y": 542.93
+  },
+  {
+   "id": "B_top_inhib_tower",
+   "team": "B",
+   "kind": "tower",
+   "x": 112.57,
+   "y": 686.54
+  },
+  {
+   "id": "B_top_inhibitor",
+   "team": "B",
+   "kind": "inhibitor",
+   "x": 112.78,
+   "y": 740.01
+  },
+  {
+   "id": "B_mid_outer",
+   "team": "B",
+   "kind": "tower",
+   "x": 409.42,
+   "y": 565.28
+  },
+  {
+   "id": "B_mid_inner",
+   "team": "B",
+   "kind": "tower",
+   "x": 360.9,
+   "y": 658.62
+  },
+  {
+   "id": "B_mid_inhib_tower",
+   "team": "B",
+   "kind": "tower",
+   "x": 271.01,
+   "y": 725.49
+  },
+  {
+   "id": "B_mid_inhibitor",
+   "team": "B",
+   "kind": "inhibitor",
+   "x": 241.2,
+   "y": 760.9
+  },
+  {
+   "id": "B_bot_outer",
+   "team": "B",
+   "kind": "tower",
+   "x": 707.42,
+   "y": 906.57
+  },
+  {
+   "id": "B_bot_inner",
+   "team": "B",
+   "kind": "tower",
+   "x": 478.2,
+   "y": 870.88
+  },
+  {
+   "id": "B_bot_inhib_tower",
+   "team": "B",
+   "kind": "tower",
+   "x": 311.19,
+   "y": 883.62
+  },
+  {
+   "id": "B_bot_inhibitor",
+   "team": "B",
+   "kind": "inhibitor",
+   "x": 257.72,
+   "y": 883.83
+  },
+  {
+   "id": "B_nexus_t1",
+   "team": "B",
+   "kind": "tower",
+   "x": 150.5,
+   "y": 814.73
+  },
+  {
+   "id": "B_nexus_t2",
+   "team": "B",
+   "kind": "tower",
+   "x": 177.38,
+   "y": 849.92
+  }
+ ],
+ "note": "2026 Worlds: 2025 sites mapped by similarity transform fitted on 15 tower icons of the early-game median (scale 1.069, residual <=3.1 px)"
+}

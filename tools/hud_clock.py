@@ -5,7 +5,7 @@ import sys, os, glob
 import numpy as np, cv2
 CELLS = [(16, 27), (27, 38), (43, 53), (53, 64)]           # 相對於 (920, 70) 的 x 範圍；y 範圍 8–30
 Y0, Y1, X0 = 78, 100, 920
-TPL = os.path.join(os.path.dirname(__file__), "..", "data", "clock_digits.npz")
+TPL = os.path.join(os.path.dirname(__file__), "..", "assets", "clock_digits.npz")
 
 def _norm(c):
     c = cv2.resize(c, (10, 22)); c = c - c.mean(); return c / (np.linalg.norm(c) + 1e-6)

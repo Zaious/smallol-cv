@@ -6,7 +6,7 @@ import sys, glob, json, csv, datetime as dt
 import numpy as np, cv2
 sys.path.insert(0, "tools"); import bans26 as B
 sys.stdout.reconfigure(encoding="utf-8")
-OUT = "data/ban_pending.npy"
+OUT = "assets/ban_pending.npy"
 
 def crops(im):
     return [im[B.Y0 + B.M:B.Y1 - B.M, a + B.M:b - B.M] for side in "LR" for a, b in B.SLOTS[side]]

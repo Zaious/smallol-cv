@@ -32,8 +32,10 @@ def slot_scores(im):
             s = F @ feat(im[Y0 + M:Y1 - M, a + M:b - M]); rows.append(s.reshape(len(NAMES), len(ZOOMS)).max(axis=1))
     return np.stack(rows)
 
-_PEND_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "ban_pending.npy")
+_PEND_PATH = os.path.join(os.path.dirname(__file__), "..", "assets", "ban_pending.npy")
 PEND = np.load(_PEND_PATH) if os.path.exists(_PEND_PATH) else None
+if PEND is None: print(f"警告：找不到 {_PEND_PATH}，BP 進行中可能把待選格誤報成 Sona", file=sys.stderr)
+if not ICONS: print("警告：找不到英雄圖示，先執行 python tools/fetch_ddragon_icons.py", file=sys.stderr)
 
 def slot_scores_live(im):
     """BP 進行中用：正在禁用的格子會閃動，舊比對常讀成 Sona。該格若比任何英雄都像 PENDING 模板（tools/ban_pending.py，
