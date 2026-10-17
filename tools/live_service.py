@@ -60,7 +60,9 @@ def _get(url, key=False, ttl=30):
 def live_matches():
     if not KEY: return []
     d = _get("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", key=True)
-    return [e["match"]["id"] for e in (d or {}).get("data", {}).get("schedule", {}).get("events", []) or [] if e.get("match")]
+    # 只看 Worlds（getLive 也會列出其他賽事，例如 Demacia Cup）
+    return [e["match"]["id"] for e in (d or {}).get("data", {}).get("schedule", {}).get("events", []) or []
+            if e.get("match") and (e.get("league") or {}).get("name") == os.environ.get("WATCH_LEAGUE", "Worlds")]
 
 def match_details(mid):
     d = _get(f"https://esports-api.lolesports.com/persisted/gw/getEventDetails?hl=en-US&id={mid}", key=True)

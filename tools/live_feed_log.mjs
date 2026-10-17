@@ -16,7 +16,9 @@ async function getLive() {
   const r = await fetch("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", { headers: { "x-api-key": KEY } });
   if (!r.ok) throw new Error(`getLive HTTP ${r.status}`);
   const d = await r.json(); const games = [];
-  for (const e of d?.data?.schedule?.events ?? []) for (const g of e.match?.games ?? e.games ?? []) if (g.state === "inProgress") games.push({ id: g.id, league: e.league?.name, match: e.match?.id });
+  // 只追指定聯賽（預設 Worlds）：getLive 也會列出其他賽事，例如 2026-10-17 的 Demacia Cup（DCGI）
+  const LEAGUE = process.env.WATCH_LEAGUE ?? "Worlds";
+  for (const e of d?.data?.schedule?.events ?? []) if (!LEAGUE || e.league?.name === LEAGUE) for (const g of e.match?.games ?? e.games ?? []) if (g.state === "inProgress") games.push({ id: g.id, league: e.league?.name, match: e.match?.id });
   return games;
 }
 
