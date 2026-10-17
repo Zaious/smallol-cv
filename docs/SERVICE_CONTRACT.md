@@ -107,6 +107,14 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `/history/teams.json` | `teams.<代碼>[]`：每局的 `side`、`opponent`、`win`、`bans`、`picks[]`（`role`、`player`、`champion`）|
 | `/history/players.json` | `players.<選手名>`：`team`、`role`、`games[]`（`champion`、`win`、`k`、`d`、`a`）、`pool.<英雄>`（`games`、`wins`、`k`、`d`、`a`）|
 
+| `/teams.json` | v0.7：Worlds 2026 隊伍資料檔（`tools/build_teamsheet.py`）。`teams[]`：`code`、`name`、`region`、`league`、`seed`、`seedLabel`（例 `"LCK #1"`）、`startStage`（`"Main Event"`／`"Play-In"`）、`qualificationPath`（例 `"LCK 2026 Season Playoffs Champion"`）、`players[]`、`coaches[]`（`id`、`role`、`nationality`）。`players[]`：`id`、`role`、`starter`（報名名單每個位置第一位為先發）、`name`、`nativeName`、`nationality`（中文）、`age`、`debutYear`、`worldsAppearances`（含本屆）、`worldsYears`、`titles`（`{"世界賽": n, "MSI": n, "LCK": n, …}`）、`gamesThisWorlds`（本服務記錄的本屆上場局數，沒上場為 null）、`bio`（只由前述欄位組成的一句話） |
+
+隊伍資料檔的規則（2026-10-18）：
+- 冠軍：世界賽／MSI 以 Leaguepedia 歷屆冠軍隊比對選手當年隊伍；賽區只算季後賽或總決賽的第一名，同一聯賽同一年同一賽季只算一次（例行賽第一、IEM、Rift Rivals、EWC、KeSPA Cup、開幕賽、Demacia Cup 不算）。LEC 一年有多個賽季加年度總決賽，所以歐洲選手的冠軍數會偏大，這是實際紀錄。
+- 世界賽次數：不含資格賽（Regional Finals、Qualifier），含 Play-In。
+- 對照：Faker 為世界賽冠軍 ×6、MSI ×2、LCK ×10、第 11 次世界賽。
+- 資料每天由服務端從 Leaguepedia 更新一次即可（限流很嚴，不要由桌面工具直接抓）；每局結束後會更新 `gamesThisWorlds`。
+
 資料來源與驗證：
 - 勝方：Leaguepedia；限流抓不到時用本服務的塔命名（主堡塔被打掉的一方輸），`sources.winner = "cv_nexus"`。Play-In 4 個系列賽 15 局推算的勝負，加總與官方系列賽比分全部一致。
 - 禁用：本服務直播當下的辨識（`cv`）＞錄影版畫面辨識（`cv_vod`，Day 1 共 80/80）＞ Leaguepedia。

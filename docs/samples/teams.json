@@ -1,0 +1,2750 @@
+{
+ "updated": "2026-10-17T22:35:53Z",
+ "tournament": "Worlds 2026",
+ "teams": [
+  {
+   "code": "GEN",
+   "name": "Gen.G",
+   "region": "Korea",
+   "league": "LCK",
+   "seed": "1",
+   "seedLabel": "LCK #1",
+   "startStage": "Main Event",
+   "qualificationPath": "LCK 2026 Season Playoffs Champion",
+   "players": [
+    {
+     "id": "Kiin",
+     "link": "Kiin",
+     "role": "top",
+     "starter": true,
+     "name": "Kim Gi-in",
+     "nativeName": "김기인",
+     "nationality": "韓國",
+     "age": 27,
+     "debutYear": 2017,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2018,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 2,
+      "LCK": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，27 歲，2017 年出道，第 5 次打世界賽，MSI冠軍 ×2、LCK冠軍 ×3"
+    },
+    {
+     "id": "Canyon",
+     "link": "Canyon",
+     "role": "jungle",
+     "starter": true,
+     "name": "Kim Geon-bu",
+     "nativeName": "김건부",
+     "nationality": "韓國",
+     "age": 25,
+     "debutYear": 2019,
+     "worldsAppearances": 8,
+     "worldsYears": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "MSI": 2,
+      "LCK": 6
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，25 歲，2019 年出道，第 8 次打世界賽，世界賽冠軍 ×1、MSI冠軍 ×2、LCK冠軍 ×6"
+    },
+    {
+     "id": "Chovy",
+     "link": "Chovy",
+     "role": "mid",
+     "starter": true,
+     "name": "Jeong Ji-hoon",
+     "nativeName": "정지훈",
+     "nationality": "韓國",
+     "age": 25,
+     "debutYear": 2018,
+     "worldsAppearances": 8,
+     "worldsYears": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 2,
+      "LCK": 6
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，25 歲，2018 年出道，第 8 次打世界賽，MSI冠軍 ×2、LCK冠軍 ×6"
+    },
+    {
+     "id": "Ruler",
+     "link": "Ruler",
+     "role": "bottom",
+     "starter": true,
+     "name": "Park Jae-hyuk",
+     "nativeName": "박재혁",
+     "nationality": "韓國",
+     "age": 27,
+     "debutYear": 2016,
+     "worldsAppearances": 9,
+     "worldsYears": [
+      2016,
+      2017,
+      2018,
+      2020,
+      2021,
+      2022,
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "MSI": 2,
+      "LCK": 3,
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，27 歲，2016 年出道，第 9 次打世界賽，世界賽冠軍 ×1、MSI冠軍 ×2、LCK冠軍 ×3、LPL冠軍 ×2"
+    },
+    {
+     "id": "Duro",
+     "link": "Duro",
+     "role": "support",
+     "starter": true,
+     "name": "Joo Min-kyu",
+     "nativeName": "주민규",
+     "nationality": "韓國",
+     "age": 24,
+     "debutYear": 2022,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "LCK": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，24 歲，2022 年出道，第 2 次打世界賽，MSI冠軍 ×1、LCK冠軍 ×2"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Ryu",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Lyn",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Nova (Park Chan-ho)",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "HLE",
+   "name": "Hanwha Life Esports",
+   "region": "Korea",
+   "league": "LCK",
+   "seed": "2",
+   "seedLabel": "LCK #2",
+   "startStage": "Main Event",
+   "qualificationPath": "LCK 2026 Season Playoffs Runner-Up",
+   "players": [
+    {
+     "id": "Zeus",
+     "link": "Zeus",
+     "role": "top",
+     "starter": true,
+     "name": "Choi Woo-je",
+     "nativeName": "최우제",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2021,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 2,
+      "MSI": 1,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2021 年出道，第 5 次打世界賽，世界賽冠軍 ×2、MSI冠軍 ×1、LCK冠軍 ×1"
+    },
+    {
+     "id": "Kanavi",
+     "link": "Kanavi",
+     "role": "jungle",
+     "starter": true,
+     "name": "Seo Jin-hyeok",
+     "nativeName": "서진혁",
+     "nationality": "韓國",
+     "age": 25,
+     "debutYear": 2019,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2020,
+      2022,
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 2,
+      "LPL": 5
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，25 歲，2019 年出道，第 5 次打世界賽，MSI冠軍 ×2、LPL冠軍 ×5"
+    },
+    {
+     "id": "Zeka",
+     "link": "Zeka (Kim Geon-woo)",
+     "role": "mid",
+     "starter": true,
+     "name": "Kim Geon-woo",
+     "nativeName": "김건우",
+     "nationality": "韓國",
+     "age": 23,
+     "debutYear": 2020,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "MSI": 1,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，23 歲，2020 年出道，第 4 次打世界賽，世界賽冠軍 ×1、MSI冠軍 ×1、LCK冠軍 ×1"
+    },
+    {
+     "id": "Gumayusi",
+     "link": "Gumayusi",
+     "role": "bottom",
+     "starter": true,
+     "name": "Lee Min-hyeong",
+     "nativeName": "이민형",
+     "nationality": "韓國",
+     "age": 24,
+     "debutYear": 2019,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 3,
+      "MSI": 1,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，24 歲，2019 年出道，第 6 次打世界賽，世界賽冠軍 ×3、MSI冠軍 ×1、LCK冠軍 ×1"
+    },
+    {
+     "id": "Delight",
+     "link": "Delight",
+     "role": "support",
+     "starter": true,
+     "name": "Yoo Hwan-joong",
+     "nativeName": "유환중",
+     "nationality": "韓國",
+     "age": 24,
+     "debutYear": 2021,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "LCK": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，24 歲，2021 年出道，第 4 次打世界賽，MSI冠軍 ×1、LCK冠軍 ×3"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Homme",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Mowgli",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Sin (Yeon Hyeong-mo)",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "T1",
+   "name": "T1",
+   "region": "Korea",
+   "league": "LCK",
+   "seed": "3",
+   "seedLabel": "LCK #3",
+   "startStage": "Main Event",
+   "qualificationPath": "LCK 2026 Season Playoffs 3rd Place",
+   "players": [
+    {
+     "id": "Doran",
+     "link": "Doran (Choi Hyeon-jun)",
+     "role": "top",
+     "starter": true,
+     "name": "Choi Hyeon-jun",
+     "nativeName": "최현준",
+     "nationality": "韓國",
+     "age": 26,
+     "debutYear": 2019,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2020,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LCK": 4
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，26 歲，2019 年出道，第 6 次打世界賽，世界賽冠軍 ×1、LCK冠軍 ×4"
+    },
+    {
+     "id": "Oner",
+     "link": "Oner",
+     "role": "jungle",
+     "starter": true,
+     "name": "Mun Hyeon-jun",
+     "nativeName": "문현준",
+     "nationality": "韓國",
+     "age": 23,
+     "debutYear": 2021,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 3,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，23 歲，2021 年出道，第 6 次打世界賽，世界賽冠軍 ×3、LCK冠軍 ×1"
+    },
+    {
+     "id": "Faker",
+     "link": "Faker",
+     "role": "mid",
+     "starter": true,
+     "name": "Lee Sang-hyeok",
+     "nativeName": "이상혁",
+     "nationality": "韓國",
+     "age": 30,
+     "debutYear": 2013,
+     "worldsAppearances": 11,
+     "worldsYears": [
+      2013,
+      2015,
+      2016,
+      2017,
+      2019,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 6,
+      "MSI": 2,
+      "LCK": 10
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，30 歲，2013 年出道，第 11 次打世界賽，世界賽冠軍 ×6、MSI冠軍 ×2、LCK冠軍 ×10"
+    },
+    {
+     "id": "Peyz",
+     "link": "Peyz",
+     "role": "bottom",
+     "starter": true,
+     "name": "Kim Su-hwan",
+     "nativeName": "김수환",
+     "nationality": "韓國",
+     "age": 20,
+     "debutYear": 2022,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "LCK": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，20 歲，2022 年出道，第 3 次打世界賽，MSI冠軍 ×1、LCK冠軍 ×3"
+    },
+    {
+     "id": "Keria",
+     "link": "Keria",
+     "role": "support",
+     "starter": true,
+     "name": "Ryu Min-seok",
+     "nativeName": "류민석",
+     "nationality": "韓國",
+     "age": 24,
+     "debutYear": 2018,
+     "worldsAppearances": 7,
+     "worldsYears": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 3,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，24 歲，2018 年出道，第 7 次打世界賽，世界賽冠軍 ×3、LCK冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Tom (Im Jae-hyeon)",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Easyhoon",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Mata",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "DK",
+   "name": "Dplus Kia",
+   "region": "Korea",
+   "league": "LCK",
+   "seed": "4",
+   "seedLabel": "LCK #4",
+   "startStage": "Main Event",
+   "qualificationPath": "LCK 2026 Season Playoffs 4th Place",
+   "players": [
+    {
+     "id": "Siwoo",
+     "link": "Siwoo",
+     "role": "top",
+     "starter": true,
+     "name": "Jeon Si-woo",
+     "nativeName": "전시우",
+     "nationality": "韓國",
+     "age": 18,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "韓國，18 歲，2025 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Lucid",
+     "link": "Lucid (Choi Yong-hyeok)",
+     "role": "jungle",
+     "starter": true,
+     "name": "Choi Yong-hyeok",
+     "nativeName": "최용혁",
+     "nationality": "韓國",
+     "age": 21,
+     "debutYear": 2022,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2024,
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "韓國，21 歲，2022 年出道，第 2 次打世界賽"
+    },
+    {
+     "id": "ShowMaker",
+     "link": "ShowMaker",
+     "role": "mid",
+     "starter": true,
+     "name": "Heo Su",
+     "nativeName": "허수",
+     "nationality": "韓國",
+     "age": 26,
+     "debutYear": 2018,
+     "worldsAppearances": 7,
+     "worldsYears": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LCK": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，26 歲，2018 年出道，第 7 次打世界賽，世界賽冠軍 ×1、LCK冠軍 ×3"
+    },
+    {
+     "id": "Smash",
+     "link": "Smash (Shin Geum-jae)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Shin Geum-jae",
+     "nativeName": "신금재",
+     "nationality": "韓國",
+     "age": 20,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "韓國，20 歲，2025 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Career",
+     "link": "Career",
+     "role": "support",
+     "starter": true,
+     "name": "Oh Hyeong-seok",
+     "nativeName": "오형석",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2025 年出道，第 1 次打世界賽"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "CvMax",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "PoohManDu",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Hachani",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "AL",
+   "name": "Anyone's Legend",
+   "region": "China",
+   "league": "LPL",
+   "seed": "1",
+   "seedLabel": "LPL #1",
+   "startStage": "Main Event",
+   "qualificationPath": "LPL 2026 Grand Finals Champion",
+   "players": [
+    {
+     "id": "Breathe",
+     "link": "Breathe",
+     "role": "top",
+     "starter": true,
+     "name": "Chen Chen",
+     "nativeName": "陈晨",
+     "nationality": "中國",
+     "age": 25,
+     "debutYear": 2020,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2022,
+      2024,
+      2026
+     ],
+     "titles": {
+      "LPL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，25 歲，2020 年出道，第 3 次打世界賽，LPL冠軍 ×1"
+    },
+    {
+     "id": "Tarzan",
+     "link": "Tarzan (Lee Seung-yong)",
+     "role": "jungle",
+     "starter": true,
+     "name": "Lee Seung-yong",
+     "nativeName": "이승용",
+     "nationality": "韓國",
+     "age": 27,
+     "debutYear": 2018,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2019,
+      2021,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，27 歲，2018 年出道，第 6 次打世界賽，LPL冠軍 ×2"
+    },
+    {
+     "id": "Shanks",
+     "link": "Shanks",
+     "role": "mid",
+     "starter": true,
+     "name": "Cui Xiao-Jun",
+     "nativeName": "崔校军",
+     "nationality": "中國",
+     "age": 25,
+     "debutYear": 2020,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，25 歲，2020 年出道，第 2 次打世界賽，LPL冠軍 ×2"
+    },
+    {
+     "id": "Hope",
+     "link": "Hope (Wang Jie)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Wang Jie",
+     "nativeName": "王杰",
+     "nationality": "中國",
+     "age": 26,
+     "debutYear": 2018,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2022,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，26 歲，2018 年出道，第 3 次打世界賽，LPL冠軍 ×3"
+    },
+    {
+     "id": "Kael",
+     "link": "Kael (Kim Jin-hong)",
+     "role": "support",
+     "starter": true,
+     "name": "Kim Jin-hong",
+     "nativeName": "김진홍",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2022 年出道，第 2 次打世界賽，LPL冠軍 ×2"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "BigWei",
+     "role": "Coach",
+     "nationality": "台灣"
+    },
+    {
+     "id": "Teacherma",
+     "role": "Coach",
+     "nationality": "中國"
+    },
+    {
+     "id": "Despa1r",
+     "role": "Coach",
+     "nationality": "中國"
+    }
+   ]
+  },
+  {
+   "code": "BLG",
+   "name": "Bilibili Gaming",
+   "region": "China",
+   "league": "LPL",
+   "seed": "2",
+   "seedLabel": "LPL #2",
+   "startStage": "Main Event",
+   "qualificationPath": "LPL 2026 Championship Points",
+   "players": [
+    {
+     "id": "Bin",
+     "link": "Bin (Chen Ze-Bin)",
+     "role": "top",
+     "starter": true,
+     "name": "Chen Ze-Bin",
+     "nativeName": "陈泽彬",
+     "nationality": "中國",
+     "age": 23,
+     "debutYear": 2019,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2020,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "LPL": 6
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，23 歲，2019 年出道，第 5 次打世界賽，MSI冠軍 ×1、LPL冠軍 ×6"
+    },
+    {
+     "id": "Flandre",
+     "link": "Flandre",
+     "role": "top",
+     "starter": false,
+     "name": "Li Xuan-Jun",
+     "nativeName": "李炫君",
+     "nationality": "中國",
+     "age": 28,
+     "debutYear": 2014,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2021,
+      2022,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，28 歲，2014 年出道，第 4 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×2"
+    },
+    {
+     "id": "Xun",
+     "link": "Xun",
+     "role": "jungle",
+     "starter": true,
+     "name": "Peng Li-Xun",
+     "nativeName": "彭立勋",
+     "nationality": "中國",
+     "age": 24,
+     "debutYear": 2021,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "LPL": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，24 歲，2021 年出道，第 1 次打世界賽，LPL冠軍 ×3"
+    },
+    {
+     "id": "Knight",
+     "link": "Knight (Zhuo Ding)",
+     "role": "mid",
+     "starter": true,
+     "name": "Zhuo Ding",
+     "nativeName": "卓定",
+     "nationality": "中國",
+     "age": 26,
+     "debutYear": 2017,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 4
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，26 歲，2017 年出道，第 2 次打世界賽，LPL冠軍 ×4"
+    },
+    {
+     "id": "Viper",
+     "link": "Viper (Park Do-hyeon)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Park Do-hyeon",
+     "nativeName": "박도현",
+     "nationality": "韓國",
+     "age": 25,
+     "debutYear": 2018,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2019,
+      2021,
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 3,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，25 歲，2018 年出道，第 6 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×3、LCK冠軍 ×1"
+    },
+    {
+     "id": "ON",
+     "link": "ON",
+     "role": "support",
+     "starter": true,
+     "name": "Luo Wen-Jun",
+     "nativeName": "骆文俊",
+     "nationality": "中國",
+     "age": 23,
+     "debutYear": 2020,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 5
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，23 歲，2020 年出道，第 4 次打世界賽，LPL冠軍 ×5"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Daeny",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Chieh",
+     "role": "Coach",
+     "nationality": "台灣"
+    },
+    {
+     "id": "Ben",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "zyb",
+     "role": "Coach",
+     "nationality": "中國"
+    }
+   ]
+  },
+  {
+   "code": "TES",
+   "name": "Top Esports",
+   "region": "China",
+   "league": "LPL",
+   "seed": "3",
+   "seedLabel": "LPL #3",
+   "startStage": "Main Event",
+   "qualificationPath": "LPL 2026 Regional Finals Winner",
+   "players": [
+    {
+     "id": "369",
+     "link": "369",
+     "role": "top",
+     "starter": true,
+     "name": "Bai Jia-Hao",
+     "nativeName": "白家浩",
+     "nationality": "中國",
+     "age": 25,
+     "debutYear": 2018,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2020,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "LPL": 5
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，25 歲，2018 年出道，第 6 次打世界賽，MSI冠軍 ×1、LPL冠軍 ×5"
+    },
+    {
+     "id": "Tian",
+     "link": "Tian",
+     "role": "jungle",
+     "starter": true,
+     "name": "Gao Tian-Liang",
+     "nativeName": "高天亮",
+     "nationality": "中國",
+     "age": 26,
+     "debutYear": 2017,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2019,
+      2021,
+      2022,
+      2024,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，26 歲，2017 年出道，第 5 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×1"
+    },
+    {
+     "id": "Creme",
+     "link": "Creme",
+     "role": "mid",
+     "starter": true,
+     "name": "Lin Jian",
+     "nativeName": "林坚",
+     "nationality": "中國",
+     "age": 22,
+     "debutYear": 2021,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，22 歲，2021 年出道，第 3 次打世界賽，LPL冠軍 ×1"
+    },
+    {
+     "id": "JackeyLove",
+     "link": "JackeyLove",
+     "role": "bottom",
+     "starter": true,
+     "name": "Yu Wen-Bo",
+     "nativeName": "喻文波",
+     "nationality": "中國",
+     "age": 25,
+     "debutYear": 2016,
+     "worldsAppearances": 7,
+     "worldsYears": [
+      2018,
+      2019,
+      2020,
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，25 歲，2016 年出道，第 7 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×3"
+    },
+    {
+     "id": "Zhuo",
+     "link": "Zhuo",
+     "role": "support",
+     "starter": true,
+     "name": "Wang Xu-Zhuo",
+     "nativeName": "王旭卓",
+     "nationality": "中國",
+     "age": 25,
+     "debutYear": 2020,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "中國，25 歲，2020 年出道，第 1 次打世界賽"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Poppy (Chang Po-Hao)",
+     "role": "Coach",
+     "nationality": "台灣"
+    },
+    {
+     "id": "BoBo (He Wen-Bo)",
+     "role": "Coach",
+     "nationality": "中國"
+    },
+    {
+     "id": "Leo (Li Yu-Ming)",
+     "role": "Coach",
+     "nationality": "中國"
+    }
+   ]
+  },
+  {
+   "code": "IG",
+   "name": "Invictus Gaming",
+   "region": "China",
+   "league": "LPL",
+   "seed": "4",
+   "seedLabel": "LPL #4",
+   "startStage": "Main Event",
+   "qualificationPath": "LPL 2026 Regional Finals Runner-Up",
+   "players": [
+    {
+     "id": "TheShy",
+     "link": "TheShy",
+     "role": "top",
+     "starter": true,
+     "name": "Kang Seung-lok",
+     "nativeName": "강승록",
+     "nationality": "韓國",
+     "age": 26,
+     "debutYear": 2017,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2018,
+      2019,
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，26 歲，2017 年出道，第 5 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×1"
+    },
+    {
+     "id": "Wei",
+     "link": "Wei (Yan Yang-Wei)",
+     "role": "jungle",
+     "starter": true,
+     "name": "Yan Yang-Wei",
+     "nativeName": "闫扬威",
+     "nationality": "中國",
+     "age": 23,
+     "debutYear": 2020,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2021,
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 2,
+      "LPL": 3
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，23 歲，2020 年出道，第 5 次打世界賽，MSI冠軍 ×2、LPL冠軍 ×3"
+    },
+    {
+     "id": "Rookie",
+     "link": "Rookie",
+     "role": "mid",
+     "starter": true,
+     "name": "Song Eui-jin",
+     "nativeName": "송의진",
+     "nationality": "韓國",
+     "age": 29,
+     "debutYear": 2014,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2015,
+      2018,
+      2019,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LPL": 1,
+      "LCK": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，29 歲，2014 年出道，第 5 次打世界賽，世界賽冠軍 ×1、LPL冠軍 ×1、LCK冠軍 ×1"
+    },
+    {
+     "id": "JiaQi",
+     "link": "JiaQi",
+     "role": "bottom",
+     "starter": true,
+     "name": "Zi Jia-Qi",
+     "nativeName": "资嘉琪",
+     "nationality": "中國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "中國，22 歲，2022 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Meiko",
+     "link": "Meiko",
+     "role": "support",
+     "starter": true,
+     "name": "Tian Ye",
+     "nativeName": "田野",
+     "nationality": "中國",
+     "age": 28,
+     "debutYear": 2015,
+     "worldsAppearances": 9,
+     "worldsYears": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2021,
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "MSI": 1,
+      "LPL": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "中國，28 歲，2015 年出道，第 9 次打世界賽，世界賽冠軍 ×1、MSI冠軍 ×1、LPL冠軍 ×2"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Kezman",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Helper (Kwon Yeong-jae)",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Chengz",
+     "role": "Coach",
+     "nationality": "中國"
+    },
+    {
+     "id": "Fury (Lee Jin-yong)",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "TL",
+   "name": "Team Liquid",
+   "region": "North America",
+   "league": "LCS",
+   "seed": "1",
+   "seedLabel": "LCS #1",
+   "startStage": "Main Event",
+   "qualificationPath": "LCS 2026 Summer Playoffs Champion",
+   "players": [
+    {
+     "id": "Morgan",
+     "link": "Morgan",
+     "role": "top",
+     "starter": true,
+     "name": "Park Ru-han",
+     "nativeName": "박루한",
+     "nationality": "韓國",
+     "age": 25,
+     "debutYear": 2019,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2021,
+      2026
+     ],
+     "titles": {
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，25 歲，2019 年出道，第 2 次打世界賽，LCS冠軍 ×1"
+    },
+    {
+     "id": "Josedeodo",
+     "link": "Josedeodo",
+     "role": "jungle",
+     "starter": true,
+     "name": "Brandon&nbsp;Joel Villegas",
+     "nativeName": null,
+     "nationality": "阿根廷",
+     "age": 26,
+     "debutYear": 2018,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2020,
+      2026
+     ],
+     "titles": {
+      "LLA": 2,
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "阿根廷，26 歲，2018 年出道，第 2 次打世界賽，LLA冠軍 ×2、LCS冠軍 ×1"
+    },
+    {
+     "id": "Quid",
+     "link": "Quid",
+     "role": "mid",
+     "starter": true,
+     "name": "Lim Hyeon-seung",
+     "nativeName": "임현승",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2022 年出道，第 3 次打世界賽，LCS冠軍 ×1"
+    },
+    {
+     "id": "Yeon",
+     "link": "Yeon (Sean Sung)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Sean Sung",
+     "nativeName": "성연호",
+     "nationality": "美國",
+     "age": 25,
+     "debutYear": 2022,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "LCS": 2,
+      "LTA": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "美國，25 歲，2022 年出道，第 3 次打世界賽，LCS冠軍 ×2、LTA冠軍 ×1"
+    },
+    {
+     "id": "CoreJJ",
+     "link": "CoreJJ",
+     "role": "support",
+     "starter": true,
+     "name": "Jo Yong-in",
+     "nativeName": "조용인",
+     "nationality": "韓國",
+     "age": 32,
+     "debutYear": 2015,
+     "worldsAppearances": 9,
+     "worldsYears": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "世界賽": 1,
+      "LCS": 4,
+      "LTA": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，32 歲，2015 年出道，第 9 次打世界賽，世界賽冠軍 ×1、LCS冠軍 ×4、LTA冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Spawn (Jake Tiberi)",
+     "role": "Coach",
+     "nationality": "澳洲"
+    },
+    {
+     "id": "Spookz",
+     "role": "Coach",
+     "nationality": "澳洲"
+    }
+   ]
+  },
+  {
+   "code": "LYON",
+   "name": "LYON",
+   "region": "North America",
+   "league": "LCS",
+   "seed": "2",
+   "seedLabel": "LCS #2",
+   "startStage": "Main Event",
+   "qualificationPath": "LCS 2026 Summer Playoffs Runner-Up",
+   "players": [
+    {
+     "id": "Dhokla",
+     "link": "Dhokla",
+     "role": "top",
+     "starter": true,
+     "name": "Niship Doshi",
+     "nativeName": null,
+     "nationality": "美國",
+     "age": 29,
+     "debutYear": 2017,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "美國，29 歲，2017 年出道，第 3 次打世界賽，LCS冠軍 ×1"
+    },
+    {
+     "id": "Inspired",
+     "link": "Inspired",
+     "role": "jungle",
+     "starter": true,
+     "name": "Kacper Słoma",
+     "nativeName": null,
+     "nationality": "波蘭",
+     "age": 24,
+     "debutYear": 2019,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2020,
+      2021,
+      2022,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCS": 2,
+      "LTA North": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "波蘭，24 歲，2019 年出道，第 6 次打世界賽，LCS冠軍 ×2、LTA North冠軍 ×1"
+    },
+    {
+     "id": "Saint",
+     "link": "Saint (Kang Sung-in)",
+     "role": "mid",
+     "starter": true,
+     "name": "Kang Sung-in",
+     "nativeName": "강성인",
+     "nationality": "韓國",
+     "age": 21,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，21 歲，2025 年出道，第 1 次打世界賽，LCS冠軍 ×1"
+    },
+    {
+     "id": "Berserker",
+     "link": "Berserker (Kim Min-cheol)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Kim Min-cheol",
+     "nativeName": "김민철",
+     "nationality": "韓國",
+     "age": 23,
+     "debutYear": 2021,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2022,
+      2023,
+      2026
+     ],
+     "titles": {
+      "LCS": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，23 歲，2021 年出道，第 3 次打世界賽，LCS冠軍 ×2"
+    },
+    {
+     "id": "Isles",
+     "link": "Isles",
+     "role": "support",
+     "starter": true,
+     "name": "Jonah Rosario",
+     "nativeName": null,
+     "nationality": "澳洲",
+     "age": 25,
+     "debutYear": 2019,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2020,
+      2026
+     ],
+     "titles": {
+      "OPL": 2,
+      "LCS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "澳洲，25 歲，2019 年出道，第 2 次打世界賽，OPL冠軍 ×2、LCS冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Reignover",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Rigby",
+     "role": "Coach",
+     "nationality": "韓國"
+    }
+   ]
+  },
+  {
+   "code": "G2",
+   "name": "G2 Esports",
+   "region": "EMEA",
+   "league": "LEC",
+   "seed": "1",
+   "seedLabel": "LEC #1",
+   "startStage": "Main Event",
+   "qualificationPath": "LEC 2026 Summer Playoffs Champion",
+   "players": [
+    {
+     "id": "BrokenBlade",
+     "link": "BrokenBlade",
+     "role": "top",
+     "starter": true,
+     "name": "Sergen Çelik",
+     "nativeName": null,
+     "nationality": "德國",
+     "age": 26,
+     "debutYear": 2021,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 12
+     },
+     "gamesThisWorlds": null,
+     "bio": "德國，26 歲，2021 年出道，第 5 次打世界賽，LEC冠軍 ×12"
+    },
+    {
+     "id": "SkewMond",
+     "link": "SkewMond",
+     "role": "jungle",
+     "starter": true,
+     "name": "Rudy Semaan",
+     "nativeName": null,
+     "nationality": "法國",
+     "age": 22,
+     "debutYear": 2025,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 4
+     },
+     "gamesThisWorlds": null,
+     "bio": "法國，22 歲，2025 年出道，第 2 次打世界賽，LEC冠軍 ×4"
+    },
+    {
+     "id": "Caps",
+     "link": "Caps",
+     "role": "mid",
+     "starter": true,
+     "name": "Rasmus Borregaard Winther",
+     "nativeName": null,
+     "nationality": "丹麥",
+     "age": 26,
+     "debutYear": 2016,
+     "worldsAppearances": 8,
+     "worldsYears": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "MSI": 1,
+      "TCL": 1,
+      "EU LCS": 2,
+      "LEC": 15
+     },
+     "gamesThisWorlds": null,
+     "bio": "丹麥，26 歲，2016 年出道，第 8 次打世界賽，MSI冠軍 ×1、LEC冠軍 ×15、EU LCS冠軍 ×2、TCL冠軍 ×1"
+    },
+    {
+     "id": "Hans Sama",
+     "link": "Hans Sama",
+     "role": "bottom",
+     "starter": true,
+     "name": "Steven Liv",
+     "nativeName": null,
+     "nationality": "法國",
+     "age": 27,
+     "debutYear": 2017,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2017,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 11
+     },
+     "gamesThisWorlds": null,
+     "bio": "法國，27 歲，2017 年出道，第 5 次打世界賽，LEC冠軍 ×11"
+    },
+    {
+     "id": "Labrov",
+     "link": "Labrov",
+     "role": "support",
+     "starter": true,
+     "name": "Lampros Papoutsakis",
+     "nativeName": "Λάμπρος Παπουτσάκης",
+     "nationality": "希臘",
+     "age": 24,
+     "debutYear": 2020,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 4
+     },
+     "gamesThisWorlds": null,
+     "bio": "希臘，24 歲，2020 年出道，第 3 次打世界賽，LEC冠軍 ×4"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Perkz",
+     "role": "Coach",
+     "nationality": "克羅埃西亞"
+    },
+    {
+     "id": "Memento",
+     "role": "Coach",
+     "nationality": "瑞典"
+    },
+    {
+     "id": "Rodrigo",
+     "role": "Coach",
+     "nationality": "葡萄牙"
+    }
+   ]
+  },
+  {
+   "code": "MKOI",
+   "name": "Movistar KOI",
+   "region": "EMEA",
+   "league": "LEC",
+   "seed": "2",
+   "seedLabel": "LEC #2",
+   "startStage": "Main Event",
+   "qualificationPath": "LEC 2026 Summer Playoffs Runner-Up",
+   "players": [
+    {
+     "id": "Myrwn",
+     "link": "Myrwn",
+     "role": "top",
+     "starter": true,
+     "name": "Alex Pastor Villarejo",
+     "nativeName": null,
+     "nationality": "西班牙",
+     "age": 23,
+     "debutYear": 2024,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "西班牙，23 歲，2024 年出道，第 3 次打世界賽，LEC冠軍 ×1"
+    },
+    {
+     "id": "Elyoya",
+     "link": "Elyoya",
+     "role": "jungle",
+     "starter": true,
+     "name": "Javier Prades Batalla",
+     "nativeName": null,
+     "nationality": "西班牙",
+     "age": 26,
+     "debutYear": 2021,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 4
+     },
+     "gamesThisWorlds": null,
+     "bio": "西班牙，26 歲，2021 年出道，第 6 次打世界賽，LEC冠軍 ×4"
+    },
+    {
+     "id": "Jojopyun",
+     "link": "Jojopyun",
+     "role": "mid",
+     "starter": true,
+     "name": "Joseph&nbsp;Joon Pyun",
+     "nativeName": null,
+     "nationality": "加拿大",
+     "age": 22,
+     "debutYear": 2023,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "加拿大，22 歲，2023 年出道，第 2 次打世界賽，LEC冠軍 ×1"
+    },
+    {
+     "id": "Supa",
+     "link": "Supa",
+     "role": "bottom",
+     "starter": true,
+     "name": "David Martínez García",
+     "nativeName": null,
+     "nationality": "西班牙",
+     "age": 25,
+     "debutYear": 2024,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "西班牙，25 歲，2024 年出道，第 3 次打世界賽，LEC冠軍 ×1"
+    },
+    {
+     "id": "Alvaro",
+     "link": "Alvaro (Álvaro Fernández)",
+     "role": "support",
+     "starter": true,
+     "name": "Álvaro Fernández del Amo",
+     "nativeName": null,
+     "nationality": "西班牙",
+     "age": 23,
+     "debutYear": 2024,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LEC": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "西班牙，23 歲，2024 年出道，第 3 次打世界賽，LEC冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Melzhet",
+     "role": "Coach",
+     "nationality": "西班牙"
+    },
+    {
+     "id": "Alphari",
+     "role": "Coach",
+     "nationality": "英國"
+    },
+    {
+     "id": "Independent",
+     "role": "Coach",
+     "nationality": "西班牙"
+    }
+   ]
+  },
+  {
+   "code": "TSW",
+   "name": "Team Secret Whales",
+   "region": "Asia-Pacific",
+   "league": "LCP",
+   "seed": "1",
+   "seedLabel": "LCP #1",
+   "startStage": "Main Event",
+   "qualificationPath": "LCP 2026 Split 3 Champion",
+   "players": [
+    {
+     "id": "Pun",
+     "link": "Pun",
+     "role": "top",
+     "starter": true,
+     "name": "Nguyễn Đăng Khoa",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 24,
+     "debutYear": 2020,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "VCS": 1,
+      "LCP": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "越南，24 歲，2020 年出道，第 2 次打世界賽，LCP冠軍 ×2、VCS冠軍 ×1"
+    },
+    {
+     "id": "Hizto",
+     "link": "Hizto",
+     "role": "jungle",
+     "starter": true,
+     "name": "Lê Văn Hoàng Hải",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 19,
+     "debutYear": 2025,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCP": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "越南，19 歲，2025 年出道，第 2 次打世界賽，LCP冠軍 ×2"
+    },
+    {
+     "id": "Dire",
+     "link": "Dire",
+     "role": "mid",
+     "starter": true,
+     "name": "Trần Duy Đức",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 19,
+     "debutYear": 2025,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCP": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "越南，19 歲，2025 年出道，第 2 次打世界賽，LCP冠軍 ×2"
+    },
+    {
+     "id": "Eddie",
+     "link": "Eddie",
+     "role": "bottom",
+     "starter": true,
+     "name": "Hoàng Công Nghĩa",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 23,
+     "debutYear": 2020,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCP": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "越南，23 歲，2020 年出道，第 2 次打世界賽，LCP冠軍 ×2"
+    },
+    {
+     "id": "Bie",
+     "link": "Bie",
+     "role": "support",
+     "starter": true,
+     "name": "Trần Đức Hiếu",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 26,
+     "debutYear": 2018,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2022,
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "VCS": 3,
+      "LCP": 2
+     },
+     "gamesThisWorlds": null,
+     "bio": "越南，26 歲，2018 年出道，第 4 次打世界賽，VCS冠軍 ×3、LCP冠軍 ×2"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "WarHorse",
+     "role": "Coach",
+     "nationality": "台灣"
+    },
+    {
+     "id": "Ciel (Trần Tiến Thịnh)",
+     "role": "Coach",
+     "nationality": "越南"
+    }
+   ]
+  },
+  {
+   "code": "CFO",
+   "name": "CTBC Flying Oyster",
+   "region": "Asia-Pacific",
+   "league": "LCP",
+   "seed": "2",
+   "seedLabel": "LCP #2",
+   "startStage": "Main Event",
+   "qualificationPath": "LCP 2026 Split 3 Runner-Up",
+   "players": [
+    {
+     "id": "Rest",
+     "link": "Rest",
+     "role": "top",
+     "starter": true,
+     "name": "Hsu Shih-Chieh",
+     "nativeName": "徐士傑",
+     "nationality": "台灣",
+     "age": 27,
+     "debutYear": 2017,
+     "worldsAppearances": 5,
+     "worldsYears": [
+      2019,
+      2022,
+      2023,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCP": 1,
+      "PCS": 1,
+      "LMS": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "台灣，27 歲，2017 年出道，第 5 次打世界賽，LCP冠軍 ×1、PCS冠軍 ×1、LMS冠軍 ×1"
+    },
+    {
+     "id": "Shad0w",
+     "link": "Shad0w",
+     "role": "jungle",
+     "starter": true,
+     "name": "Zhao Zhi-Qiang",
+     "nativeName": "赵志强",
+     "nationality": "義大利",
+     "age": 25,
+     "debutYear": 2020,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2020,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LPL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "義大利，25 歲，2020 年出道，第 3 次打世界賽，LPL冠軍 ×1"
+    },
+    {
+     "id": "POUT",
+     "link": "POUT",
+     "role": "mid",
+     "starter": true,
+     "name": "Han In-woong",
+     "nativeName": "한인웅",
+     "nationality": "韓國",
+     "age": 23,
+     "debutYear": 2026,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "韓國，23 歲，2026 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Doggo",
+     "link": "Doggo",
+     "role": "bottom",
+     "starter": true,
+     "name": "Chiu Tzu-Chuan",
+     "nativeName": "邱梓銓",
+     "nationality": "台灣",
+     "age": 23,
+     "debutYear": 2021,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2021,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LCP": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "台灣，23 歲，2021 年出道，第 3 次打世界賽，LCP冠軍 ×1"
+    },
+    {
+     "id": "Kino",
+     "link": "Kino",
+     "role": "support",
+     "starter": true,
+     "name": "Chu&nbsp;Wu Hsin-Jung",
+     "nativeName": "朱吳欣榮",
+     "nationality": "台灣",
+     "age": 28,
+     "debutYear": 2018,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2021,
+      2022,
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": null,
+     "bio": "台灣，28 歲，2018 年出道，第 3 次打世界賽"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Chawy",
+     "role": "Coach",
+     "nationality": "新加坡"
+    },
+    {
+     "id": "Wulala",
+     "role": "Coach",
+     "nationality": "台灣"
+    }
+   ]
+  },
+  {
+   "code": "LOS",
+   "name": "LØS",
+   "region": "Brazil",
+   "league": "CBLOL",
+   "seed": "1",
+   "seedLabel": "CBLOL #1",
+   "startStage": "Main Event",
+   "qualificationPath": "CBLOL 2026 Split 2 Playoffs Champion",
+   "players": [
+    {
+     "id": "Zest",
+     "link": "Zest (Kim Dong-min)",
+     "role": "top",
+     "starter": true,
+     "name": "Kim Dong-min",
+     "nativeName": "김동민",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2022 年出道，第 1 次打世界賽，CBLOL冠軍 ×1"
+    },
+    {
+     "id": "Curse",
+     "link": "Curse (Raí Yamada)",
+     "role": "jungle",
+     "starter": true,
+     "name": "Raí Yamada",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 21,
+     "debutYear": 2026,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "巴西，21 歲，2026 年出道，第 1 次打世界賽，CBLOL冠軍 ×1"
+    },
+    {
+     "id": "Feisty",
+     "link": "Feisty",
+     "role": "mid",
+     "starter": true,
+     "name": "Jeong Seong-hoon",
+     "nativeName": "정성훈",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "韓國，22 歲，2022 年出道，第 1 次打世界賽，CBLOL冠軍 ×1"
+    },
+    {
+     "id": "Duduhh",
+     "link": "Duduhh",
+     "role": "bottom",
+     "starter": true,
+     "name": "Wallyson&nbsp;Francisco Queiroz da Silva",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 18,
+     "debutYear": 2026,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "巴西，18 歲，2026 年出道，第 1 次打世界賽，CBLOL冠軍 ×1"
+    },
+    {
+     "id": "Ackerman",
+     "link": "Ackerman (Gabriel Aparicio)",
+     "role": "support",
+     "starter": true,
+     "name": "Gabriel&nbsp;Agustin Aparicio",
+     "nativeName": null,
+     "nationality": "阿根廷",
+     "age": 23,
+     "debutYear": 2021,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2021,
+      2026
+     ],
+     "titles": {
+      "LLA": 3,
+      "CBLOL": 1
+     },
+     "gamesThisWorlds": null,
+     "bio": "阿根廷，23 歲，2021 年出道，第 2 次打世界賽，LLA冠軍 ×3、CBLOL冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Enatron",
+     "role": "Coach",
+     "nationality": "希臘"
+    },
+    {
+     "id": "Invokid",
+     "role": "Coach",
+     "nationality": "土耳其"
+    },
+    {
+     "id": "Brandão",
+     "role": "Coach",
+     "nationality": "巴西"
+    }
+   ]
+  },
+  {
+   "code": "C9",
+   "name": "Cloud9",
+   "region": "North America",
+   "league": "LCS",
+   "seed": "3",
+   "seedLabel": "LCS #3",
+   "startStage": "Play-In",
+   "qualificationPath": "LCS 2026 Summer Playoffs 3rd Place",
+   "players": [
+    {
+     "id": "Thanatos",
+     "link": "Thanatos (Park Seung-gyu)",
+     "role": "top",
+     "starter": true,
+     "name": "Park Seung-gyu",
+     "nativeName": "박승규",
+     "nationality": "韓國",
+     "age": 22,
+     "debutYear": 2022,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 9,
+     "bio": "韓國，22 歲，2022 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Blaber",
+     "link": "Blaber",
+     "role": "jungle",
+     "starter": true,
+     "name": "Robert Huang",
+     "nativeName": null,
+     "nationality": "美國",
+     "age": 26,
+     "debutYear": 2018,
+     "worldsAppearances": 6,
+     "worldsYears": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2023,
+      2026
+     ],
+     "titles": {
+      "LCS": 2
+     },
+     "gamesThisWorlds": 9,
+     "bio": "美國，26 歲，2018 年出道，第 6 次打世界賽，LCS冠軍 ×2"
+    },
+    {
+     "id": "Loki",
+     "link": "Loki (Lee Sang-min)",
+     "role": "mid",
+     "starter": true,
+     "name": "Lee Sang-min",
+     "nativeName": "이상민",
+     "nationality": "韓國",
+     "age": 21,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 9,
+     "bio": "韓國，21 歲，2025 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Tactical",
+     "link": "Tactical",
+     "role": "bottom",
+     "starter": true,
+     "name": "Edward Ra",
+     "nativeName": "나문용",
+     "nationality": "美國",
+     "age": 26,
+     "debutYear": 2020,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2020,
+      2021,
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 9,
+     "bio": "美國，26 歲，2020 年出道，第 3 次打世界賽"
+    },
+    {
+     "id": "Vulcan",
+     "link": "Vulcan (Philippe Laflamme)",
+     "role": "support",
+     "starter": true,
+     "name": "Philippe Laflamme",
+     "nativeName": null,
+     "nationality": "加拿大",
+     "age": 27,
+     "debutYear": 2018,
+     "worldsAppearances": 4,
+     "worldsYears": [
+      2019,
+      2021,
+      2022,
+      2026
+     ],
+     "titles": {
+      "LCS": 2
+     },
+     "gamesThisWorlds": 9,
+     "bio": "加拿大，27 歲，2018 年出道，第 4 次打世界賽，LCS冠軍 ×2"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "IWDominate",
+     "role": "Head Coach",
+     "nationality": "美國"
+    },
+    {
+     "id": "Veigar v2",
+     "role": "Assistant Coach",
+     "nationality": "挪威"
+    },
+    {
+     "id": "Arrow",
+     "role": "Assistant Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "YamatoCannon",
+     "role": "Assistant Coach",
+     "nationality": "瑞典"
+    }
+   ]
+  },
+  {
+   "code": "KC",
+   "name": "Karmine Corp",
+   "region": "EMEA",
+   "league": "LEC",
+   "seed": "3",
+   "seedLabel": "LEC #3",
+   "startStage": "Play-In",
+   "qualificationPath": "LEC 2026 Summer Playoffs 3rd Place",
+   "players": [
+    {
+     "id": "Canna",
+     "link": "Canna",
+     "role": "top",
+     "starter": true,
+     "name": "Kim Chang-dong",
+     "nativeName": "김창동",
+     "nationality": "韓國",
+     "age": 26,
+     "debutYear": 2020,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2021,
+      2023,
+      2026
+     ],
+     "titles": {
+      "LEC": 1,
+      "LCK": 1
+     },
+     "gamesThisWorlds": 8,
+     "bio": "韓國，26 歲，2020 年出道，第 3 次打世界賽，LEC冠軍 ×1、LCK冠軍 ×1"
+    },
+    {
+     "id": "Yike",
+     "link": "Yike",
+     "role": "jungle",
+     "starter": true,
+     "name": "Martin Sundelin",
+     "nativeName": null,
+     "nationality": "瑞典",
+     "age": 25,
+     "debutYear": 2023,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2023,
+      2024,
+      2026
+     ],
+     "titles": {
+      "LEC": 8
+     },
+     "gamesThisWorlds": 8,
+     "bio": "瑞典，25 歲，2023 年出道，第 3 次打世界賽，LEC冠軍 ×8"
+    },
+    {
+     "id": "kyeahoo",
+     "link": "kyeahoo",
+     "role": "mid",
+     "starter": true,
+     "name": null,
+     "nativeName": null,
+     "nationality": "韓國",
+     "age": null,
+     "debutYear": 2023,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 8,
+     "bio": "韓國，2023 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Caliste",
+     "link": "Caliste",
+     "role": "bottom",
+     "starter": true,
+     "name": "Caliste Henry-Hennebert",
+     "nativeName": null,
+     "nationality": "法國",
+     "age": 20,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "LEC": 1
+     },
+     "gamesThisWorlds": 8,
+     "bio": "法國，20 歲，2025 年出道，第 1 次打世界賽，LEC冠軍 ×1"
+    },
+    {
+     "id": "Busio",
+     "link": "Busio",
+     "role": "support",
+     "starter": true,
+     "name": "Alan Cwalina",
+     "nativeName": null,
+     "nationality": "美國",
+     "age": 22,
+     "debutYear": 2023,
+     "worldsAppearances": 3,
+     "worldsYears": [
+      2024,
+      2025,
+      2026
+     ],
+     "titles": {
+      "LTA North": 1
+     },
+     "gamesThisWorlds": 8,
+     "bio": "美國，22 歲，2023 年出道，第 3 次打世界賽，LTA North冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "Reapered",
+     "role": "Coach",
+     "nationality": "韓國"
+    },
+    {
+     "id": "Zeph",
+     "role": "Coach",
+     "nationality": "法國"
+    }
+   ]
+  },
+  {
+   "code": "MVK",
+   "name": "MVK Esports",
+   "region": "Asia-Pacific",
+   "league": "LCP",
+   "seed": "3",
+   "seedLabel": "LCP #3",
+   "startStage": "Play-In",
+   "qualificationPath": "LCP 2026 Championship Points",
+   "players": [
+    {
+     "id": "Kratos",
+     "link": "Kratos (Ngô Đức Khánh)",
+     "role": "top",
+     "starter": true,
+     "name": "Ngô Đức Khánh",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 21,
+     "debutYear": 2023,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 8,
+     "bio": "越南，21 歲，2023 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Gury",
+     "link": "Gury",
+     "role": "jungle",
+     "starter": true,
+     "name": "Lương Hải Long",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 22,
+     "debutYear": 2023,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2024,
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 6,
+     "bio": "越南，22 歲，2023 年出道，第 2 次打世界賽"
+    },
+    {
+     "id": "SanSan",
+     "link": "SanSan",
+     "role": "jungle",
+     "starter": false,
+     "name": "Lê Quốc Khánh",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 19,
+     "debutYear": 2026,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 2,
+     "bio": "越南，19 歲，2026 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Chika",
+     "link": "Chika",
+     "role": "mid",
+     "starter": true,
+     "name": "Võ Lê Nhân",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 20,
+     "debutYear": 2026,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 8,
+     "bio": "越南，20 歲，2026 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "Harky",
+     "link": "Harky",
+     "role": "bottom",
+     "starter": true,
+     "name": "Nguyễn Văn Hữu",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 21,
+     "debutYear": 2023,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 8,
+     "bio": "越南，21 歲，2023 年出道，第 1 次打世界賽"
+    },
+    {
+     "id": "SiuLoong",
+     "link": "SiuLoong",
+     "role": "support",
+     "starter": true,
+     "name": "Nguyễn Hoàng Lam",
+     "nativeName": null,
+     "nationality": "越南",
+     "age": 21,
+     "debutYear": 2024,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": null,
+     "gamesThisWorlds": 8,
+     "bio": "越南，21 歲，2024 年出道，第 1 次打世界賽"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "SofM",
+     "role": "Coach",
+     "nationality": "越南"
+    },
+    {
+     "id": "BigKoro",
+     "role": "Coach",
+     "nationality": "越南"
+    },
+    {
+     "id": "Suga",
+     "role": "Coach",
+     "nationality": "越南"
+    }
+   ]
+  },
+  {
+   "code": "FUR",
+   "name": "FURIA",
+   "region": "Brazil",
+   "league": "CBLOL",
+   "seed": "2",
+   "seedLabel": "CBLOL #2",
+   "startStage": "Play-In",
+   "qualificationPath": "CBLOL 2026 Split 2 Playoffs Runner-Up",
+   "players": [
+    {
+     "id": "Guigo",
+     "link": "Guigo",
+     "role": "top",
+     "starter": true,
+     "name": "Guilherme Araújo Ruiz",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 24,
+     "debutYear": 2021,
+     "worldsAppearances": 2,
+     "worldsYears": [
+      2021,
+      2026
+     ],
+     "titles": {
+      "CBLOL": 2,
+      "LTA South": 1
+     },
+     "gamesThisWorlds": 9,
+     "bio": "巴西，24 歲，2021 年出道，第 2 次打世界賽，CBLOL冠軍 ×2、LTA South冠軍 ×1"
+    },
+    {
+     "id": "Tatu",
+     "link": "Tatu (Pedro Seixas)",
+     "role": "jungle",
+     "starter": true,
+     "name": "Pedro Seixas Brito",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 20,
+     "debutYear": 2025,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1,
+      "LTA South": 1
+     },
+     "gamesThisWorlds": 9,
+     "bio": "巴西，20 歲，2025 年出道，第 1 次打世界賽，CBLOL冠軍 ×1、LTA South冠軍 ×1"
+    },
+    {
+     "id": "Tutsz",
+     "link": "Tutsz",
+     "role": "mid",
+     "starter": true,
+     "name": "Arthur Peixoto Machado",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 23,
+     "debutYear": 2020,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 2,
+      "LTA South": 1
+     },
+     "gamesThisWorlds": 9,
+     "bio": "巴西，23 歲，2020 年出道，第 1 次打世界賽，CBLOL冠軍 ×2、LTA South冠軍 ×1"
+    },
+    {
+     "id": "Ayu",
+     "link": "Ayu (Andrey Saraiva)",
+     "role": "bottom",
+     "starter": true,
+     "name": "Andrey Saraiva",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 21,
+     "debutYear": 2023,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1,
+      "LTA South": 1
+     },
+     "gamesThisWorlds": 9,
+     "bio": "巴西，21 歲，2023 年出道，第 1 次打世界賽，CBLOL冠軍 ×1、LTA South冠軍 ×1"
+    },
+    {
+     "id": "JoJo",
+     "link": "JoJo (Gabriel Dzelme)",
+     "role": "support",
+     "starter": true,
+     "name": "Gabriel Dzelme de Oliveira",
+     "nativeName": null,
+     "nationality": "巴西",
+     "age": 27,
+     "debutYear": 2019,
+     "worldsAppearances": 1,
+     "worldsYears": [
+      2026
+     ],
+     "titles": {
+      "CBLOL": 1,
+      "LTA South": 1
+     },
+     "gamesThisWorlds": 9,
+     "bio": "巴西，27 歲，2019 年出道，第 1 次打世界賽，CBLOL冠軍 ×1、LTA South冠軍 ×1"
+    }
+   ],
+   "coaches": [
+    {
+     "id": "furyz",
+     "role": "Coach",
+     "nationality": "巴西"
+    },
+    {
+     "id": "Luuukz",
+     "role": "Coach",
+     "nationality": "巴西"
+    },
+    {
+     "id": "Lanterninho",
+     "role": "Coach",
+     "nationality": "巴西"
+    }
+   ]
+  }
+ ],
+ "coverage": {
+  "teams": 19,
+  "players": 97,
+  "withBirthdate": 96,
+  "withCareer": 97
+ },
+ "sources": "Leaguepedia（晉級表、報名名單、選手資料、賽事成績）；gamesThisWorlds 為本服務記錄的本屆上場局數",
+ "notes": "starter 依報名名單的順序（每個位置第一位為先發）；bio 只由 nationality、age、debutYear、worldsAppearances、titles 組成"
+}

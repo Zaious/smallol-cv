@@ -26,7 +26,13 @@ NAT = {"South Korea": "韓國", "China": "中國", "Taiwan": "台灣", "Vietnam"
 TITLE_LEAGUES = {"World Championship": "世界賽", "Mid-Season Invitational": "MSI", "LoL Champions Korea": "LCK", "Tencent LoL Pro League": "LPL",
                  "LoL EMEA Championship": "LEC", "LoL European Championship": "LEC", "LoL Championship Series": "LCS", "League Championship Series": "LCS",
                  "LoL Championship Pacific": "LCP", "Pacific Championship Series": "PCS", "Vietnam Championship Series": "VCS",
-                 "Campeonato Brasileiro de League of Legends": "CBLOL", "League of Legends Japan League": "LJL", "LTA North": "LTA North", "LTA South": "LTA South"}
+                 "Campeonato Brasileiro de League of Legends": "CBLOL", "League of Legends Japan League": "LJL", "LTA North": "LTA North", "LTA South": "LTA South",
+                 # Leaguepedia 實際使用的聯賽名稱（2026-10-18 由選手生涯資料列出；盃賽如 Demacia Cup 不算）
+                 "League of Legends Championship Series": "LCS", "League of Legends Championship Pacific": "LCP",
+                 "Circuit Brazilian League of Legends": "CBLOL", "Europe League Championship Series": "EU LCS",
+                 "League of Legends Championship of The Americas": "LTA", "League of Legends Championship of The Americas North": "LTA North",
+                 "League of Legends Championship of The Americas South": "LTA South", "Oceanic Pro League": "OPL",
+                 "Liga Latinoamerica": "LLA", "Turkish Championship League": "TCL", "LoL Master Series": "LMS"}
 
 def load_all(prefix):
     rows = []
@@ -37,7 +43,50 @@ def age(bd):
     try: b = dt.date.fromisoformat(bd[:10]); return TODAY.year - b.year - ((TODAY.month, TODAY.day) < (b.month, b.day))
     except Exception: return None
 
+def is_qualifier(name): return any(k in (name or "") for k in ("Regional Finals", "Qualif", "Qualifier"))
+
+def worlds_years(c):
+    """打過世界賽的年份：League 為 World Championship、名稱不是資格賽（Regional Finals／Qualifier）。Play-In 也算出賽。"""
+    return sorted({int(x["Year"]) for x in c if x.get("League") == "World Championship" and (x.get("Year") or "").isdigit() and not is_qualifier(x.get("Name"))})
+
+def norm_team(t): return "".join(ch for ch in (t or "").lower() if ch.isalnum())
+
+def count_titles(c, intl):
+    """冠軍次數（2026-10-18 規則，因舊規則把例行賽第一、非聯賽賽事算進去而改）：
+    世界賽／MSI：該年冠軍隊（data/lp/intl_champions.json）出現在選手當年該賽事的隊伍名單上；2011–2013 另以該賽事頁名次 1 補。
+    賽區：只算季後賽或總決賽頁（名稱含 Playoffs／Finals，排除 Regional Finals）的第一名，同一聯賽同一年同一賽季只算一次；
+          2014 年以前沒有季後賽頁的盃賽制，該賽季頁第一名才算。非聯賽賽事（IEM、Rift Rivals、EWC、KeSPA Cup、開幕賽）不算。"""
+    t = Counter()
+    for lg, tag in (("World Championship", "世界賽"), ("Mid-Season Invitational", "MSI")):
+        yrs = set()
+        for x in c:
+            if x.get("League") != lg or is_qualifier(x.get("Name")) or not (x.get("Year") or "").isdigit(): continue
+            y = int(x["Year"]); champ = intl.get((lg, y))
+            if (champ and norm_team(champ) in (norm_team(x.get("Team")), norm_team(x.get("ResTeam")))) or x.get("Place") == "1": yrs.add(y)
+        if yrs: t[tag] = len(yrs)
+    regional = {k: v for k, v in TITLE_LEAGUES.items() if v not in ("世界賽", "MSI")}
+    regional["LoL The Champions"] = "LCK"
+    groups = defaultdict(lambda: {"po_win": False, "has_po": False, "rs_win": False})
+    for x in c:
+        lg = regional.get(x.get("League")); name = x.get("Name") or ""
+        if not lg or is_qualifier(name) or not (x.get("Year") or "").isdigit(): continue
+        key = (lg, x["Year"], name.replace(" Playoffs", "").replace(" Grand Finals", "").replace(" Season Finals", "").replace(" Finals", "").strip())
+        po = any(k in name for k in ("Playoffs", "Finals"))
+        g = groups[key]
+        if po: g["has_po"] = True; g["po_win"] |= x.get("Place") == "1"
+        else: g["rs_win"] |= x.get("Place") == "1"
+    for (lg, yr, _), g in groups.items():
+        if g["po_win"] or (not g["has_po"] and g["rs_win"] and int(yr) <= 2014): t[lg] += 1
+    return t
+
 def main():
+    intl = {}
+    try:
+        for r in json.load(open(os.path.join(LP, "intl_champions.json"), encoding="utf-8")):
+            if r.get("Team") and (r.get("Date") or "")[:4].isdigit() and ":" not in (r.get("Event") or ""):
+                lg = "World Championship" if "World Championship" in r["OverviewPage"] else "Mid-Season Invitational"
+                intl[(lg, int(r["Date"][:4]))] = r["Team"]
+    except FileNotFoundError: pass
     seeds = json.load(open(os.path.join(LP, "w26_seeds.json"), encoding="utf-8"))
     tp = json.load(open(os.path.join(LP, "w26_players.json"), encoding="utf-8"))
     bios = {r["OverviewPage"]: r for r in load_all("ts_players")}
@@ -62,8 +111,8 @@ def main():
             role = ROLE[r["Role"]]; seen_role[role] += 1
             c = career.get(link, [])
             years = sorted({int(x["Year"]) for x in c if (x.get("Year") or "").isdigit()})
-            worlds = sorted({int(x["Year"]) for x in c if x.get("League") == "World Championship" and (x.get("Year") or "").isdigit()})
-            titles = Counter(TITLE_LEAGUES[x["League"]] for x in c if x.get("Place") == "1" and x.get("League") in TITLE_LEAGUES)
+            worlds = worlds_years(c)
+            titles = count_titles(c, intl)
             a = age(b.get("Birthdate") or ""); nat = NAT.get(r["Flag"], r["Flag"]) or None
             debut = years[0] if years else None
             n_worlds = len(set(worlds) | {2026}) if c else None      # 含本屆
