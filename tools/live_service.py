@@ -245,6 +245,7 @@ def draft_bans(t_from, t_to, final):
 
 
 _OBJ_CACHE = {}
+_ANN_CACHE = {}; _HERALD_FOUND = {}
 def broadcast_objectives(st0, t_end, lag):
     """轉播畫面上的物件資訊（tools/objective_box.py）：
     左上角計時框（obj_<RUN>_*.png，每 5 秒）→ 下一條龍屬性、上方野怪坑的下一隻（grubs/herald/baron）；
@@ -278,6 +279,34 @@ def broadcast_objectives(st0, t_end, lag):
     seq = [(t, p) for t, _, p, _ in reads if p]
     seen_h = [t for t, p in seq if p == "herald"]
     after = [t for t, p in seq if p == "baron" and seen_h and t > seen_h[-1]]
+    # 預示者歸屬：畫面上方公告「Blue/Red team has defeated the Rift Herald!」（ann_<RUN>_*.png，每秒）。
+    # tools/herald_banner.py（軟文字遮罩）：Day 1+2 共 12 局留一局，門檻 0.75 時每局第一則 12/12、過門檻 100 張中藍紅方判錯 0；
+    # 過門檻的「其他公告」只有「X team has summoned the Rift Herald」，隊伍與擊殺方相同。1080p 直播畫面僅以 1 局驗證（0.80–0.82）。
+    herald_team = None
+    if st0 in _HERALD_FOUND: herald_team, herald_at = _HERALD_FOUND[st0]
+    else:
+        try:
+            import herald_banner as HBN
+            TB = dict(np.load(os.path.join(ROOT, "assets", "herald_banner_templates.npz")))
+            for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+                run = os.path.basename(p)[9:-4]; anns = glob.glob(f"{D}/snap/ann_{run}_*.png")
+                if not anns: continue
+                rows = list(csv.DictReader(open(p, encoding="utf-8")))
+                anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows]))
+                for fp in sorted(fp for fp in anns if 14 * 60 <= int(fp[-11:-4]) + anchor - st0 - lag <= 20 * 60 + 30):
+                    if fp not in _ANN_CACHE:                      # 每張只算一次：文字遮罩太淡就記 None
+                        m = HBN.mask(cv2.imread(fp))
+                        _ANN_CACHE[fp] = None if m.mean() < 0.04 else max(((HBN.ncc_shift(m, t), k) for k, t in TB.items()))
+                    hit = _ANN_CACHE[fp]
+                    if hit and hit[0] >= 0.75:
+                        herald_team = hit[1]; herald_at = int(int(fp[-11:-4]) + anchor - st0 - lag)
+                        _HERALD_FOUND[st0] = (herald_team, herald_at); break
+                if herald_team: break
+        except Exception as e:
+            print(iso(time.time()), "預示者公告辨識例外", repr(e), flush=True)
+    if herald_team:
+        out["herald"] = {"status": "taken", "at": gclock(herald_at), "sec": herald_at, "team": herald_team, "teamSource": "announcement"}
+        return out
     if not seen_h: out["herald"] = {"status": "upcoming"}
     elif not after: out["herald"] = {"status": "alive_or_upcoming"}
     else:

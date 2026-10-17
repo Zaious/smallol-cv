@@ -1,12 +1,13 @@
 {
  "status": "finished",
  "game": "115660588583171792",
- "updated": "2026-10-17T01:23:22Z",
+ "updated": "2026-10-17T03:07:16Z",
  "videoLagSec": 31.0,
  "series": {
   "bestOf": 5,
   "game": 2,
   "matchId": "115660588583171790",
+  "sidesSource": "api",
   "teams": {
    "B": {
     "code": "KC",
@@ -526,10 +527,10 @@
  },
  "herald": {
   "status": "taken",
-  "at": "15:55",
-  "sec": 955,
-  "team": null,
-  "note": "時間為計時框換圖的前後兩次讀值中點（每 5 秒一張）；歸屬尚未支援"
+  "at": "15:59",
+  "sec": 959,
+  "team": "B",
+  "teamSource": "announcement"
  },
  "pitNext": "baron",
  "towersLost": {
