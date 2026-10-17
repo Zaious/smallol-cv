@@ -1,7 +1,7 @@
 # 2026 即時逐秒判讀（clf_live_<RUN>.csv）→ trigger_sim 用的逐秒 CSV ＋ feed 事件檔。時間軸同 snap26_to_clf（t = 牆鐘 − LAG − feed 開局時間戳 + G0）。
 # 用法：python tools/live26_to_clf.py <clf_live_RUN.csv> <gameId>
 import csv, json, sys, datetime as dt
-LAG, G0 = 31.0, 1000
+LAG, G0 = float(__import__('os').environ.get('LAG', '31')), 1000
 src, gid = sys.argv[1], sys.argv[2]; D = "data/live_worlds2026"
 ts = lambda s: dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 r = [json.loads(l) for l in open(f"{D}/feed_{gid}.jsonl")]; ig = [x for x in r if x["state"] == "in_game"]

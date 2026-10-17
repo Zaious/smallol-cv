@@ -2,12 +2,14 @@
 // 把每幀的塔／水晶／龍／男爵計數寫成 JSONL（含本機牆鐘時間）。金鑰只讀環境變數 LOL_API_KEY，不寫進任何檔案。
 // 用法：LOL_API_KEY=... node tools/live_feed_log.mjs <out_dir>
 import fs from "node:fs";
+import { spawn } from "node:child_process";
 const OUT = process.argv[2]; fs.mkdirSync(OUT, { recursive: true });
 const KEY = process.env.LOL_API_KEY; if (!KEY) { console.error("缺 LOL_API_KEY"); process.exit(1); }
 const log = (m) => { const l = `${new Date().toISOString()} ${m}`; console.log(l); fs.appendFileSync(`${OUT}/feed.log`, l + "\n"); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const seen = new Map();   // gameId -> 最後寫入的 rfc460Timestamp
 const polling = new Set();
+const backfilled = new Set();
 const done = new Set();     // 已結束的小局：getLive 結束後仍會列出一陣子，不再重複追蹤
 
 async function getLive() {
@@ -35,6 +37,11 @@ async function pollGame(g) {
             B: { t: f.blueTeam.towers, i: f.blueTeam.inhibitors, b: f.blueTeam.barons, d: f.blueTeam.dragons, k: f.blueTeam.totalKills, g: f.blueTeam.totalGold },
             R: { t: f.redTeam.towers, i: f.redTeam.inhibitors, b: f.redTeam.barons, d: f.redTeam.dragons, k: f.redTeam.totalKills, g: f.redTeam.totalGold } };
           fs.appendFileSync(`${OUT}/feed_${g.id}.jsonl`, JSON.stringify(row) + "\n");
+        }
+        if (wrote && !backfilled.has(g.id)) {             // 第一次寫入本局：補抓開局到現在漏掉的幀（晚開始追蹤時，Day 2 第 3、5 局）
+          backfilled.add(g.id);
+          spawn("python", [new URL("./feed_backfill.py", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"), OUT, g.id], { stdio: "ignore", detached: true }).unref();
+          log(`補抓 game ${g.id} 開局片段`);
         }
         idle = wrote ? 0 : idle + 1;
         if (d.frames?.some((f) => f.gameState === "finished")) { log(`game ${g.id} finished`); done.add(g.id); break; }

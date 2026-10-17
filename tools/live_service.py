@@ -16,7 +16,7 @@ iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%d
 gclock = lambda sec: f"{int(sec)//60}:{int(sec)%60:02d}"
 STATE = {"status": "starting"}; LOCK = threading.Lock()
 sys.path.insert(0, HERE)
-from hud_clock import read_clock
+from hud_clock import read_clock, read_clock_safe
 import cv2
 # 物件規則（版本 26.x；來源：官方 /dev 2026 Season One Gameplay Preview 與 LoL Wiki，2026-10-16 查閱；尚未在比賽畫面上逐項驗證）
 RULES = {
@@ -40,7 +40,7 @@ def hud_clock_reads(st0, t_end):
         for hp in sorted(glob.glob(f"{D}/snap/hud_{run}_*.png")):
             n = int(hp[-11:-4]); w = n + anchor
             if not (st0 - 30 <= w <= t_end + 90): continue
-            if hp not in _HUD_CACHE: _HUD_CACHE[hp] = read_clock(cv2.imread(hp), x0=920 - 500)
+            if hp not in _HUD_CACHE: _HUD_CACHE[hp] = read_clock_safe(cv2.imread(hp), x0=920 - 500)
             c = _HUD_CACHE[hp]
             if c is not None: out.append((w, c - w))
     return sorted(out)
@@ -189,7 +189,7 @@ def draft_bans(t_from, t_to, final):
     vis = []
     for w, fp in sorted(frames):
         if fp not in _BAN_CACHE:
-            im = cv2.imread(fp); _BAN_CACHE[fp] = BN.slot_scores(im) if im is not None and BN.visible(im) else None
+            im = cv2.imread(fp); _BAN_CACHE[fp] = BN.slot_scores_live(im) if im is not None and BN.visible(im) else None
         if _BAN_CACHE[fp] is not None: vis.append(_BAN_CACHE[fp])
     if not vis: return None
     if final:
@@ -218,7 +218,7 @@ def current_game():
     if not best or time.time() - best[0] > 600: return None
     return os.path.basename(best[1])[5:-6]
 
-def cv_rows(st0, t_end):
+def cv_rows(st0, t_end, lag=LAG):
     """把所有 clf_live_*.csv 中落在本局的逐秒判讀，轉成 trigger_sim 的時間軸（畫面時間以格數 n 錨定）。"""
     out = {}
     for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
@@ -227,15 +227,15 @@ def cv_rows(st0, t_end):
         off = np.array([ts(r["wall_utc"]) - int(r["n"]) for r in rows])
         for i, r in enumerate(rows):
             if "R_top_outer_A" not in r: continue                # 缺塔欄位的列（例如只有版面欄位）不用，避免整個塔命名失效
-            w = int(r["n"]) + float(np.median(off[max(0, i - 300):i + 300])) - LAG
+            w = int(r["n"]) + float(np.median(off[max(0, i - 300):i + 300])) - lag
             if not (st0 - 60 <= w <= t_end): continue
             out[int(round(w - st0)) + G0] = r
     return out
 
-def tower_naming(gid, feed, finished):
+def tower_naming(gid, feed, finished, lag=LAG):
     ig = [x for x in feed if x["state"] == "in_game"]
     st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
-    rows = cv_rows(st0, end + 10 if finished else time.time())
+    rows = cv_rows(st0, end + 10 if finished else time.time(), lag)
     if len(rows) < 30: return None, "畫面資料不足"
     sites = [k[:-2] for k in next(iter(rows.values())) if k.endswith("_A")]
     tmp = os.path.join(D, "svc"); os.makedirs(tmp, exist_ok=True)
@@ -250,7 +250,7 @@ def tower_naming(gid, feed, finished):
                 for k in cur:
                     if cur[k] > prev[k]: f.write(f'{x["ts"]} {k} {prev[k]}->{cur[k]}\n')
             prev = cur
-    cmd = [sys.executable, os.path.join(HERE, "trigger_sim_clf4.py"), f"{tmp}/clf.csv", f"{tmp}/events.txt", str(G0), ig[0]["ts"], str(LAG), "--thr", "0.7", "--live", "--json", f"{tmp}/named.json"]
+    cmd = [sys.executable, os.path.join(HERE, "trigger_sim_clf4.py"), f"{tmp}/clf.csv", f"{tmp}/events.txt", str(G0), ig[0]["ts"], str(lag), "--thr", "0.7", "--live", "--json", f"{tmp}/named.json"]
     if finished: cmd.append("--complete")
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
     if r.returncode != 0: return None, r.stderr[-300:]
@@ -347,7 +347,7 @@ def update(gid=None):
     if len(reads) >= 5:
         offs = np.array([o for _, o in reads]); ws = np.array([w for w, _ in reads])
         # 直播落後 feed 的秒數：開局附近的讀值推回時鐘 0:00 的畫面時間，減去 feed 開局時間戳（以中位數抗誤讀）
-        L = float(np.median([(-o) - st0 for o in offs[:12]]))
+        L = float(np.median([(-o) - st0 for o in offs]))       # 全局讀值中位數（只用不含 0、9 的讀值；Day 2 前 12 張的估法被誤讀拖到 −490 秒）
         def clock_of(t):
             v = t + L                                          # feed 事件在畫面上出現的時間
             i = np.argsort(np.abs(ws - v))[:5]                 # 取最接近的 5 個讀值的偏移中位數（抗誤讀，跟得上暫停）
@@ -357,7 +357,7 @@ def update(gid=None):
         clock_of = lambda t: t - st0
         st["clockSource"] = "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）"
     st.update(objectives(feed, clock_of))
-    towers, err = tower_naming(gid, feed, finished)
+    towers, err = tower_naming(gid, feed, finished, st.get("measuredLagSec") or LAG)   # 直播落後秒數依來源不同（YouTube 約 31、Twitch 約 46），有實測就用實測
     st["towersLost"] = towers                                  # 鍵為失去塔的隊伍（R/B），值為已命名的站點與影片顯示消失的遊戲時間
     if err: st["towersError"] = err
     return st

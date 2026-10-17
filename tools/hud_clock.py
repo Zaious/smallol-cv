@@ -30,6 +30,16 @@ def read_clock(img, x0=X0, y0=0, min_score=0.8):
     if min(sc for _, sc in r) < min_score or digs[2] > 5: return None
     return (digs[0] * 10 + digs[1]) * 60 + digs[2] * 10 + digs[3]
 
+
+def read_clock_safe(img, x0=X0, y0=0, min_score=0.8):
+    """只回傳四位數都不含 0、9 的讀值（模板只有 0↔9 會互相讀錯；Day 2 Twitch 實測）。其他情況回 None。
+    用途：估「遊戲時鐘 − 畫面時間」的偏移，只要一部分讀值可靠就夠。"""
+    T = np.load(TPL)["t"]
+    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    r = [_match(g, a, b, x0, y0, T) for a, b in CELLS]; digs = [k for k, _ in r]
+    if min(sc for _, sc in r) < min_score or digs[2] > 5 or {0, 9} & set(digs): return None
+    return (digs[0] * 10 + digs[1]) * 60 + digs[2] * 10 + digs[3]
+
 # 已知時鐘的序列（全畫面每 60 秒一張；起點為人工目視讀值，之後每張 +60 秒，期間無暫停——以讀值連續性驗證）
 SEQS = {"g3": ("full_1016T0043_", 1140, 27, 40), "g2": ("full_1015T2334_", 2460, 26, 8 * 60 + 52)}
 

@@ -32,6 +32,21 @@ def slot_scores(im):
             s = F @ feat(im[Y0 + M:Y1 - M, a + M:b - M]); rows.append(s.reshape(len(NAMES), len(ZOOMS)).max(axis=1))
     return np.stack(rows)
 
+_PEND_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "ban_pending.npy")
+PEND = np.load(_PEND_PATH) if os.path.exists(_PEND_PATH) else None
+
+def slot_scores_live(im):
+    """BP 進行中用：正在禁用的格子會閃動，舊比對常讀成 Sona。該格若比任何英雄都像 PENDING 模板（tools/ban_pending.py，
+    以 Day 2 建立），整列分數歸零＝視為未定。Day 1（未參與建模板）的 Sona 誤報 146 次 → 0 次。"""
+    S = slot_scores(im)
+    if PEND is not None:
+        j = 0
+        for side in "LR":
+            for a, b in SLOTS[side]:
+                if float(PEND @ feat(im[Y0 + M:Y1 - M, a + M:b - M])) >= S[j].max(): S[j] = 0
+                j += 1
+    return S
+
 def visible(im):
     gr = im.mean(axis=2)
     return all(gr[700:709, x0:x1].mean() < 25 and gr[714:774, x0:x1].mean() > 30 for x0, x1 in ((0, 360), (1560, 1915)))
