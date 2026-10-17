@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T04:41:23Z",
+ "updated": "2026-10-17T22:45:03Z",
  "teams": {
   "KC": [
    {
@@ -994,6 +994,178 @@
       "champion": "Milio"
      }
     ]
+   },
+   {
+    "gameId": "115660588583171799",
+    "start": "2026-10-17T18:14:22Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "B",
+    "opponent": "FUR",
+    "win": null,
+    "bans": [
+     "Karma",
+     "Vi",
+     "Olaf",
+     "Akali",
+     "Jax"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Zaahen"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "JarvanIV"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Cassiopeia"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Ezreal"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Lulu"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171800",
+    "start": "2026-10-17T19:06:10Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "B",
+    "opponent": "FUR",
+    "win": null,
+    "bans": [
+     "Akali",
+     "Renata",
+     "Olaf",
+     "Locke",
+     "Jax"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Gnar"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "Vi"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "KogMaw"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Jhin"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Bard"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171801",
+    "start": "2026-10-17T19:54:43Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "B",
+    "opponent": "FUR",
+    "win": null,
+    "bans": [
+     "Renata",
+     "Olaf",
+     "Pantheon",
+     "Jax",
+     "Naafiri"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "KSante"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "Jayce"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Mel"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Ziggs"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Leona"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204442",
+    "start": "2026-10-17T20:50:49Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "B",
+    "opponent": "FUR",
+    "win": null,
+    "bans": [
+     "Renata",
+     "Akali",
+     "Trundle",
+     "Kaisa",
+     "Sylas"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "MVK Kratos",
+      "champion": "Olaf"
+     },
+     {
+      "role": "jungle",
+      "player": "MVK Gury",
+      "champion": "MonkeyKing"
+     },
+     {
+      "role": "mid",
+      "player": "MVK Chika",
+      "champion": "Ryze"
+     },
+     {
+      "role": "bottom",
+      "player": "MVK Harky",
+      "champion": "Corki"
+     },
+     {
+      "role": "support",
+      "player": "MVK SiuLoong",
+      "champion": "Shen"
+     }
+    ]
    }
   ],
   "FUR": [
@@ -1295,6 +1467,178 @@
       "role": "support",
       "player": "FUR JoJo",
       "champion": "Rell"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171799",
+    "start": "2026-10-17T18:14:22Z",
+    "stage": "Play-Ins",
+    "game": 1,
+    "side": "R",
+    "opponent": "MVK",
+    "win": null,
+    "bans": [
+     "Nocturne",
+     "Pyke",
+     "LeeSin",
+     "Jayce",
+     "Renekton"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Camille"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Sejuani"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Syndra"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Lucian"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Milio"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171800",
+    "start": "2026-10-17T19:06:10Z",
+    "stage": "Play-Ins",
+    "game": 2,
+    "side": "R",
+    "opponent": "MVK",
+    "win": null,
+    "bans": [
+     "Nocturne",
+     "Caitlyn",
+     "Seraphine",
+     "Neeko",
+     "Rumble"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Ambessa"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Nasus"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Viktor"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Xayah"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Rakan"
+     }
+    ]
+   },
+   {
+    "gameId": "115660588583171801",
+    "start": "2026-10-17T19:54:43Z",
+    "stage": "Play-Ins",
+    "game": 3,
+    "side": "R",
+    "opponent": "MVK",
+    "win": null,
+    "bans": [
+     "Nocturne",
+     "Pyke",
+     "LeeSin",
+     "Nautilus",
+     "Maokai"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Rumble"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Skarner"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "TwistedFate"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "MissFortune"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Seraphine"
+     }
+    ]
+   },
+   {
+    "gameId": "116299649500204442",
+    "start": "2026-10-17T20:50:49Z",
+    "stage": "Play-Ins",
+    "game": 4,
+    "side": "R",
+    "opponent": "MVK",
+    "win": null,
+    "bans": [
+     "Nocturne",
+     "LeeSin",
+     "Karma",
+     "Zyra",
+     "Maokai"
+    ],
+    "picks": [
+     {
+      "role": "top",
+      "player": "FUR Guigo",
+      "champion": "Jax"
+     },
+     {
+      "role": "jungle",
+      "player": "FUR Tatu",
+      "champion": "Pantheon"
+     },
+     {
+      "role": "mid",
+      "player": "FUR Tutsz",
+      "champion": "Taliyah"
+     },
+     {
+      "role": "bottom",
+      "player": "FUR Ayu",
+      "champion": "Sivir"
+     },
+     {
+      "role": "support",
+      "player": "FUR JoJo",
+      "champion": "Alistar"
      }
     ]
    }

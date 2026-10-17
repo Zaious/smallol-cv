@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T04:41:23Z",
+ "updated": "2026-10-17T22:45:03Z",
  "scope": "Worlds 2026（本服務有記錄的小局）",
  "players": {
   "KC Canna": {
@@ -1310,15 +1310,47 @@
      "k": 1,
      "d": 2,
      "a": 1
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Zaahen",
+     "win": null,
+     "k": 8,
+     "d": 1,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Gnar",
+     "win": null,
+     "k": 0,
+     "d": 2,
+     "a": 8
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "KSante",
+     "win": null,
+     "k": 2,
+     "d": 3,
+     "a": 0
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Olaf",
+     "win": null,
+     "k": 3,
+     "d": 2,
+     "a": 9
     }
    ],
    "pool": {
     "Olaf": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 2,
-     "d": 2,
-     "a": 1
+     "k": 5,
+     "d": 4,
+     "a": 10
     },
     "Rumble": {
      "games": 1,
@@ -1328,11 +1360,11 @@
      "a": 13
     },
     "Zaahen": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 2,
-     "d": 1,
-     "a": 7
+     "k": 10,
+     "d": 2,
+     "a": 15
     },
     "Ambessa": {
      "games": 1,
@@ -1354,6 +1386,20 @@
      "k": 1,
      "d": 2,
      "a": 1
+    },
+    "Gnar": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 2,
+     "a": 8
+    },
+    "KSante": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 3,
+     "a": 0
     }
    }
   },
@@ -1392,15 +1438,47 @@
      "k": 0,
      "d": 3,
      "a": 3
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "JarvanIV",
+     "win": null,
+     "k": 2,
+     "d": 1,
+     "a": 17
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Vi",
+     "win": null,
+     "k": 4,
+     "d": 1,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Jayce",
+     "win": null,
+     "k": 3,
+     "d": 4,
+     "a": 5
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "MonkeyKing",
+     "win": null,
+     "k": 4,
+     "d": 0,
+     "a": 7
     }
    ],
    "pool": {
     "Vi": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 2,
-     "d": 2,
-     "a": 7
+     "k": 6,
+     "d": 3,
+     "a": 12
     },
     "LeeSin": {
      "games": 1,
@@ -1410,11 +1488,11 @@
      "a": 6
     },
     "JarvanIV": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 5,
-     "d": 2,
-     "a": 10
+     "k": 7,
+     "d": 3,
+     "a": 27
     },
     "Maokai": {
      "games": 1,
@@ -1422,6 +1500,20 @@
      "k": 0,
      "d": 3,
      "a": 3
+    },
+    "Jayce": {
+     "games": 1,
+     "wins": 0,
+     "k": 3,
+     "d": 4,
+     "a": 5
+    },
+    "MonkeyKing": {
+     "games": 1,
+     "wins": 0,
+     "k": 4,
+     "d": 0,
+     "a": 7
     }
    }
   },
@@ -1476,15 +1568,47 @@
      "k": 3,
      "d": 6,
      "a": 1
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Cassiopeia",
+     "win": null,
+     "k": 5,
+     "d": 1,
+     "a": 11
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "KogMaw",
+     "win": null,
+     "k": 4,
+     "d": 2,
+     "a": 7
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Mel",
+     "win": null,
+     "k": 2,
+     "d": 3,
+     "a": 1
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Ryze",
+     "win": null,
+     "k": 6,
+     "d": 2,
+     "a": 7
     }
    ],
    "pool": {
     "Cassiopeia": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 6,
-     "d": 3,
-     "a": 1
+     "k": 11,
+     "d": 4,
+     "a": 12
     },
     "Viktor": {
      "games": 1,
@@ -1494,11 +1618,11 @@
      "a": 12
     },
     "KogMaw": {
-     "games": 2,
+     "games": 3,
      "wins": 1,
-     "k": 10,
-     "d": 8,
-     "a": 11
+     "k": 14,
+     "d": 10,
+     "a": 18
     },
     "KSante": {
      "games": 1,
@@ -1513,6 +1637,20 @@
      "k": 2,
      "d": 6,
      "a": 2
+    },
+    "Mel": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 3,
+     "a": 1
+    },
+    "Ryze": {
+     "games": 1,
+     "wins": 0,
+     "k": 6,
+     "d": 2,
+     "a": 7
     }
    }
   },
@@ -1567,6 +1705,38 @@
      "k": 2,
      "d": 0,
      "a": 2
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Ezreal",
+     "win": null,
+     "k": 4,
+     "d": 4,
+     "a": 9
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Jhin",
+     "win": null,
+     "k": 9,
+     "d": 0,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Ziggs",
+     "win": null,
+     "k": 1,
+     "d": 5,
+     "a": 5
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Corki",
+     "win": null,
+     "k": 8,
+     "d": 2,
+     "a": 6
     }
    ],
    "pool": {
@@ -1585,11 +1755,11 @@
      "a": 13
     },
     "Jhin": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 5,
+     "k": 14,
      "d": 0,
-     "a": 10
+     "a": 14
     },
     "Tristana": {
      "games": 1,
@@ -1599,11 +1769,25 @@
      "a": 1
     },
     "Ezreal": {
+     "games": 2,
+     "wins": 0,
+     "k": 6,
+     "d": 7,
+     "a": 12
+    },
+    "Ziggs": {
      "games": 1,
      "wins": 0,
-     "k": 2,
-     "d": 3,
-     "a": 3
+     "k": 1,
+     "d": 5,
+     "a": 5
+    },
+    "Corki": {
+     "games": 1,
+     "wins": 0,
+     "k": 8,
+     "d": 2,
+     "a": 6
     }
    }
   },
@@ -1658,6 +1842,38 @@
      "k": 1,
      "d": 2,
      "a": 3
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Lulu",
+     "win": null,
+     "k": 2,
+     "d": 1,
+     "a": 15
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Bard",
+     "win": null,
+     "k": 1,
+     "d": 2,
+     "a": 13
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Leona",
+     "win": null,
+     "k": 0,
+     "d": 6,
+     "a": 4
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Shen",
+     "win": null,
+     "k": 0,
+     "d": 2,
+     "a": 19
     }
    ],
    "pool": {
@@ -1683,11 +1899,11 @@
      "a": 7
     },
     "Lulu": {
-     "games": 1,
+     "games": 2,
      "wins": 0,
-     "k": 0,
-     "d": 1,
-     "a": 3
+     "k": 2,
+     "d": 2,
+     "a": 18
     },
     "Pyke": {
      "games": 1,
@@ -1695,6 +1911,27 @@
      "k": 1,
      "d": 4,
      "a": 3
+    },
+    "Bard": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 13
+    },
+    "Leona": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 6,
+     "a": 4
+    },
+    "Shen": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 2,
+     "a": 19
     }
    }
   },
@@ -1757,15 +1994,47 @@
      "k": 2,
      "d": 4,
      "a": 6
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Camille",
+     "win": null,
+     "k": 1,
+     "d": 7,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Ambessa",
+     "win": null,
+     "k": 0,
+     "d": 6,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Rumble",
+     "win": null,
+     "k": 1,
+     "d": 2,
+     "a": 9
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Jax",
+     "win": null,
+     "k": 4,
+     "d": 3,
+     "a": 2
     }
    ],
    "pool": {
     "Jax": {
-     "games": 2,
+     "games": 3,
      "wins": 1,
-     "k": 6,
-     "d": 8,
-     "a": 8
+     "k": 10,
+     "d": 11,
+     "a": 10
     },
     "Ornn": {
      "games": 1,
@@ -1782,11 +2051,11 @@
      "a": 1
     },
     "Ambessa": {
-     "games": 1,
+     "games": 2,
      "wins": 0,
      "k": 0,
-     "d": 3,
-     "a": 3
+     "d": 9,
+     "a": 4
     },
     "Olaf": {
      "games": 1,
@@ -1801,6 +2070,20 @@
      "k": 2,
      "d": 1,
      "a": 8
+    },
+    "Camille": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 7,
+     "a": 4
+    },
+    "Rumble": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 2,
+     "a": 9
     }
    }
   },
@@ -1863,6 +2146,38 @@
      "k": 5,
      "d": 0,
      "a": 6
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Sejuani",
+     "win": null,
+     "k": 2,
+     "d": 4,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Nasus",
+     "win": null,
+     "k": 0,
+     "d": 4,
+     "a": 5
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Skarner",
+     "win": null,
+     "k": 4,
+     "d": 3,
+     "a": 9
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Pantheon",
+     "win": null,
+     "k": 2,
+     "d": 5,
+     "a": 3
     }
    ],
    "pool": {
@@ -1895,11 +2210,11 @@
      "a": 8
     },
     "Sejuani": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 3,
-     "d": 0,
-     "a": 7
+     "k": 5,
+     "d": 4,
+     "a": 11
     },
     "Chogath": {
      "games": 1,
@@ -1914,6 +2229,27 @@
      "k": 5,
      "d": 0,
      "a": 6
+    },
+    "Nasus": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 4,
+     "a": 5
+    },
+    "Skarner": {
+     "games": 1,
+     "wins": 0,
+     "k": 4,
+     "d": 3,
+     "a": 9
+    },
+    "Pantheon": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 5,
+     "a": 3
     }
    }
   },
@@ -1976,6 +2312,38 @@
      "k": 2,
      "d": 0,
      "a": 5
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Syndra",
+     "win": null,
+     "k": 2,
+     "d": 5,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Viktor",
+     "win": null,
+     "k": 4,
+     "d": 3,
+     "a": 2
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "TwistedFate",
+     "win": null,
+     "k": 2,
+     "d": 0,
+     "a": 5
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Taliyah",
+     "win": null,
+     "k": 0,
+     "d": 3,
+     "a": 4
     }
    ],
    "pool": {
@@ -1987,11 +2355,11 @@
      "a": 6
     },
     "Syndra": {
-     "games": 1,
+     "games": 2,
      "wins": 0,
-     "k": 4,
-     "d": 4,
-     "a": 1
+     "k": 6,
+     "d": 9,
+     "a": 3
     },
     "Ryze": {
      "games": 1,
@@ -2015,18 +2383,25 @@
      "a": 2
     },
     "Viktor": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 6,
-     "d": 2,
-     "a": 7
+     "k": 10,
+     "d": 5,
+     "a": 9
     },
     "TwistedFate": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 2,
+     "k": 4,
      "d": 0,
-     "a": 5
+     "a": 10
+    },
+    "Taliyah": {
+     "games": 1,
+     "wins": 0,
+     "k": 0,
+     "d": 3,
+     "a": 4
     }
    }
   },
@@ -2089,6 +2464,38 @@
      "k": 7,
      "d": 0,
      "a": 5
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Lucian",
+     "win": null,
+     "k": 2,
+     "d": 4,
+     "a": 4
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Xayah",
+     "win": null,
+     "k": 3,
+     "d": 2,
+     "a": 1
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "MissFortune",
+     "win": null,
+     "k": 12,
+     "d": 0,
+     "a": 3
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Sivir",
+     "win": null,
+     "k": 1,
+     "d": 5,
+     "a": 4
     }
    ],
    "pool": {
@@ -2100,11 +2507,11 @@
      "a": 8
     },
     "Xayah": {
-     "games": 1,
+     "games": 2,
      "wins": 0,
-     "k": 6,
-     "d": 7,
-     "a": 7
+     "k": 9,
+     "d": 9,
+     "a": 8
     },
     "Kaisa": {
      "games": 1,
@@ -2121,18 +2528,25 @@
      "a": 0
     },
     "Sivir": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 2,
-     "d": 1,
-     "a": 9
+     "k": 3,
+     "d": 6,
+     "a": 13
     },
     "MissFortune": {
-     "games": 1,
+     "games": 2,
      "wins": 1,
-     "k": 7,
+     "k": 19,
      "d": 0,
-     "a": 5
+     "a": 8
+    },
+    "Lucian": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 4,
+     "a": 4
     }
    }
   },
@@ -2195,6 +2609,38 @@
      "k": 0,
      "d": 3,
      "a": 11
+    },
+    {
+     "gameId": "115660588583171799",
+     "champion": "Milio",
+     "win": null,
+     "k": 1,
+     "d": 1,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171800",
+     "champion": "Rakan",
+     "win": null,
+     "k": 0,
+     "d": 3,
+     "a": 6
+    },
+    {
+     "gameId": "115660588583171801",
+     "champion": "Seraphine",
+     "win": null,
+     "k": 2,
+     "d": 3,
+     "a": 16
+    },
+    {
+     "gameId": "116299649500204442",
+     "champion": "Alistar",
+     "win": null,
+     "k": 1,
+     "d": 5,
+     "a": 4
     }
    ],
    "pool": {
@@ -2206,11 +2652,11 @@
      "a": 15
     },
     "Rakan": {
-     "games": 1,
+     "games": 2,
      "wins": 0,
      "k": 2,
-     "d": 4,
-     "a": 11
+     "d": 7,
+     "a": 17
     },
     "Leona": {
      "games": 1,
@@ -2239,6 +2685,27 @@
      "k": 0,
      "d": 3,
      "a": 11
+    },
+    "Milio": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 1,
+     "a": 6
+    },
+    "Seraphine": {
+     "games": 1,
+     "wins": 0,
+     "k": 2,
+     "d": 3,
+     "a": 16
+    },
+    "Alistar": {
+     "games": 1,
+     "wins": 0,
+     "k": 1,
+     "d": 5,
+     "a": 4
     }
    }
   },
