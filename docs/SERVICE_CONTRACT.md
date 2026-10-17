@@ -101,6 +101,7 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | 端點 | 內容 |
 | --- | --- |
 | `/schedule.json` | Worlds 2026 全賽程（官方 getSchedule，5 分鐘快取）。`matches[]`：`matchId`、`start`（UTC）、`state`（`unstarted`／`inProgress`／`completed`）、`stage`（Play-Ins／Swiss／Quarterfinals／Semifinals／Finals）、`bestOf`、`teams[]`（`code`、`name`、`image`；未定為 `TBD`）、**`result`**（`{wins: [n, n], winner}`，未開打為 null）。**不爆雷：整個 `result` 不顯示即可**，其他欄位不含比分 |
+| `/schedule.json` 的 `teamsSpoiler` | 每場一個值：`true` 表示該場的對戰組合本身會洩露先前比賽結果（來自官方 getStandings 的 `flags.isSpoiler`，lolesports 官網的防雷依據）；`false` 表示預先排好的組合，或隊伍仍是 TBD；`null` 表示該場不在 getStandings 裡，或 getStandings 抓取失敗。TBD 場次目前為 `false`，隊伍確定後由官方重新標記，服務每 5 分鐘更新。**維護者 2026-10-17 決定不爆雷只藏比分，此欄位僅供參考，桌面工具不使用** |
 | `/history/games.json` | 已結束小局的索引：`gameId`、`matchId`、`stage`、`game`、`bestOf`、`start`、`duration`、`teams`（`{B, R}` 代碼）、`winner`（`"B"`／`"R"`）|
 | `/history/game/<gameId>.json` | 單局回顧：上列欄位＋`bans`、`players`（同 `state.json` 的 players，最終值）、`final`（兩隊擊殺、金錢、打掉的塔／水晶、巴龍、龍）、`voidgrubs`、`heralds`、`towersLost`（哪幾座塔，畫面辨識）、`goldDiffPerMin`（`[[分鐘, 藍−紅金錢], …]`）、`sources`（每個欄位的來源） |
 | `/history/teams.json` | `teams.<代碼>[]`：每局的 `side`、`opponent`、`win`、`bans`、`picks[]`（`role`、`player`、`champion`）|
