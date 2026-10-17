@@ -38,7 +38,7 @@ while True:
     if FULL and n % FULL == 0: cv2.imwrite(os.path.join(OUT, "snap", f"full_{RUN}_{n:07d}.jpg"), fr, [cv2.IMWRITE_JPEG_QUALITY, 88])
     if OFFG and not lay and n % OFFG == 0: cv2.imwrite(os.path.join(OUT, "snap", f"off_{RUN}_{n:07d}.jpg"), fr, [cv2.IMWRITE_JPEG_QUALITY, 85])   # 非比賽畫面（BP、局間）：禁用辨識素材
     if HUD and n % HUD == 0: cv2.imwrite(os.path.join(OUT, "snap", f"obj_{RUN}_{n:07d}.png"), fr[0:70, 0:300])   # 左上角物件計時框（下一條龍、上方野怪坑）
-    if lay: cv2.imwrite(os.path.join(OUT, "snap", f"ann_{RUN}_{n:07d}.png"), fr[190:255, 740:1180])   # 畫面上方擊殺公告區（每秒；預示者歸屬素材）
+    if lay: cv2.imwrite(os.path.join(OUT, "snap", f"ann_{RUN}_{n:07d}.png"), fr[190:255, 560:1360])   # 畫面上方公告區（每秒）：整句「Blue/Red team has defeated the Rift Herald」都在內
     if HUD and n % HUD == 0: cv2.imwrite(os.path.join(OUT, "snap", f"hud_{RUN}_{n:07d}.png"), fr[0:110, 500:1420])   # 上方計分列（物件計數、龍、時鐘）
     lat.append(time.time() - t0); n += 1
     if n % 60 == 0:
