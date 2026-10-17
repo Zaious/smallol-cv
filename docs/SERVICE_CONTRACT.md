@@ -77,6 +77,22 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 
 已驗證：8 局 participantId 皆為藍方 1–5、紅方 6–10；window 與 details 每秒約 5 幀、時間戳一致；樣本局各隊 5 人擊殺加總等於隊伍擊殺數。
 
+## 轉播畫面物件（v0.4，2026-10-17 加入）
+
+來源是轉播畫面左上角的物件計時框，以及計分列兩端的三蟲數（`tools/objective_box.py`）。只在 `in_game`、`finished` 時出現；畫面資料不足時欄位不出現。
+
+| 欄位 | 型別 | 說明 |
+| --- | --- | --- |
+| `timers.nextDragon.element` | string \| null | 下一條龍屬性。v0.4 起優先取轉播計時框（`elementSource: "broadcast"`），讀不到時退回規則推算（`"rules"`）。轉播顯示遠古時 `kind` 改為 `"elder"` |
+| `timers.nextDragon.elementSource` | `"broadcast"` \| `"rules"` | 屬性來源 |
+| `voidgrubs` | `{B: n\|null, R: n\|null}` | 兩隊已拿的三蟲數（0–3）。Day 2 七局皆從 0/0 開始、最後兩隊合計 3 |
+| `pitNext` | `"grubs"` \| `"herald"` \| `"baron"` \| null | 上方野怪坑的下一隻（計時框上方那格） |
+| `herald.status` | string | `upcoming`（尚未出現）、`alive_or_upcoming`、`taken`（19:40 前被打掉）、`taken_or_despawned`（19:40 後才換圖，可能是消失） |
+| `herald.at` / `herald.sec` | `M:SS` / number | 預示者被打掉的時間（計時框換圖前後兩次讀值的中點；畫面每 5 秒一張，誤差約 ±5 秒） |
+| `herald.team` | null | **尚未支援**：預示者歸屬。feed 沒有，畫面上方擊殺公告的辨識尚在收集素材（Day 3 起） |
+
+驗證（Day 1、Day 2 共 9 局）：下一條龍屬性 161/170 張畫面正確，其餘 9 張讀不到（多為重播字卡蓋住），沒有讀成錯誤屬性。模板由人工目視分群標定，答案取自 feed 的龍事件；但測試畫面與建模板的畫面是同一批，真正的盲測待 Day 3。
+
 `site` 值：`top_outer` `top_inner` `top_inhib_tower` `mid_outer` `mid_inner` `mid_inhib_tower` `bot_outer` `bot_inner` `bot_inhib_tower` `nexus_t1` `nexus_t2`。
 
 ## 已知限制（v0）

@@ -206,6 +206,48 @@ def draft_bans(t_from, t_to, final):
     return {"B": res[:5], "R": res[5:][::-1]}
 
 
+_OBJ_CACHE = {}
+def broadcast_objectives(st0, t_end, lag):
+    """轉播畫面上的物件資訊（tools/objective_box.py）：
+    左上角計時框（obj_<RUN>_*.png，每 5 秒）→ 下一條龍屬性、上方野怪坑的下一隻（grubs/herald/baron）；
+    計分列兩端（hud_<RUN>_*.png，每 5 秒）→ 兩隊三蟲數。
+    畫面時間 w 換成遊戲時間：w − st0 − lag（未處理暫停）。回傳 dict 或 None。"""
+    import objective_box as OB
+    from collections import Counter
+    reads = []
+    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+        run = os.path.basename(p)[9:-4]
+        objs = glob.glob(f"{D}/snap/obj_{run}_*.png")
+        if not objs: continue
+        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        if not rows: continue
+        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows])); lay = {int(r["n"]): r["layout"] for r in rows}
+        for fp in sorted(objs):
+            n = int(fp[-11:-4]); w = n + anchor
+            if not (st0 + lag <= w <= t_end + lag + 30) or lay.get(n) != "1": continue
+            if fp not in _OBJ_CACHE:
+                ob = OB.read(cv2.imread(fp)); hp = f"{D}/snap/hud_{run}_{n:07d}.png"
+                gr = OB.read_grubs(cv2.imread(hp), x_off=-500) if os.path.exists(hp) else {"B": None, "R": None}
+                _OBJ_CACHE[fp] = (ob["dragon"], ob["pit"], gr)
+            reads.append((w - st0 - lag, *_OBJ_CACHE[fp]))
+    if not reads: return None
+    def mode_last(vals, k=3):
+        v = [x for x in vals if x is not None][-k:]
+        return Counter(v).most_common(1)[0][0] if v else None
+    out = {"nextDragonElement": mode_last([r[1] for r in reads]),
+           "voidgrubs": {s: mode_last([r[3][s] for r in reads]) for s in "BR"}, "pitNext": mode_last([r[2] for r in reads])}
+    # 預示者：計時框上方那格由 herald 換成 baron 的時間 ≈ 預示者被打掉（19:45 前）或消失（19:45 後）
+    seq = [(t, p) for t, _, p, _ in reads if p]
+    seen_h = [t for t, p in seq if p == "herald"]
+    after = [t for t, p in seq if p == "baron" and seen_h and t > seen_h[-1]]
+    if not seen_h: out["herald"] = {"status": "upcoming"}
+    elif not after: out["herald"] = {"status": "alive_or_upcoming"}
+    else:
+        tk = int((seen_h[-1] + after[0]) / 2)
+        out["herald"] = {"status": "taken" if tk < RULES["heraldDespawn"] - 5 else "taken_or_despawned", "at": gclock(tk), "sec": tk, "team": None,
+                         "note": "時間為計時框換圖的前後兩次讀值中點（每 5 秒一張）；歸屬尚未支援"}
+    return out
+
 def load_feed(gid):
     return [json.loads(l) for l in open(f"{D}/feed_{gid}.jsonl", encoding="utf-8")]
 
@@ -303,7 +345,7 @@ def objectives(feed, clock_of):
     inh = [{"teamLost": "R" if e["team"] == "B" else "B", "respawnAt": gclock(e["sec"] + RULES["inhibitorRespawn"])} for e in ev if e["type"] == "inhibitor" and e["sec"] + RULES["inhibitorRespawn"] > now]
     timers = {"nextDragon": next_dragon, "nextBaron": {"spawnAt": gclock(bn), "sec": bn}, "activeBuffs": buffs, "inhibitorsDown": inh,
               "grubsWindow": f'{gclock(RULES["grubsSpawn"])}–{gclock(RULES["grubsDespawn"])}', "heraldWindow": f'{gclock(RULES["heraldSpawn"])}–{gclock(RULES["heraldDespawn"])}',
-              "note": "計時依規則表推算；三蟲與預示者是否被擊殺、由誰擊殺，feed 不提供，尚未從畫面讀取"}
+              "note": "計時依規則表推算；下一條龍屬性、三蟲數、預示者狀態另由轉播畫面讀取（見 voidgrubs、herald、nextDragon.elementSource）"}
     return {
         "gameClock": gclock(now), "timers": timers,
         "dragons": {s: last[s]["d"] for s in "BR"},
@@ -357,6 +399,18 @@ def update(gid=None):
         clock_of = lambda t: t - st0
         st["clockSource"] = "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）"
     st.update(objectives(feed, clock_of))
+    try:
+        bo = broadcast_objectives(st0, end if finished else time.time(), st.get("measuredLagSec") or LAG)
+        if bo:
+            nd = st["timers"]["nextDragon"]
+            if bo["nextDragonElement"]:
+                if bo["nextDragonElement"] == "elder": nd["kind"] = "elder"
+                else: nd["element"] = bo["nextDragonElement"]; nd["elementNote"] = None
+                nd["elementSource"] = "broadcast"
+            else: nd["elementSource"] = "rules"
+            st["voidgrubs"] = bo["voidgrubs"]; st["herald"] = bo["herald"]; st["pitNext"] = bo["pitNext"]
+    except Exception as e:
+        st["broadcastError"] = repr(e)[:200]
     towers, err = tower_naming(gid, feed, finished, st.get("measuredLagSec") or LAG)   # 直播落後秒數依來源不同（YouTube 約 31、Twitch 約 46），有實測就用實測
     st["towersLost"] = towers                                  # 鍵為失去塔的隊伍（R/B），值為已命名的站點與影片顯示消失的遊戲時間
     if err: st["towersError"] = err
