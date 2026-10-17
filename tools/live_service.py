@@ -123,6 +123,15 @@ def series_and_draft(gid):
         cur = next((g for g in games if g["state"] == "inProgress"), None) or next((g for g in games if g["state"] == "unstarted"), None)
         if not cur: return None, None, None
     side = {("B" if t["side"] == "blue" else "R"): t["id"] for t in cur["teams"]}
+    sides_source = "api"
+    if cur["state"] != "completed" and feed_start(cur["id"]) is None:
+        # 開打前 API 的藍紅方不可靠（Day 2：7 局中 5 局在 BP 中顛倒）；改看 BP 畫面中央的隊伍 logo（Day 1+2：1295/1295 張判對）
+        try:
+            bs = broadcast_sides(md, time.time())
+            if bs: side = bs; sides_source = "broadcast"
+            else: sides_source = "api_unconfirmed"
+        except Exception as e:
+            print(iso(time.time()), "BP 藍紅方判斷例外", repr(e), flush=True); sides_source = "api_unconfirmed"
     # 勝場：本局開始前的值。第一次看到本局（尚未結束）時記下 gameWins；之後一律用記下的值
     gc = cache["games"].get(cur["id"])
     if gc is None and cur["state"] != "completed":
@@ -130,7 +139,7 @@ def series_and_draft(gid):
     for g in games: cache["matchOf"][g["id"]] = mid
     json.dump(cache, open(SCACHE, "w", encoding="utf-8"))
     ws = gc["winsAtStart"] if gc else None
-    series = {"bestOf": md["strategy"]["count"], "game": cur["number"], "matchId": mid,
+    series = {"bestOf": md["strategy"]["count"], "game": cur["number"], "matchId": mid, "sidesSource": sides_source,
               "teams": {s_: {"code": code.get(tid), "wins": (ws or {}).get(tid)} for s_, tid in side.items()}}
     if not ws: series["winsNote"] = "服務未在本局開始前看到系列賽，無法確定開局前勝場"
     def side_draft(gid_, sd, bans=None):
@@ -158,6 +167,35 @@ def series_and_draft(gid):
     draft = {"current": current, "earlier": earlier,
              "picksOrder": "role", "bansSupported": True, "bansOrder": "ban", "turnSupported": False}
     return series, draft, cur["state"]
+
+def broadcast_sides(md, t_now):
+    """BP 畫面中央的隊伍 logo（左＝藍方）判斷藍紅方：最近 120 秒的 BP 畫格多數決，至少 3 票。回傳 {"B": teamId, "R": teamId} 或 None。"""
+    import draft_sides as DS, bans26 as BN
+    from collections import Counter
+    logos = {t["code"]: DS.fetch_logo(t["code"], t["image"]) for t in md["teams"]}
+    id_of = {t["code"]: t["id"] for t in md["teams"]}
+    votes = Counter()
+    for fp in recent_off_frames(t_now - 120, t_now):
+        im = cv2.imread(fp)
+        if im is None or not BN.visible(im): continue
+        r = DS.sides(im, logos)
+        if r: votes[(r[0], r[1])] += 1
+    if not votes or votes.most_common(1)[0][1] < 3: return None
+    (bc, rc), _ = votes.most_common(1)[0]
+    return {"B": id_of[bc], "R": id_of[rc]}
+
+def recent_off_frames(t_from, t_to):
+    """擷取存下的非比賽畫面（off_<RUN>_<n>.jpg）中，畫面時間落在 [t_from, t_to] 的檔案路徑（依時間排序）。"""
+    out = []
+    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+        run = os.path.basename(p)[9:-4]
+        offs = glob.glob(f"{D}/snap/off_{run}_*.jpg")
+        if not offs: continue
+        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        if not rows: continue
+        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows[-600:]]))
+        out += [(int(fp[-11:-4]) + anchor, fp) for fp in offs if t_from <= int(fp[-11:-4]) + anchor <= t_to]
+    return [fp for _, fp in sorted(out)]
 
 def feed_start(gid):
     """本服務記錄到的該局 feed 第一個 in_game 時間戳（秒）；沒有記錄時回 None。"""

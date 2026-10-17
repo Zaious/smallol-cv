@@ -48,6 +48,7 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `series.bestOf` | number | esports-api getEventDetails（`strategy.count`） | 1/3/5 |
 | `series.game` | number | 同上 | 本局是第幾局 |
 | `series.matchId` | string | 同上 | 官方系列賽 ID（提案外新增） |
+| `series.sidesSource` | string | 服務（v0.4） | 藍紅方的依據。`api`：開打後的官方資料。`broadcast`：BP 中由畫面中央隊伍 logo 判斷（Day 1+2 共 1295 張 BP 畫面全對）。`api_unconfirmed`：BP 中但畫面判斷不出來，此時藍紅方**可能是錯的**（官方 API 開打前常顛倒，Day 2 七局中五局） |
 | `series.teams.B` / `.R` | `{code, wins}` | 同上（每局的 `side`） | **這一局**誰在藍方、誰在紅方（會換邊）。`wins` = 本局開始前的勝場 |
 | `series.winsNote` | string（可無） | 服務 | 服務沒在本局開始前看到系列賽時出現，此時 `wins` 為 null |
 | `draft.current` | `{game, B, R, turn}` | | 本局 |

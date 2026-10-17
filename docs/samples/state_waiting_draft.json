@@ -7,20 +7,21 @@
   "matchId": "115660588583171790",
   "teams": {
    "B": {
-    "code": "MVK",
-    "wins": 0
-   },
-   "R": {
     "code": "KC",
     "wins": 1
+   },
+   "R": {
+    "code": "MVK",
+    "wins": 0
    }
-  }
+  },
+  "sidesSource": "broadcast"
  },
  "draft": {
   "current": {
    "game": 2,
    "B": {
-    "team": "MVK",
+    "team": "KC",
     "bans": [
      "Olaf",
      "Nocturne",
@@ -37,7 +38,7 @@
     ]
    },
    "R": {
-    "team": "KC",
+    "team": "MVK",
     "bans": [
      "Pantheon",
      "Karma",
