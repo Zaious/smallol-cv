@@ -510,6 +510,17 @@ def schedule():
         nxt = (d.get("pages") or {}).get("newer")
         if not nxt: break
         url = f"https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=en-US&leagueId={WORLDS_LEAGUE}&pageToken={nxt}"
+    # 官方 getStandings 的 flags.isSpoiler：該場的對戰組合本身會洩露先前比賽結果（lolesports 官網用來防雷）
+    spoiler = {}
+    try:
+        T = _get(f"https://esports-api.lolesports.com/persisted/gw/getTournamentsForLeague?hl=en-US&leagueId={WORLDS_LEAGUE}", key=True, ttl=3600)
+        tid = next(t["id"] for t in T["data"]["leagues"][0]["tournaments"] if t["startDate"] >= "2026-01-01")
+        S = _get(f"https://esports-api.lolesports.com/persisted/gw/getStandings?hl=en-US&tournamentId={tid}", key=True, ttl=300)
+        for stg in S["data"]["standings"][0]["stages"]:
+            for sec in stg["sections"]:
+                for mm in sec.get("matches") or []: spoiler[mm["id"]] = "isSpoiler" in (mm.get("flags") or [])
+    except Exception as ex:
+        print(iso(time.time()), "賽程防雷標記例外", repr(ex), flush=True)
     out = []
     for e in sorted(evs, key=lambda e: e["startTime"]):
         m = e["match"]; teams = [{"code": t["code"], "name": t["name"], "image": t.get("image")} for t in m["teams"]]
@@ -518,9 +529,10 @@ def schedule():
         if e["state"] in ("inProgress", "completed"):
             res = {"wins": wins, "winner": next((t["code"] for t in m["teams"] if (t.get("result") or {}).get("outcome") == "win"), None)}
         out.append({"matchId": m["id"], "start": e["startTime"], "state": e["state"], "stage": e.get("blockName"),
-                    "bestOf": (m.get("strategy") or {}).get("count"), "teams": teams, "result": res})
+                    "bestOf": (m.get("strategy") or {}).get("count"), "teams": teams, "result": res,
+                    "teamsSpoiler": spoiler.get(m["id"])})
     data = {"updated": iso(time.time()), "league": "Worlds 2026", "matches": out,
-            "note": "result 為比分與勝方（不爆雷時整欄隱藏）；隊伍代碼 TBD 表示尚未確定"}
+            "note": "result 為比分與勝方（不爆雷時整欄隱藏）；teamsSpoiler 為 true 時對戰組合本身會洩露先前結果（官方 isSpoiler 標記），不爆雷時隊伍也要藏；隊伍代碼 TBD 表示尚未確定"}
     _SCHED.update(at=time.time(), data=data); return data
 
 class H(BaseHTTPRequestHandler):
