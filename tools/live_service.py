@@ -480,20 +480,34 @@ def objectives(feed, clock_of):
         "events": ev,
     }
 
+_NOFEED = {}
+def feed_note(series, api_state):
+    """官方 API 說這局進行中、官方 feed 卻一直沒有資料：2 分鐘後標 "missing"，讓桌面工具講明是官方數據暫停，
+    不是工具壞了（2026-10-19 Day 4 第 1 局：轉播換回舊版介面，feed 整局回 204）。"""
+    if api_state != "inProgress" or not series: return None
+    t0 = _NOFEED.setdefault((series.get("matchId"), series.get("game")), time.time())
+    return "missing" if time.time() - t0 >= 120 else None
+
 def update(gid=None):
     gid = gid or current_game()
     if not gid:
         # 沒有進行中的小局：若有進行中的系列賽（BP 中、局間），回 waiting 並附系列賽與 BP
-        try: series, draft, _ = series_and_draft(None)
-        except Exception as e: series, draft = None, None
-        if series: return {"status": "waiting", "updated": iso(time.time()), "series": series, "draft": draft}
+        try: series, draft, api_state = series_and_draft(None)
+        except Exception as e: series, draft, api_state = None, None, None
+        if series:
+            st = {"status": "waiting", "updated": iso(time.time()), "series": series, "draft": draft}
+            note = feed_note(series, api_state)
+            if note: st["feed"] = note
+            return st
         return {"status": "idle", "updated": iso(time.time())}
     feed = load_feed(gid)
     if not any(x["state"] == "in_game" for x in feed):
         st = {"status": "waiting", "game": gid, "updated": iso(time.time())}
         try:
-            series, draft, _ = series_and_draft(gid)
+            series, draft, api_state = series_and_draft(gid)
             if series: st["series"], st["draft"] = series, draft
+            note = feed_note(series, api_state)
+            if note: st["feed"] = note
         except Exception as e: st["seriesError"] = repr(e)[:200]
         return st
     finished = feed[-1]["state"] == "finished"
