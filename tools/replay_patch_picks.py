@@ -27,7 +27,7 @@ while t <= t1:
         for s in "BR":
             if pk: r["draft"]["current"][s]["picks"] = pk[s]["picks"]
             r["draft"]["current"][s]["picksSource"] = "feed"
-    h = (r.get("broadcast") or {}).get("herald")
+    h = r.get("herald") or (r.get("broadcast") or {}).get("herald")
     if herald_team and h and h.get("team"): h["team"] = herald_team
     res.append(r); t += 3 if r.get("status") == "waiting" else 10
 with open(out, "w", encoding="utf-8") as f:

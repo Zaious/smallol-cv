@@ -14,10 +14,11 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--from", dest="t0", default="2026-10-17T17:49"); ap.add_argument("--to", dest="t1", default="2026-10-17T21:30")
 ap.add_argument("--speed", type=float, default=1.0); ap.add_argument("--skip", type=float, default=0, help="從開頭跳過幾分鐘（錄影時間）")
 ap.add_argument("--port", type=int, default=8788); ap.add_argument("--loop", action="store_true"); ap.add_argument("--list", action="store_true")
+ap.add_argument("--log", default=os.path.join(D, "statelog.jsonl"), help="改播 tools/replay_patch_picks.py 補過的紀錄")
 a = ap.parse_args()
 
 rows = []
-for l in open(os.path.join(D, "statelog.jsonl"), encoding="utf-8"):
+for l in open(a.log, encoding="utf-8"):
     try: r = json.loads(l)
     except ValueError: continue
     rows.append((ts(r["updated"]), r))
