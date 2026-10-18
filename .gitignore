@@ -12,3 +12,6 @@ data/
 .env
 *.key
 config.local.*
+
+# Python 快取
+__pycache__/

@@ -35,7 +35,7 @@
 | `timers.nextBaron` | `{spawnAt, sec}` | 規則 | |
 | `timers.activeBuffs` | `{buff, team, until, untilSec}[]` | 規則 | `buff`=`baron`（180 秒）/`elder`（150 秒） |
 | `timers.inhibitorsDown` | `{teamLost, respawnAt}[]` | 規則 | 水晶 5 分鐘重生 |
-| `timers.grubsWindow` / `heraldWindow` | string | 規則 | 三蟲 8:00–14:45、預示者 15:00–19:45（被誰拿：尚未支援） |
+| `timers.grubsWindow` / `heraldWindow` | string | 規則 | 三蟲 8:00–14:45、預示者 15:00–19:45（被誰拿：見 `broadcast.herald.team`） |
 | `events` | 陣列 | feed | `{type: dragon/baron/inhibitor/tower, team, element?, sec, gameTime}`，`team` 為**取得者** |
 
 ## 系列賽與 BP（v0.1，2026-10-16 加入；依 DesktopLOL `docs/CONTRACT_PROPOSAL.md`）
@@ -90,7 +90,7 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `pitNext` | `"grubs"` \| `"herald"` \| `"baron"` \| null | 上方野怪坑的下一隻（計時框上方那格） |
 | `herald.status` | string | `upcoming`（尚未出現）、`alive_or_upcoming`、`taken`（19:40 前被打掉）、`taken_or_despawned`（19:40 後才換圖，可能是消失） |
 | `herald.at` / `herald.sec` | `M:SS` / number | 預示者被打掉的時間（計時框換圖前後兩次讀值的中點；畫面每 5 秒一張，誤差約 ±5 秒） |
-| `herald.team` | "B" / "R" / null | v0.5：預示者歸屬，來自畫面上方公告「Blue/Red team has defeated（或 summoned）the Rift Herald!」（此時 `herald.teamSource` 為 "announcement"）。Day 1+2 共 12 局留一局驗證 12/12（對照 Leaguepedia）。沒看到公告時為 null。1080p 直播畫面目前只以 1 局驗證 |
+| `herald.team` | "B" / "R" / null | v0.5：預示者歸屬，來自畫面上方公告「Blue/Red team has defeated（或 summoned）the Rift Herald!」（此時 `herald.teamSource` 為 "announcement"）。v0.8（2026-10-18）改用句尾「Rift Herald!」＋公告底線顏色判斷：錄影版 12 局留一局全對、Day 3 直播 1080p 盲測 4/4（舊版在 Day 3 是 0/4）。有公告時 `herald.at` 為第一則公告的時間（擊殺公告可能因導播切走沒播出，此時是召喚公告的時間，會晚於擊殺）。沒看到公告時為 null |
 
 驗證（Day 1、Day 2 共 9 局）：下一條龍屬性 161/170 張畫面正確，其餘 9 張讀不到（多為重播字卡蓋住），沒有讀成錯誤屬性。模板由人工目視分群標定，答案取自 feed 的龍事件；但測試畫面與建模板的畫面是同一批，真正的盲測待 Day 3。
 
@@ -126,5 +126,5 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 ## 已知限制（v0）
 
 - 塔的命名平均比畫面晚約 7 秒（需累積 8 秒的消失證據）；被英雄頭像遮住時會更晚。比賽結束時的最後幾座可能是由 feed 數量推算補上。
-- 三蟲、預示者由誰取得、紅藍 buff 尚未支援（評估中）。
+- 紅藍 buff 與其他野怪不支援（2026-10-17 決定放棄）。三蟲數與預示者歸屬見「轉播畫面物件」。
 - 欄位可能在 v1 增加，但 v0 既有欄位的意義不變。

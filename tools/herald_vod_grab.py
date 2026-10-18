@@ -19,7 +19,7 @@ for gid in GAMES:
     st0 = ts(next(x["ts"] for x in r if x["state"] == "in_game"))
     guess = st0 + 46 + 900 - ts(START)                       # 錄影版中遊戲 15:00 的粗估位置
     clock = None
-    for d in (0, 7, 13, 21):                                 # 讀不到（0/9 或遮擋）就往後挪幾秒再讀
+    for d in (0, 7, 13, 21, 37, 53, 71, 97, 131, -29, -61, -97):   # 讀不到（0/9、重播或遮擋）就前後挪幾秒再讀
         im = frame(u1080, guess + d, 1920, 1080)
         if im is None: continue
         c = read_clock_safe(im)

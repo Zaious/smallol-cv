@@ -281,27 +281,36 @@ def broadcast_objectives(st0, t_end, lag):
     seq = [(t, p) for t, _, p, _ in reads if p]
     seen_h = [t for t, p in seq if p == "herald"]
     after = [t for t, p in seq if p == "baron" and seen_h and t > seen_h[-1]]
-    # 預示者歸屬：畫面上方公告「Blue/Red team has defeated the Rift Herald!」（ann_<RUN>_*.png，每秒）。
-    # tools/herald_banner.py（軟文字遮罩）：Day 1+2 共 12 局留一局，門檻 0.75 時每局第一則 12/12、過門檻 100 張中藍紅方判錯 0；
-    # 過門檻的「其他公告」只有「X team has summoned the Rift Herald」，隊伍與擊殺方相同。1080p 直播畫面僅以 1 局驗證（0.80–0.82）。
+    # 預示者歸屬：畫面上方公告「Blue/Red team has defeated/summoned the Rift Herald!」（ann_<RUN>_*.png，每秒）。
+    # tools/herald_banner2.py：句尾「Rift Herald!」判斷是不是預示者公告，底線顏色判斷哪一方。
+    # 驗收：錄影版 12 局留一局 23 段全對；Day 3 直播 1080p 盲測 4/4（舊的整句比對 herald_banner.py 在 Day 3 是 0/4）。
+    # 擊殺公告可能因導播切走沒播出（Day 3 第 1 局只有召喚公告），召喚方即擊殺方，所以 at 是「第一則公告」的時間，可能晚於擊殺。
     herald_team = None
     if st0 in _HERALD_FOUND: herald_team, herald_at = _HERALD_FOUND[st0]
     else:
         try:
-            import herald_banner as HBN
-            TB = dict(np.load(os.path.join(ROOT, "assets", "herald_banner_templates.npz")))
+            import herald_banner2 as HB2
+            T = HB2.load(os.path.join(ROOT, "assets", "herald_banner2.npz"))
             for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
                 run = os.path.basename(p)[9:-4]; anns = glob.glob(f"{D}/snap/ann_{run}_*.png")
                 if not anns: continue
                 rows = list(csv.DictReader(open(p, encoding="utf-8")))
                 anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows]))
-                for fp in sorted(fp for fp in anns if 14 * 60 <= int(fp[-11:-4]) + anchor - st0 - lag <= 20 * 60 + 30):
-                    if fp not in _ANN_CACHE:                      # 每張只算一次：文字遮罩太淡就記 None
-                        m = HBN.mask(cv2.imread(fp))
-                        _ANN_CACHE[fp] = None if m.mean() < 0.04 else max(((HBN.ncc_shift(m, t), k) for k, t in TB.items()))
-                    hit = _ANN_CACHE[fp]
-                    if hit and hit[0] >= 0.75:
-                        herald_team = hit[1]; herald_at = int(int(fp[-11:-4]) + anchor - st0 - lag)
+                win = sorted(fp for fp in anns if 14 * 60 <= int(fp[-11:-4]) + anchor - st0 - lag <= min(20 * 60 + 30, t_end - st0 + 30))
+                hits = []                                         # 每張只算一次：(分數, 藍, 紅)
+                for fp in win:
+                    if fp not in _ANN_CACHE:
+                        img = cv2.imread(fp); _ANN_CACHE[fp] = (HB2.end_score(img, T), *HB2.bar(img))
+                    sc, b, r = _ANN_CACHE[fp]
+                    if sc >= HB2.THR: hits.append((int(fp[-11:-4]), b, r))
+                segs = []                                         # 連續（間隔 ≤ 3 秒）的命中合成一段，段內加總底線像素
+                for n, b, r in hits:
+                    if segs and n - segs[-1][1] <= 3: segs[-1][1] = n; segs[-1][2] += b; segs[-1][3] += r
+                    else: segs.append([n, n, b, r])
+                for n0, _, b, r in segs:
+                    team = "B" if b >= 100 and b >= 2 * r else "R" if r >= 100 and r >= 2 * b else None
+                    if team:
+                        herald_team = team; herald_at = int(n0 + anchor - st0 - lag)
                         _HERALD_FOUND[st0] = (herald_team, herald_at); break
                 if herald_team: break
         except Exception as e:
