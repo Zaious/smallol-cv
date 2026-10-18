@@ -1,0 +1,22 @@
+smallol-cv
+Copyright 2026 ChronicleCore Studio (編年史記工作室)
+Created by Zaious.
+https://github.com/Zaious/smallol-cv
+https://studio.chroniclecore.com
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+A work based on it must carry this notice along, as section 4(d) of the
+licence asks: "Based on smallol-cv by Zaious, ChronicleCore Studio".
+
+The name "SmalLoL" is not licensed for other works (section 6 of the
+licence). A modified version needs a name of its own.
+
+Match data comes from the official LoL Esports feed and API, Leaguepedia and
+the broadcast; champion art and names from Riot Games' Data Dragon. None of
+it is part of this product or covered by its licence, and none of it is in
+this repository.
+
+smallol-cv isn't endorsed by Riot Games and doesn't reflect the views or
+opinions of Riot Games or anyone officially involved in producing or managing
+Riot Games properties. Riot Games, and all associated properties are
+trademarks or registered trademarks of Riot Games, Inc.

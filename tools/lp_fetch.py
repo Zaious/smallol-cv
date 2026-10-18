@@ -4,7 +4,7 @@
 # Leaguepedia 對同一 IP 限流很嚴：每次請求間隔至少 6 秒，被限流時退避 2、4、6… 分鐘，最多 8 次。
 import json, os, time, urllib.parse, urllib.request
 OUT = os.path.join(os.path.dirname(__file__), "..", "data", "lp"); os.makedirs(OUT, exist_ok=True)
-UA = {"User-Agent": "DesktopLOL-probe/0.1 (personal research)"}
+UA = {"User-Agent": "smallol-cv/0.1 (+https://github.com/Zaious/smallol-cv)"}
 _last = [0.0]
 
 def _call(params):

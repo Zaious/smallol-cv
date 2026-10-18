@@ -10,7 +10,7 @@ for i in $(seq 1 12); do
     --data-urlencode "fields=GameId,Team1,Team2,Winner,Team1Bans,Team2Bans,Team1Picks,Team2Picks,N_GameInMatch,MatchId,DateTime_UTC" \
     --data-urlencode "where=DateTime_UTC >= '2025-11-08' AND DateTime_UTC < '2025-11-10' AND (Team1 LIKE '%KT%' OR Team2 LIKE '%KT%')" \
     --data-urlencode "limit=10" --data-urlencode "format=json" \
-    -H "User-Agent: DesktopLOL-probe/0.1 (personal research; contact: zaious.design@gmail.com)" > "$OUT.tmp"
+    -H "User-Agent: smallol-cv/0.1 (+https://github.com/Zaious/smallol-cv)" > "$OUT.tmp"
   if ! grep -q '"error"' "$OUT.tmp"; then mv "$OUT.tmp" "$OUT"; echo "OK attempt $i"; exit 0; fi
   echo "ratelimited attempt $i"; sleep $((120 * i))
 done

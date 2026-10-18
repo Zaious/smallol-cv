@@ -3,9 +3,11 @@ vod/
 recordings/
 frames/
 
-# 英雄頭像：不放進 repo，由使用者自行放在本機資料夾（見 README 的下載來源）
-hero-icons/
-hero-art/
+# 英雄圖：不放進 repo，用 tools/fetch_ddragon_*.py 自己下載（見各資料夾的 README.md）
+hero-icons/*
+!hero-icons/README.md
+hero-art/*
+!hero-art/README.md
 data/
 
 # 金鑰與本機設定

@@ -1,6 +1,6 @@
 # Stream CV 服務輸出合約（v0.9，2026-10-18；v0 起於 2026-10-16）
 
-桌面工具（DesktopLOL）讀這份資料。服務由 `tools/live_service.py` 產生，每 5 秒更新一次。
+桌面工具（SmalLoL）讀這份資料。服務由 `tools/live_service.py` 產生，每 5 秒更新一次。
 
 - HTTP：`GET http://127.0.0.1:8787/state.json`（日後上 VPS 改成對外網址；欄位不變）
 - 檔案：`data/live_worlds2026/state.json`（目前狀態）、`data/live_worlds2026/events.jsonl`（新事件逐行附加）
@@ -38,7 +38,7 @@
 | `timers.grubsWindow` / `heraldWindow` | string | 規則 | 三蟲 8:00–14:45、預示者 15:00–19:45（被誰拿：見 `broadcast.herald.team`） |
 | `events` | 陣列 | feed | `{type: dragon/baron/inhibitor/tower, team, element?, sec, gameTime}`，`team` 為**取得者** |
 
-## 系列賽與 BP（v0.1，2026-10-16 加入；依 DesktopLOL `docs/CONTRACT_PROPOSAL.md`）
+## 系列賽與 BP（v0.1，2026-10-16 加入；依 smallol `docs/CONTRACT_PROPOSAL.md`）
 
 `series` 與 `draft` 在 `in_game`、`finished`、`waiting` 時都會附上（服務需有 `LOL_API_KEY` 環境變數；沒有時兩欄不出現）。
 BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播）時 `status` 為 `waiting`，此時只有 `status`、`updated`、`series`、`draft`。
@@ -62,7 +62,7 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `draft.bansSupported` / `turnSupported` | boolean | 服務 | v0.3 起 `bansSupported` 為 true；`turnSupported` 仍為 false |
 | `draft.bansOrder` | `"ban"` | 服務 | v0.3 新增：bans 依禁用順序排列（藍紅兩方各自的第 1–5 手） |
 
-## 選手（v0.2，2026-10-16 加入；依 DesktopLOL `docs/CONTRACT_PROPOSAL.md`「選手」一節）
+## 選手（v0.2，2026-10-16 加入；依 smallol `docs/CONTRACT_PROPOSAL.md`「選手」一節）
 
 `players` 在 `in_game`、`finished` 時附上（免金鑰）。`players.B` / `players.R` 各 5 人，順序為 participantId（實際上就是上、野、中、下、輔）。
 
