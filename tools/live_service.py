@@ -598,6 +598,8 @@ class H(BaseHTTPRequestHandler):
         if path == "/schedule.json":
             try: body = json.dumps(schedule(), ensure_ascii=False).encode("utf-8")
             except Exception as e: body = json.dumps({"error": repr(e)[:200]}, ensure_ascii=False).encode("utf-8")
+        elif path == "/healthz":
+            body = b'{"ok": true}'
         elif path in ("/", "/state.json"):
             with LOCK: body = json.dumps(STATE, ensure_ascii=False).encode("utf-8")
         elif path == "/teams.json":
