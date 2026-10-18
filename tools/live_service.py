@@ -51,7 +51,7 @@ KEY = os.environ.get("LOL_API_KEY")
 _API_CACHE = {}
 def _get(url, key=False, ttl=30):
     now = time.time(); c = _API_CACHE.get(url)
-    if c and now - c[0] < ttl: return c[1]
+    if c and c[1] is not None and now - c[0] < ttl: return c[1]     # 「沒有資料」不快取：開打前問過 feed，開打後要馬上拿得到
     req = urllib.request.Request(url, headers={"x-api-key": KEY} if key else {})
     with urllib.request.urlopen(req, timeout=15) as r:
         d = json.loads(r.read().decode("utf-8")) if r.status == 200 else None
@@ -75,8 +75,10 @@ def _scache():
 
 def game_picks(gid):
     """已開局小局的選角（feed gameMetadata，免金鑰）：依位置順序（上、野、中、下、輔），不是 BP 順序。"""
-    d = _get(f"https://feed.lolesports.com/livestats/v1/window/{gid}", ttl=3600)
-    if not d: return None
+    url = f"https://feed.lolesports.com/livestats/v1/window/{gid}"
+    d = _get(url, ttl=3600)
+    if not d or "gameMetadata" not in d:                     # 開打前 feed 沒有資料：不要把「沒有」快取一小時（Day 2/3 比賽中本局 picks 全是 null）
+        _API_CACHE.pop(url, None); return None
     m = d["gameMetadata"]; out = {}
     for side, k in (("B", "blueTeamMetadata"), ("R", "redTeamMetadata")):
         ps = sorted(m[k]["participantMetadata"], key=lambda p: p["participantId"])
@@ -168,7 +170,9 @@ def series_and_draft(gid):
         except Exception as e:
             print(iso(time.time()), "禁用辨識例外", repr(e), flush=True)
         return None
-    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side, game_bans(cur), game_live_picks(cur)), "turn": None}
+    # 開打與否看本服務記錄到的 feed（feed_start），不看 API 的 state：API 比賽開打後還會寫 unstarted 一段時間（Day 2/3 比賽中本局 picks 全是 null）
+    started = cur["state"] != "unstarted" or feed_start(cur["id"]) is not None
+    current = {"game": cur["number"], **side_draft(cur["id"] if started else None, side, game_bans(cur), game_live_picks(cur)), "turn": None}
     earlier = []
     for g in games:
         if g["number"] < cur["number"] and g["state"] == "completed":
