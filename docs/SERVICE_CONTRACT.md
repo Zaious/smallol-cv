@@ -1,4 +1,4 @@
-# Stream CV 服務輸出合約（v0，2026-10-16）
+# Stream CV 服務輸出合約（v0.9，2026-10-18；v0 起於 2026-10-16）
 
 桌面工具（DesktopLOL）讀這份資料。服務由 `tools/live_service.py` 產生，每 5 秒更新一次。
 
@@ -52,7 +52,9 @@ BP 中或局與局之間（沒有進行中的小局、但系列賽仍在直播�
 | `series.teams.B` / `.R` | `{code, wins}` | 同上（每局的 `side`） | **這一局**誰在藍方、誰在紅方（會換邊）。`wins` = 本局開始前的勝場 |
 | `series.winsNote` | string（可無） | 服務 | 服務沒在本局開始前看到系列賽時出現，此時 `wins` 為 null |
 | `draft.current` | `{game, B, R, turn}` | | 本局 |
-| `draft.current.B.picks` | string[5] | feed `gameMetadata`（免金鑰） | Data Dragon 英雄 ID（已驗證：8 局 60 個 ID 全部對得上 16.20.1，例：`KSante` `MonkeyKing` `Velkoz`）。**開局後才有**；BP 中為 5 個 null |
+| `draft.current.B.picks` | string[5] | 開局後：feed `gameMetadata`；BP 中：轉播畫面（v0.9） | Data Dragon 英雄 ID（已驗證：8 局 60 個 ID 全部對得上 16.20.1，例：`KSante` `MonkeyKing` `Velkoz`）。v0.9（2026-10-18）起 **BP 中就有值**：讀轉播 BP 介面下方的選手卡（`tools/draft_picks.py`），只放**已鎖定**的英雄，還沒鎖定的格子是 null。BP 中的順序是選手卡的位置（上、野、中、下、輔的選手）；BP 最後的交換環節會換位，交換後與開局後的 feed 順序相同。驗收：Day 1 錄影 8 局（盲測）＋Day 2/3 直播 10 局，錯誤鎖定 0；最終 180 手中 179 手對、1 手為 null（Ornn，當時沒有樣本）。從鎖定到出現在這裡：中位數約 4 秒、最慢約 40 秒，另加服務的 5 秒更新 |
+| `draft.current.B.picksSource` | `"broadcast"` / `"feed"` / null | 服務 | v0.9：picks 的來源 |
+| `draft.current.B.hovering` | (string 或 null)[5] | 轉播畫面 | v0.9，選填，只在 BP 中出現：卡片上**還沒鎖定**（選擇中）的英雄，位置同 picks。選手會來回切換，這不是選角結果；要不要顯示由桌面工具決定 |
 | `draft.current.B.bans` | (string\|null)[5] | 畫面辨識（v0.3） | 依禁用順序（第 1–5 手）；Data Dragon 英雄 ID。**開局後**：BP 列最後 3 張畫面、10 格一對一指派（Day 1 共 8 局 80/80 對照 Leaguepedia，其中規則凍結後的盲測 40/40）。**BP 進行中**：只回報連續 3 張（約 9 秒）穩定的格子，其餘 null（此模式尚未驗證）。服務沒有該局的 BP 畫面時為 5 個 null |
 | `draft.current.turn` | null | — | **尚未支援**：BP 進行中的下一手需要畫面辨識。目前一律 null |
 | `draft.earlier` | `{game, B, R}[]` | feed `gameMetadata` | 同系列已結束的局（全局 BP 鎖定名單由此而來）；各局的 B/R 是**那一局**的藍紅方 |

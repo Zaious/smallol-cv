@@ -144,13 +144,21 @@ def series_and_draft(gid):
     series = {"bestOf": md["strategy"]["count"], "game": cur["number"], "matchId": mid, "sidesSource": sides_source,
               "teams": {s_: {"code": code.get(tid), "wins": (ws or {}).get(tid)} for s_, tid in side.items()}}
     if not ws: series["winsNote"] = "服務未在本局開始前看到系列賽，無法確定開局前勝場"
-    def side_draft(gid_, sd, bans=None):
+    def side_draft(gid_, sd, bans=None, live_picks=None):
         pk = game_picks(gid_) if gid_ else None
         out = {}
         for s_, tid in sd.items():
             p = next((v for v in (pk or {}).values() if v["teamId"] == tid), None)
-            out[s_] = {"team": code.get(tid), "bans": (bans or {}).get(s_) or [None] * 5, "picks": p["picks"] if p else [None] * 5}
+            out[s_] = {"team": code.get(tid), "bans": (bans or {}).get(s_) or [None] * 5, "picks": p["picks"] if p else [None] * 5,
+                       "picksSource": "feed" if p else None}
+            if not p and live_picks:                          # 開局前：BP 畫面（左＝藍方），只放已鎖定；選擇中的放 hovering
+                out[s_].update(picks=live_picks[s_]["picks"], hovering=live_picks[s_]["hovering"], picksSource="broadcast")
         return out
+    def game_live_picks(g):
+        if g["state"] == "completed" or feed_start(g["id"]) is not None: return None
+        try: return draft_picks_live(time.time() - 1200, time.time())
+        except Exception as e:
+            print(iso(time.time()), "選角辨識例外", repr(e), flush=True); return None
     def game_bans(g):
         """該局的禁用（畫面辨識）：已開局者取開局前 20 分鐘的 BP 畫面做最終判定；BP 中者只回穩定出現的格子。"""
         try:
@@ -160,7 +168,7 @@ def series_and_draft(gid):
         except Exception as e:
             print(iso(time.time()), "禁用辨識例外", repr(e), flush=True)
         return None
-    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side, game_bans(cur)), "turn": None}
+    current = {"game": cur["number"], **side_draft(cur["id"] if cur["state"] != "unstarted" else None, side, game_bans(cur), game_live_picks(cur)), "turn": None}
     earlier = []
     for g in games:
         if g["number"] < cur["number"] and g["state"] == "completed":
@@ -188,6 +196,10 @@ def broadcast_sides(md, t_now):
 
 def recent_off_frames(t_from, t_to):
     """擷取存下的非比賽畫面（off_<RUN>_<n>.jpg）中，畫面時間落在 [t_from, t_to] 的檔案路徑（依時間排序）。"""
+    return [fp for _, fp in recent_off_frames_t(t_from, t_to)]
+
+def recent_off_frames_t(t_from, t_to):
+    """同上，回傳 [(畫面時間, 路徑)]。"""
     out = []
     for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
         run = os.path.basename(p)[9:-4]
@@ -197,7 +209,7 @@ def recent_off_frames(t_from, t_to):
         if not rows: continue
         anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows[-600:]]))
         out += [(int(fp[-11:-4]) + anchor, fp) for fp in offs if t_from <= int(fp[-11:-4]) + anchor <= t_to]
-    return [fp for _, fp in sorted(out)]
+    return sorted(out)
 
 def feed_start(gid):
     """本服務記錄到的該局 feed 第一個 in_game 時間戳（秒）；沒有記錄時回 None。"""
@@ -245,6 +257,36 @@ def draft_bans(t_from, t_to, final):
         res = [None if n in dup else n for n in res]
     return {"B": res[:5], "R": res[5:][::-1]}
 
+
+# BP 進行中的即時選角（tools/draft_picks.py）：背景執行緒讀新的非比賽畫面，結果依畫面存著；建 draft 時把最近 20 分鐘的結果依序餵 Tracker。
+# 驗收（2026-10-18）：Day 2+3 共 10 局（調門檻用）、Day 1 錄影 8 局（盲測）。錯誤鎖定 0；最終 180 手中 179 手對、1 手讀不到（Ornn，留一局驗證時沒有樣本）。
+_PICK_CARDS = {}; _PICK_READER = None
+def pick_worker():
+    global _PICK_READER
+    try:
+        import draft_picks as DP
+        _PICK_READER = DP.Reader()
+    except Exception as e:
+        print(iso(time.time()), "選角辨識無法啟動", repr(e), flush=True); return
+    while True:
+        try:
+            for fp in recent_off_frames(time.time() - 1200, time.time() + 60):
+                if fp in _PICK_CARDS: continue
+                im = cv2.imread(fp)
+                if im is None: continue
+                _PICK_CARDS[fp] = _PICK_READER.cards(im) if _PICK_READER.overlay(im) >= 0.6 else None
+        except Exception as e:
+            print(iso(time.time()), "選角辨識例外", repr(e), flush=True)
+        time.sleep(1)
+
+def draft_picks_live(t_from, t_to):
+    """[t_from, t_to] 內 BP 畫面的選手卡依序餵 Tracker。回傳 {"B": {"picks": [5], "hovering": [5]}, "R": …} 或 None（沒有 BP 畫面）。"""
+    import draft_picks as DP
+    seq = [(w, _PICK_CARDS[fp]) for w, fp in recent_off_frames_t(t_from, t_to) if _PICK_CARDS.get(fp)]
+    if not seq: return None
+    T = DP.Tracker()
+    for w, cards in seq: T.feed(cards, w)
+    return T.result()
 
 _OBJ_CACHE = {}
 _ANN_CACHE = {}; _HERALD_FOUND = {}
@@ -583,6 +625,7 @@ if __name__ == "__main__":
     if ONCE:
         print(json.dumps(update(ONCE), ensure_ascii=False, indent=1)); sys.exit()
     threading.Thread(target=lambda: ThreadingHTTPServer(("127.0.0.1", PORT), H).serve_forever(), daemon=True).start()
+    threading.Thread(target=pick_worker, daemon=True).start()
     while True:
         try:
             new = update()
