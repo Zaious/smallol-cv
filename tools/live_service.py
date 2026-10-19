@@ -12,6 +12,7 @@ D = arg("--dir", "data/live_worlds2026"); PORT = int(arg("--port", "8787")); ONC
 # 直播落後官方 feed 的秒數：YouTube 約 31、Twitch 約 46。實測不到時（例如計分列時鐘讀不到）用這個預設；
 # outpost_run.py 依來源設 VIDEO_LAG（2026-10-19 Day 4：Twitch 用了 31，塔的歸屬對不上）。
 LAG, G0 = float(os.environ.get("VIDEO_LAG", "31")), 1000
+LAG_OK = (15, 90)   # 實測延遲的合理範圍（秒）；超出就當誤讀
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, "..")
 ts = lambda s: dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -526,10 +527,16 @@ def update(gid=None):
         st["playersError"] = repr(e)[:200]
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
     reads = hud_clock_reads(st0, end if finished else time.time())
+    L = None
     if len(reads) >= 5:
         offs = np.array([o for _, o in reads]); ws = np.array([w for w, _ in reads])
         # 直播落後 feed 的秒數：開局附近的讀值推回時鐘 0:00 的畫面時間，減去 feed 開局時間戳（以中位數抗誤讀）
         L = float(np.median([(-o) - st0 for o in offs]))       # 全局讀值中位數（只用不含 0、9 的讀值；Day 2 前 12 張的估法被誤讀拖到 −490 秒）
+        # 不合理就整組不用：Day 4 換回舊版轉播介面，計分列時鐘位置不同，讀到別的數字，算出 154、100 秒，
+        # 塔的歸屬整個對歪（第 2 局 10 座只認出 8；改用預設延遲 10/10）。
+        if not LAG_OK[0] <= L <= LAG_OK[1]:
+            print(iso(time.time()), f"計分列時鐘算出的延遲 {L:.0f} 秒不合理，改用預設 {LAG:.0f} 秒", flush=True); L = None
+    if L is not None:
         def clock_of(t):
             v = t + L                                          # feed 事件在畫面上出現的時間
             i = np.argsort(np.abs(ws - v))[:5]                 # 取最接近的 5 個讀值的偏移中位數（抗誤讀，跟得上暫停）
