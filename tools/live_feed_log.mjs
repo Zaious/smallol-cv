@@ -11,6 +11,14 @@ const seen = new Map();   // gameId -> 最後寫入的 rfc460Timestamp
 const polling = new Set();
 const backfilled = new Set();
 const done = new Set();     // 已結束的小局：getLive 結束後仍會列出一陣子，不再重複追蹤
+// 連線卡住：Node 的 fetch 一旦連續失敗就一直失敗，重開行程才恢復（2026-10-19 Day 4：半小時沒有 feed，手動重啟後才接上）。
+// FEED_EXIT_ON_STUCK=1（outpost_run.py 設）時，連續失敗這麼多次就結束，讓外層 10 秒後重開一個新的。
+const STUCK_AFTER = 6;
+let failsInARow = 0;
+const failed = (what, e) => {
+  log(`${what} 例外 ${e}`);
+  if (++failsInARow >= STUCK_AFTER && process.env.FEED_EXIT_ON_STUCK === "1") { log(`連續失敗 ${failsInARow} 次，結束行程讓外層重開`); process.exit(3); }
+};
 
 async function getLive() {
   const r = await fetch("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", { headers: { "x-api-key": KEY } });
@@ -30,6 +38,7 @@ async function pollGame(g) {
     const ts = new Date(t).toISOString().replace(/\.\d+Z$/, "Z");
     try {
       const r = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.id}?startingTime=${ts}`);
+      failsInARow = 0;
       if (r.status === 200) {
         const d = await r.json(); let wrote = 0; const wall = new Date().toISOString();
         for (const f of d.frames ?? []) {
@@ -48,7 +57,7 @@ async function pollGame(g) {
         idle = wrote ? 0 : idle + 1;
         if (d.frames?.some((f) => f.gameState === "finished")) { log(`game ${g.id} finished`); done.add(g.id); break; }
       } else idle++;
-    } catch (e) { log(`window 例外 ${e}`); idle++; }
+    } catch (e) { failed("window", e); idle++; }
     await sleep(10000);
   }
   polling.delete(g.id); log(`停止追蹤 game ${g.id}`);
@@ -58,7 +67,8 @@ log("feed 記錄啟動");
 while (true) {
   try {
     const games = await getLive();
+    failsInARow = 0;
     for (const g of games) if (!polling.has(g.id) && !done.has(g.id)) pollGame(g);
-  } catch (e) { log(`getLive 例外 ${e}`); }
+  } catch (e) { failed("getLive", e); }
   await sleep(30000);
 }

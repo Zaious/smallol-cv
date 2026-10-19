@@ -17,6 +17,10 @@ env = dict(os.environ)
 env["PATH"] = os.path.dirname(sys.executable) + os.pathsep + env.get("PATH", "")
 env.setdefault("XDG_CACHE_HOME", os.path.join(ROOT, "data", "cache"))
 env["PYTHONUNBUFFERED"] = "1"
+# 直播比官方 feed 落後的秒數（實測不到時的預設）：Twitch 約 46，YouTube 約 31。
+env.setdefault("VIDEO_LAG", "46" if "twitch.tv" in URL else "31")
+# feed 記錄器連線卡住時自己結束，由下面的 keep() 重開（見 live_feed_log.mjs）。
+env["FEED_EXIT_ON_STUCK"] = "1"
 
 def say(m):
     print(f"{dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} {m}", flush=True)

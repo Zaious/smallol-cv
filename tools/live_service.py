@@ -9,7 +9,9 @@ import numpy as np
 
 arg = lambda k, d: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 D = arg("--dir", "data/live_worlds2026"); PORT = int(arg("--port", "8787")); ONCE = arg("--once", None)
-LAG, G0 = 31.0, 1000
+# 直播落後官方 feed 的秒數：YouTube 約 31、Twitch 約 46。實測不到時（例如計分列時鐘讀不到）用這個預設；
+# outpost_run.py 依來源設 VIDEO_LAG（2026-10-19 Day 4：Twitch 用了 31，塔的歸屬對不上）。
+LAG, G0 = float(os.environ.get("VIDEO_LAG", "31")), 1000
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, "..")
 ts = lambda s: dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
