@@ -16,6 +16,12 @@ def card_box(side, i):
     return x0 + 30, x0 + 158                              # 左側 30 px 是直排的選手名
 MIN_INL = 12
 MIN_INL_CARD = 25                                          # 對到卡片庫（轉播卡片截圖）要更多內點：卡片截圖含介面線條
+# 特徵點太少、原畫比不上的英雄（鄂爾：卡片是放大到臉、又暗又糊的經典原畫，整張只有 20 個特徵點，連跟自己比都過不了 25）：
+# 一般辨識失敗時，改用整張圖相關係數比卡片庫。2026-10-24 瑞士輪第 1 場 BP 畫面量測：鄂爾對另一局鄂爾卡 0.935–0.945，
+# 其他 9 隻英雄 ≤ 0.44。但 10/18 的空格（近黑底＋選手名字）也對到 0.80–0.86：所以另外要求飽和度跟卡片相近
+# （鄂爾卡 190–200；那些空格 ≤ 101），門檻也提高到 0.88（今晚真的鄂爾格 0.97–0.99，跨局 0.945）。
+NCC_CARD = 0.88
+SAT_TOL = 0.3
 ALIAS_FRAC = 0.05                                          # 卡片中心對到原畫上的位置（原畫寬高的比例）離別名表上的點多遠以內才採用
 
 def _ncc(a, b):
@@ -57,6 +63,23 @@ class Reader:
         sc.sort(key=lambda x: -x[0])
         M = sc[0][2]; at = M @ np.array([crop.shape[1] / 2, crop.shape[0] / 2, 1.0]); h, w = self.db[sc[0][1]][2].shape[:2]
         return sc[0][1], sc[0][0], (sc[1][0] if len(sc) > 1 else 0), M, [round(float(at[0]) / w, 4), round(float(at[1]) / h, 4)]
+
+    def by_picture(self, crop):
+        """卡片庫中整張圖最像的一張（相關係數 >= NCC_CARD）：(分數, 名稱, 圖) 或 None。取卡片中央一塊，在幾個縮放下找。"""
+        h, w = crop.shape[:2]; q = crop[int(h * .15):int(h * .75), int(w * .15):int(w * .85)]
+        sat = float(cv2.cvtColor(q, cv2.COLOR_BGR2HSV)[..., 1].mean())
+        best = None
+        for name, (_, _, col) in self.db.items():
+            if not name.startswith("card:"): continue
+            ch, cw = col.shape[:2]
+            ref = float(cv2.cvtColor(col[int(ch * .15):int(ch * .75), int(cw * .15):int(cw * .85)], cv2.COLOR_BGR2HSV)[..., 1].mean())
+            if abs(sat - ref) > SAT_TOL * ref: continue          # 近黑的空格：圖形對得上，顏色對不上
+            for f in (0.85, 0.92, 1.0, 1.08, 1.16, 1.25):
+                c = cv2.resize(col, None, fx=f, fy=f)
+                if c.shape[0] < q.shape[0] or c.shape[1] < q.shape[1]: continue
+                sc = float(cv2.matchTemplate(c, q, cv2.TM_CCOEFF_NORMED).max())
+                if sc >= NCC_CARD and (best is None or sc > best[0]): best = (round(sc, 3), name, col)
+        return best
 
     def ident_one(self, crop, champ):
         """卡片對某一隻英雄原畫的內點數（建卡片庫用）。"""
@@ -101,9 +124,23 @@ class Reader:
 
     def _card(self, side, i, crop):
         r = self.ident(crop)
-        if not r or r[1] < MIN_INL: return {"side": side, "slot": i, "champ": None, "inl": r[1] if r else 0}
+        if not r or r[1] < MIN_INL:
+            sp = self.by_picture(crop)
+            if sp:
+                score, name, col = sp
+                # 卡片庫的圖是鎖定後的卡，顏色直接跟它比；內點數記成門檻值，同一畫面重複時讓真正特徵比對到的那格優先
+                return {"side": side, "slot": i, "champ": name[5:].split("__")[0], "art": name, "at": None, "inl": MIN_INL, "second": 0,
+                        "ncc": score, "colour": plain_colour(crop, col)}
+            return {"side": side, "slot": i, "champ": None, "inl": r[1] if r else 0}
         art, inl, second, M, at = r
         return {"side": side, "slot": i, "champ": self.resolve(art, at), "art": art, "at": at, "inl": inl, "second": second, "colour": self.colour(crop, art, M)}
+
+def plain_colour(crop, card):
+    """跟 Reader.colour 同樣的三個比值，但對象是同大小的轉播卡片截圖（不必對齊）。"""
+    a = crop.reshape(-1, 3).astype(float).mean(axis=0) + 1; b = card.reshape(-1, 3).astype(float).mean(axis=0) + 1
+    ha = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV).reshape(-1, 3).astype(float).mean(axis=0) + 1
+    hb = cv2.cvtColor(card, cv2.COLOR_BGR2HSV).reshape(-1, 3).astype(float).mean(axis=0) + 1
+    return round((a[0] / a[2]) / (b[0] / b[2]), 3), round(ha[2] / hb[2], 3), round(ha[1] / hb[1], 3)
 
 # ── 選擇中／已鎖定（Day 2+3 共 10 局 BP 量測，2026-10-18）──
 # 藍方選擇中：藍/紅比值之比中位數 1.70（p5 1.07），鎖定 0.96（p95 1.12）；紅方選擇中 0.72（p95 1.03），鎖定 1.00（p5 0.84）。
