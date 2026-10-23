@@ -34,7 +34,7 @@ async function pollGame(g) {
   polling.add(g.id); log(`開始追蹤 game ${g.id} (${g.league}) match ${g.match}`);
   let idle = 0;
   while (idle < 40) {                                     // 連續 40 次沒有新幀（約 7 分鐘）就當作結束
-    const t = Math.floor((Date.now() - 45000) / 10000) * 10000;   // feed 有延遲，往前 45 秒、對齊 10 秒
+    const t = Math.floor((Date.now() - 60000) / 10000) * 10000;   // feed 拒絕結束時間不到 50 秒前的窗（2026-10-24 起回 400）：往前 60 秒、對齊 10 秒
     const ts = new Date(t).toISOString().replace(/\.\d+Z$/, "Z");
     try {
       const r = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.id}?startingTime=${ts}`);
