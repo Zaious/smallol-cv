@@ -166,8 +166,11 @@ class Tracker:
     (b) 輪到對方（維護者 2026-10-14 的判定準則：一個環節開始後，上一環節的結果定案）：對方出現一隻「比我方這隻晚出現」的新英雄
         （連續 NEED 張），而我方這隻仍在卡上。同一隊同時輪到兩手（紅 1-2、藍 2-3、藍 4-5）不互相封存。
     (c) 交換階段：某隊有英雄換了位置 → 該隊已選完，該隊卡上全部鎖定（只鎖該隊：Day 2 第 5 局紅方開始交換時，藍方最後一手還在選擇中）。
-    (d) 10 格全滿、連續 SETTLE 秒沒有變化 → 全部鎖定（每手限時 30 秒，選擇中不會停這麼久）。"""
-    NEED = 2; SETTLE = 45
+    (d) 10 格全滿、連續 SETTLE 秒沒有變化 → 全部鎖定（每手限時 30 秒，選擇中不會停這麼久）。
+    (e) 之後又有英雄出現，而且比這隻晚 LATER 秒以上 → 這隻已鎖定（每手限時 30 秒，選擇中撐不到那麼久）。
+        顏色判不準的英雄靠這條：2026-10-24 第 3 場 MKOI 的卡瑪原畫偏藍，鎖定後藍紅比 1.158（門檻 1.15）一直被當成選擇中。
+        暫停時不會有新英雄出現，所以不會誤鎖。"""
+    NEED = 2; SETTLE = 45; LATER = 60
     def __init__(self):
         self.locked = {"B": set(), "R": set()}; self.run = {}; self.seen_n = {}; self.first = {}; self.slot_of = {}
         self.view = None; self.full_since = None; self.last_sig = None
@@ -197,6 +200,11 @@ class Tracker:
                 for k2 in shown:
                     if k2[0] == key[0]: self._lock(*k2)
             if self.seen_n[key] >= self.NEED: self.slot_of[key] = c["slot"]
+        # (e) 之後又有英雄出現、而且晚了 LATER 秒以上
+        if self.first:
+            newest = max(self.first.values())
+            for key in shown:
+                if key in self.first and newest - self.first[key] >= self.LATER: self._lock(*key)
         # (d) 全滿且穩定
         sig = tuple(c.get("champ") for c in cards)
         if all(sig):
