@@ -211,6 +211,12 @@ class Tracker:
         for s in "BR":
             cs = [c for c in (self.view or []) if c["side"] == s]
             if len(cs) != 5: out[s] = {"picks": [None] * 5, "hovering": [None] * 5}; continue
-            out[s] = {"picks": [c["champ"] if c.get("champ") in self.locked[s] else None for c in cs],
-                      "hovering": [c["champ"] if c.get("champ") and c["champ"] not in self.locked[s] else None for c in cs]}
+            picks = [c["champ"] if c.get("champ") in self.locked[s] else None for c in cs]
+            hovering = [c["champ"] if c.get("champ") and c["champ"] not in self.locked[s] else None for c in cs]
+            # 已鎖定、但最新一張畫面讀不到的（剛鎖定時卡片閃光、轉播切畫面那一瞬間）：留在上次出現的格子，
+            # 不要在 BP 視窗裡消失一下又回來（2026-10-24 瑞士輪第 2 場）。那格現在有別的英雄就不放。
+            for champ in self.locked[s]:
+                i = self.slot_of.get((s, champ))
+                if champ not in picks and i is not None and picks[i] is None and hovering[i] is None: picks[i] = champ
+            out[s] = {"picks": picks, "hovering": hovering}
         return out
