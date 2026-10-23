@@ -534,7 +534,7 @@ def update(gid=None):
         st["playersError"] = repr(e)[:200]
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
     reads = hud_clock_reads(st0, end if finished else time.time())
-    L = None
+    L = None; hud_lag_default = False
     if len(reads) >= 5:
         offs = np.array([o for _, o in reads]); ws = np.array([w for w, _ in reads])
         # 直播落後 feed 的秒數：開局附近的讀值推回時鐘 0:00 的畫面時間，減去 feed 開局時間戳（以中位數抗誤讀）
@@ -542,13 +542,22 @@ def update(gid=None):
         # 不合理就整組不用：Day 4 換回舊版轉播介面，計分列時鐘位置不同，讀到別的數字，算出 154、100 秒，
         # 塔的歸屬整個對歪（第 2 局 10 座只認出 8；改用預設延遲 10/10）。
         if not LAG_OK[0] <= L <= LAG_OK[1]:
-            print(iso(time.time()), f"計分列時鐘算出的延遲 {L:.0f} 秒不合理，改用預設 {LAG:.0f} 秒", flush=True); L = None
+            # 開局就暫停（2026-10-24 瑞士輪第 1 場）：feed 開局時間戳在暫停之前，算出的延遲當然不合理，
+            # 但最近的讀值彼此一致（偏移差 3 秒內）就仍可信：延遲用預設，時鐘照讀值走。
+            # 讀值彼此不一致（Day 4 舊版介面讀到別的數字）才整組不用。
+            last = offs[-8:]
+            if len(last) >= 5 and float(np.max(last) - np.min(last)) <= 3:
+                print(iso(time.time()), f"計分列時鐘算出的延遲 {L:.0f} 秒不合理（多半是暫停），延遲改用預設 {LAG:.0f} 秒，時鐘仍照計分列", flush=True)
+                L = LAG; hud_lag_default = True
+            else:
+                print(iso(time.time()), f"計分列時鐘算出的延遲 {L:.0f} 秒不合理，改用預設 {LAG:.0f} 秒", flush=True); L = None
     if L is not None:
         def clock_of(t):
             v = t + L                                          # feed 事件在畫面上出現的時間
             i = np.argsort(np.abs(ws - v))[:5]                 # 取最接近的 5 個讀值的偏移中位數（抗誤讀，跟得上暫停）
             return v + float(np.median(offs[i]))
-        st["clockSource"] = f"計分列時鐘（{len(reads)} 張）"; st["measuredLagSec"] = round(L, 1)
+        st["clockSource"] = f"計分列時鐘（{len(reads)} 張）"
+        if not hud_lag_default: st["measuredLagSec"] = round(L, 1)
     else:
         clock_of = lambda t: t - st0
         st["clockSource"] = "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）"

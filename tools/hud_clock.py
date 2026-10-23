@@ -37,8 +37,11 @@ def read_clock_safe(img, x0=X0, y0=0, min_score=0.8):
     T = np.load(TPL)["t"]
     g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
     r = [_match(g, a, b, x0, y0, T) for a, b in CELLS]; digs = [k for k, _ in r]
-    if min(sc for _, sc in r) < min_score or digs[2] > 5 or {0, 9} & set(digs): return None
-    return (digs[0] * 10 + digs[1]) * 60 + digs[2] * 10 + digs[3]
+    # The minutes' tens digit is 0 for the first ten minutes (a 9 there would mean 90+ minutes), so a 0 or 9
+    # in that one place is read as 0; elsewhere 0 and 9 still drop the read. Without this, no read under
+    # 10:00 was kept at all (2026-10-24, first Swiss game: a pause at the start left the clock minutes off).
+    if min(sc for _, sc in r) < min_score or digs[2] > 5 or {0, 9} & set(digs[1:]): return None
+    return ((0 if digs[0] in (0, 9) else digs[0]) * 10 + digs[1]) * 60 + digs[2] * 10 + digs[3]
 
 # 已知時鐘的序列（全畫面每 60 秒一張；起點為人工目視讀值，之後每張 +60 秒，期間無暫停——以讀值連續性驗證）
 SEQS = {"g3": ("full_1016T0043_", 1140, 27, 40), "g2": ("full_1015T2334_", 2460, 26, 8 * 60 + 52)}
