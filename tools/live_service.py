@@ -486,10 +486,19 @@ def objectives(feed, clock_of):
 _NOFEED = {}
 def feed_note(series, api_state):
     """官方 API 說這局進行中、官方 feed 卻一直沒有資料：2 分鐘後標 "missing"，讓桌面工具講明是官方數據暫停，
-    不是工具壞了（2026-10-19 Day 4 第 1 局：轉播換回舊版介面，feed 整局回 204）。"""
+    不是工具壞了（2026-10-19 Day 4 第 1 局：轉播換回舊版介面，feed 整局回 204）。
+    只在轉播畫面上真的在打（最近 3 分鐘讀得到計分列時鐘）時才算：BP 和載入畫面時官方 API 也說進行中、
+    feed 本來就還沒有遊戲資料（2026-10-24 世界賽瑞士輪第 1 場，BP 期間誤報「官方即時數據暫停」）。"""
     if api_state != "inProgress" or not series: return None
-    t0 = _NOFEED.setdefault((series.get("matchId"), series.get("game")), time.time())
-    return "missing" if time.time() - t0 >= 120 else None
+    now = time.time()
+    try: playing = bool(hud_clock_reads(now - 180, now))
+    except Exception: playing = False
+    key = (series.get("matchId"), series.get("game"))
+    if not playing:
+        _NOFEED.pop(key, None)
+        return None
+    t0 = _NOFEED.setdefault(key, now)
+    return "missing" if now - t0 >= 120 else None
 
 def update(gid=None):
     gid = gid or current_game()
@@ -509,8 +518,6 @@ def update(gid=None):
         try:
             series, draft, api_state = series_and_draft(gid)
             if series: st["series"], st["draft"] = series, draft
-            note = feed_note(series, api_state)
-            if note: st["feed"] = note
         except Exception as e: st["seriesError"] = repr(e)[:200]
         return st
     finished = feed[-1]["state"] == "finished"
