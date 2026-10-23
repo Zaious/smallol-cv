@@ -7,6 +7,11 @@ const OUT = process.argv[2]; fs.mkdirSync(OUT, { recursive: true });
 const KEY = process.env.LOL_API_KEY; if (!KEY) { console.error("缺 LOL_API_KEY"); process.exit(1); }
 const log = (m) => { const l = `${new Date().toISOString()} ${m}`; console.log(l); fs.appendFileSync(`${OUT}/feed.log`, l + "\n"); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// 每個請求最多等 15 秒：沒有逾時的 fetch 卡住時，整個追蹤迴圈就停在那裡，也不算失敗（2026-10-24 疑似 17:24–17:29）
+const get = (url, opts = {}) => fetch(url, { ...opts, signal: AbortSignal.timeout(15000) });
+// 往前多少秒問 window：feed 拒絕結束時間太新的窗（2026-10-24 起「不到 50 秒」回 400）。
+// 再被拒就照錯誤訊息裡的秒數自己加大，不必等人改程式。
+let backMs = Number(process.env.FEED_BACK_MS ?? 60000);
 const seen = new Map();   // gameId -> 最後寫入的 rfc460Timestamp
 const polling = new Set();
 const backfilled = new Set();
@@ -21,7 +26,7 @@ const failed = (what, e) => {
 };
 
 async function getLive() {
-  const r = await fetch("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", { headers: { "x-api-key": KEY } });
+  const r = await get("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-US", { headers: { "x-api-key": KEY } });
   if (!r.ok) throw new Error(`getLive HTTP ${r.status}`);
   const d = await r.json(); const games = [];
   // 只追指定聯賽（預設 Worlds）：getLive 也會列出其他賽事，例如 2026-10-17 的 Demacia Cup（DCGI）
@@ -34,10 +39,18 @@ async function pollGame(g) {
   polling.add(g.id); log(`開始追蹤 game ${g.id} (${g.league}) match ${g.match}`);
   let idle = 0;
   while (idle < 40) {                                     // 連續 40 次沒有新幀（約 7 分鐘）就當作結束
-    const t = Math.floor((Date.now() - 60000) / 10000) * 10000;   // feed 拒絕結束時間不到 50 秒前的窗（2026-10-24 起回 400）：往前 60 秒、對齊 10 秒
+    const t = Math.floor((Date.now() - backMs) / 10000) * 10000;  // 往前 backMs、對齊 10 秒
     const ts = new Date(t).toISOString().replace(/\.\d+Z$/, "Z");
     try {
-      const r = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.id}?startingTime=${ts}`);
+      const r = await get(`https://feed.lolesports.com/livestats/v1/window/${g.id}?startingTime=${ts}`);
+      if (r.status === 400) {
+        // 被拒：訊息寫明要多舊（"... less than 50 sec old ..."）就照著加大；看不懂的 400 算失敗，連續太多次由外層重開
+        const text = await r.text().catch(() => "");
+        const m = /less than (\d+) sec old/.exec(text);
+        if (m && (Number(m[1]) + 15) * 1000 > backMs) { backMs = (Number(m[1]) + 15) * 1000; log(`feed 要求窗至少 ${m[1]} 秒前，改成往前 ${backMs / 1000} 秒`); }
+        else failed("window", new Error(`HTTP 400 ${text.slice(0, 160)}`));
+        idle++; await sleep(m ? 1000 : 10000); continue;
+      }
       failsInARow = 0;
       if (r.status === 200) {
         const d = await r.json(); let wrote = 0; const wall = new Date().toISOString();
