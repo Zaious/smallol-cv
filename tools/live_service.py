@@ -519,8 +519,29 @@ def feed_note(series, api_state):
 _LAST_WAIT = {"t": 0.0, "st": None}
 STALE_OK = 120
 
+# 本局的 feed 停了多久算「停住」：暫停時 feed 也不出新幀（2026-10-24 第 1 場開局暫停約 6 分鐘），
+# 這時再問官方 API 現在進行中的是不是同一局。不是（重開一局：新的遊戲編號）就換過去，
+# 不必等舊局的檔案放滿 10 分鐘才放手；是同一局就照舊顯示，標 paused。
+FEED_STALE = 120
+
+def api_current_game():
+    """官方 API 上 Worlds 進行中的小局編號；查不到回 None（呼叫端照舊）。"""
+    for m_id in live_matches():
+        g = next((g for g in match_details(m_id)["games"] if g["state"] == "inProgress"), None)
+        if g: return g["id"]
+    return None
+
 def update(gid=None):
     gid = gid or current_game()
+    paused = False
+    if gid:
+        feed0 = load_feed(gid)
+        last_wall = ts(feed0[-1]["wall"]) if feed0 and feed0[-1].get("wall") else None
+        if feed0 and feed0[-1]["state"] != "finished" and last_wall and time.time() - last_wall > FEED_STALE:
+            try: now_id = api_current_game()
+            except Exception: now_id = gid
+            if now_id and now_id != gid: gid = None                  # 重開一局：舊局放手，回到等待（新局的 BP）
+            else: paused = True
     if not gid:
         # 沒有進行中的小局：若有進行中的系列賽（BP 中、局間），回 waiting 並附系列賽與 BP
         failed = False
@@ -545,6 +566,7 @@ def update(gid=None):
         return st
     finished = feed[-1]["state"] == "finished"
     st = {"status": "finished" if finished else "in_game", "game": gid, "updated": iso(time.time()), "videoLagSec": LAG}
+    if paused: st["paused"] = True
     try:
         series, draft, _ = series_and_draft(gid)
         if series: st["series"], st["draft"] = series, draft
