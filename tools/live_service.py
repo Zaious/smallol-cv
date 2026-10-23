@@ -430,6 +430,20 @@ def tower_naming(gid, feed, finished, lag=LAG):
     out["nexusRespawnsSeen"] = [{**r, "destroyedAt": gclock(r["destroyed"]), "respawnSeenAt": gclock(r["respawnSeen"])} for r in named.get("respawns", [])]
     return out, None
 
+_TOWER_STICKY = {}
+def sticky_towers(gid, towers, last):
+    """命名過的塔不再收回：每次更新都從頭重算，同一座塔可能這次有名字、下次沒有，小地圖上就一下出現一下消失「?」
+    （瑞士輪第 1 場 15:05–17:45 之間兩次）。主堡塔例外：它會重生，以最新一次的結果為準。
+    每隊最多留 feed 記的被摧毀數（或這次命名的數量，取大者），多出來的捨棄最晚命名的。"""
+    keep = _TOWER_STICKY.setdefault(gid, {"R": {}, "B": {}})
+    lost = {"R": last["B"]["t"], "B": last["R"]["t"]}         # 失去的塔數 = 對手推掉的塔數
+    for tm in "RB":
+        new = {x["site"]: x for x in towers[tm]}
+        for site in [k for k in keep[tm] if k.startswith("nexus") and k not in new]: keep[tm].pop(site)
+        for site, x in new.items(): keep[tm].setdefault(site, x)
+        towers[tm] = sorted(keep[tm].values(), key=lambda x: x["sec"])[:max(lost[tm], len(new))]
+    return towers
+
 def objectives(feed, clock_of):
     """clock_of(feed 時間戳秒) -> 遊戲時鐘秒。"""
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); last = feed[-1]
@@ -543,10 +557,11 @@ def update(gid=None):
         # 塔的歸屬整個對歪（第 2 局 10 座只認出 8；改用預設延遲 10/10）。
         if not LAG_OK[0] <= L <= LAG_OK[1]:
             # 開局就暫停（2026-10-24 瑞士輪第 1 場）：feed 開局時間戳在暫停之前，算出的延遲當然不合理，
-            # 但最近的讀值彼此一致（偏移差 3 秒內）就仍可信：延遲用預設，時鐘照讀值走。
+            # 但最近的讀值大多彼此一致就仍可信：延遲用預設，時鐘照讀值走。
             # 讀值彼此不一致（Day 4 舊版介面讀到別的數字）才整組不用。
+            # 「一致」= 最近 8 張裡至少 5 張離中位數 3 秒內：一張誤讀（28:54）不能讓整組作廢（瑞士輪第 1 場 17:48 又退回 feed 時間）
             last = offs[-8:]
-            if len(last) >= 5 and float(np.max(last) - np.min(last)) <= 3:
+            if len(last) >= 5 and int(np.sum(np.abs(last - np.median(last)) <= 3)) >= 5:
                 print(iso(time.time()), f"計分列時鐘算出的延遲 {L:.0f} 秒不合理（多半是暫停），延遲改用預設 {LAG:.0f} 秒，時鐘仍照計分列", flush=True)
                 L = LAG; hud_lag_default = True
             else:
@@ -575,6 +590,12 @@ def update(gid=None):
     except Exception as e:
         st["broadcastError"] = repr(e)[:200]
     towers, err = tower_naming(gid, feed, finished, st.get("measuredLagSec") or LAG)   # 直播落後秒數依來源不同（YouTube 約 31、Twitch 約 46），有實測就用實測
+    if towers:
+        towers = sticky_towers(gid, towers, feed[-1])
+        # 命名的時間是 feed 開局後的秒數；換成遊戲時鐘（開局暫停時兩者差好幾分鐘：瑞士輪第 1 場顯示 22:14，實際 15:05）
+        for tm in "RB":
+            towers[tm] = [{**x, "sec": round(clock_of(st0 + x["sec"])), "gameTime": gclock(round(clock_of(st0 + x["sec"])))} for x in towers[tm]]
+        towers["nexusTurretsDown"] = [{"teamLost": tm, "site": x["site"], "respawnAt": gclock(x["sec"] + RULES["nexusTurretRespawn"])} for tm in "RB" for x in towers[tm] if x["site"].startswith("nexus")]
     st["towersLost"] = towers                                  # 鍵為失去塔的隊伍（R/B），值為已命名的站點與影片顯示消失的遊戲時間
     if err: st["towersError"] = err
     return st
