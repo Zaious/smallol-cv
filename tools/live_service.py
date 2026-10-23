@@ -514,17 +514,26 @@ def feed_note(series, api_state):
     t0 = _NOFEED.setdefault(key, now)
     return "missing" if now - t0 >= 120 else None
 
+# 官方 API 偶爾一次問不到（伺服器連線閃斷，2026-10-24 18:24 第 2 場 BP 中）：不要因此回報「沒比賽」讓 BP 整個消失，
+# 2 分鐘內沿用上一次的等待狀態（標 stale）。真的打完的系列賽頂多多掛 2 分鐘。
+_LAST_WAIT = {"t": 0.0, "st": None}
+STALE_OK = 120
+
 def update(gid=None):
     gid = gid or current_game()
     if not gid:
         # 沒有進行中的小局：若有進行中的系列賽（BP 中、局間），回 waiting 並附系列賽與 BP
+        failed = False
         try: series, draft, api_state = series_and_draft(None)
-        except Exception as e: series, draft, api_state = None, None, None
+        except Exception as e: series, draft, api_state, failed = None, None, None, True
         if series:
             st = {"status": "waiting", "updated": iso(time.time()), "series": series, "draft": draft}
             note = feed_note(series, api_state)
             if note: st["feed"] = note
+            _LAST_WAIT.update(t=time.time(), st=st)
             return st
+        if _LAST_WAIT["st"] and time.time() - _LAST_WAIT["t"] <= STALE_OK and failed:
+            return {**_LAST_WAIT["st"], "updated": iso(time.time()), "stale": True}
         return {"status": "idle", "updated": iso(time.time())}
     feed = load_feed(gid)
     if not any(x["state"] == "in_game" for x in feed):
