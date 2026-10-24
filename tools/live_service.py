@@ -3,8 +3,11 @@
 # 塔「哪一座」：以 trigger_sim_clf4.py --live 重跑累積資料（命名是因果的，重跑等同即時）；feed 結束時把資料截在結束點並做補滿。
 # 龍（屬性、龍魂、遠古）、巴龍、水晶、擊殺、金錢：直接取自官方 feed。計時類（重生、buff 持續）尚未實作：規則需先對 16.20 版查證。
 # 用法：python tools/live_service.py [--dir data/live_worlds2026] [--port 8787] [--once <gameId>]
-import csv, glob, json, os, subprocess, sys, threading, time, datetime as dt
+import csv, glob, json, os, pickle, signal, socket, subprocess, sys, threading, time, datetime as dt
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+# 先試 IPv4 再試 IPv6：伺服器連官方主機偶爾失敗（每天約 100 次 fetch failed；10/24 18:24 讓 BP 消失一次），兩種都還會用
+_gai = socket.getaddrinfo
+socket.getaddrinfo = lambda *a, **k: sorted(_gai(*a, **k), key=lambda r: r[0] != socket.AF_INET)
 import numpy as np
 
 arg = lambda k, d: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
@@ -717,10 +720,39 @@ class H(BaseHTTPRequestHandler):
         self.end_headers(); self.wfile.write(body)
     def log_message(self, *a): pass
 
+# 重啟不必從頭重算：畫面辨識的結果（BP 選角卡、禁用、計分列時鐘、塔名…）在結束時存檔、啟動時讀回。
+# 起因：2026-10-24 18:14 第 2 場 BP 中重啟，BP 要重讀 20 分鐘的畫面，空白了約 5 分鐘。
+# 每份最多留最新 KEEP 筆（鍵是畫面檔名，依序遞增），另每 10 分鐘存一次以防當機。
+CACHE_FILE = os.path.join(D, "svc", "caches.pkl"); KEEP = 3000
+_PERSIST = ("_HUD_CACHE", "_BAN_CACHE", "_PICK_CARDS", "_OBJ_CACHE", "_ANN_CACHE", "_HERALD_FOUND", "_TOWER_STICKY")
+
+def save_caches():
+    try:
+        os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+        data = {}
+        for name in _PERSIST:
+            c = globals()[name]; keys = sorted(c, key=str)[-KEEP:]
+            data[name] = {k: c[k] for k in keys}
+        with open(CACHE_FILE + ".tmp", "wb") as f: pickle.dump(data, f)
+        os.replace(CACHE_FILE + ".tmp", CACHE_FILE)
+    except Exception as e: print(iso(time.time()), "快取存檔失敗", repr(e), flush=True)
+
+def load_caches():
+    try:
+        with open(CACHE_FILE, "rb") as f: data = pickle.load(f)
+        for name, v in data.items():
+            if name in _PERSIST: globals()[name].update(v)
+        print(iso(time.time()), "讀回快取", {n: len(v) for n, v in data.items()}, flush=True)
+    except FileNotFoundError: pass
+    except Exception as e: print(iso(time.time()), "快取讀回失敗", repr(e), flush=True)
+
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     if ONCE:
         print(json.dumps(update(ONCE), ensure_ascii=False, indent=1)); sys.exit()
+    load_caches()
+    signal.signal(signal.SIGTERM, lambda *_: (save_caches(), os._exit(0)))
+    _saved_at = time.time()
     threading.Thread(target=lambda: ThreadingHTTPServer(("127.0.0.1", PORT), H).serve_forever(), daemon=True).start()
     threading.Thread(target=pick_worker, daemon=True).start()
     while True:
@@ -742,6 +774,7 @@ if __name__ == "__main__":
                 sp = f'{D}/samples/waiting_{new.get("series", {}).get("matchId", "x")}_g{new.get("series", {}).get("game", 0)}.json'
                 if not os.path.exists(sp): json.dump(new, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             json.dump(new, open(f"{D}/state.json.tmp", "w", encoding="utf-8"), ensure_ascii=False); os.replace(f"{D}/state.json.tmp", f"{D}/state.json")
+            if time.time() - _saved_at > 600: save_caches(); _saved_at = time.time()
         except Exception as e:
             with LOCK: STATE["error"] = repr(e)
             print(iso(time.time()), "例外", repr(e), flush=True)

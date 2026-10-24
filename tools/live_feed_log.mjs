@@ -2,6 +2,9 @@
 // 把每幀的塔／水晶／龍／男爵計數寫成 JSONL（含本機牆鐘時間）。金鑰只讀環境變數 LOL_API_KEY，不寫進任何檔案。
 // 用法：LOL_API_KEY=... node tools/live_feed_log.mjs <out_dir>
 import fs from "node:fs";
+import dns from "node:dns";
+// 先試 IPv4 再試 IPv6：伺服器連官方主機偶爾 fetch failed（每天約 100 次）
+dns.setDefaultResultOrder("ipv4first");
 import { spawn } from "node:child_process";
 const OUT = process.argv[2]; fs.mkdirSync(OUT, { recursive: true });
 const KEY = process.env.LOL_API_KEY; if (!KEY) { console.error("缺 LOL_API_KEY"); process.exit(1); }

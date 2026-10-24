@@ -4,8 +4,10 @@
 # 來源與優先序（每個欄位都記來源）：
 #   賽程、系列賽、藍紅方：官方 esports-api（getSchedule、getEventDetails；開打後的藍紅方）
 #   選角、選手數據、裝備、擊殺、金錢、塔數、水晶、巴龍、龍、經濟差：官方 feed（本機記錄的 feed_<gameId>.jsonl，沒有就線上抓）
-#   禁用：本服務的畫面辨識（statelog）＞ Leaguepedia；勝方、三蟲、預示者：Leaguepedia（data/bans26/leaguepedia_games.json）
-#   哪幾座塔倒了：本服務的塔命名（data/trig4_w26_<gameId>.json，只有我們有錄影的局）
+#   禁用：本服務的畫面辨識（statelog）＞ Leaguepedia；三蟲、預示者：Leaguepedia（data/bans26/leaguepedia_games.json）
+#   勝方：Leaguepedia ＞ 官方 API 的系列賽勝場數（每局結束後記下變化，data/archive/series_wins.json）＞ 主堡塔
+#   哪幾座塔倒了：本服務的塔命名（錄影的局：data/trig4_w26_<gameId>.json；直播的局：statelog 的最後一筆）
+# 各隊、各選手的彙整用 data/archive/games/ 裡所有的局（不只這次重建的局：搬上 VPS 前的局只有單局檔，沒有 feed）
 # 用法：LOL_API_KEY=... python tools/archive.py
 import sys, os, json, glob, importlib.util, datetime as dt
 from collections import defaultdict
@@ -49,7 +51,40 @@ def cv_bans(gid):
     if os.path.exists(p2):
         v = json.load(open(p2, encoding="utf-8")).get(gid)
         if v: return v, "cv_vod"
+    p3 = os.path.join(OUT, "cv_bans_backfill.json")                      # 事後用存下的 BP 畫面補的（tools/bans_backfill.py；10/18 伺服器缺 scipy 的局）
+    if os.path.exists(p3):
+        v = json.load(open(p3, encoding="utf-8")).get(gid)
+        if v: return v, "cv_backfill"
     return None
+
+SW = os.path.join(OUT, "series_wins.json")
+def series_winners(m, md):
+    """官方 API 的系列賽勝場數 → 各已結束小局的勝方代碼。每次執行記下已判定的局，下次只需判新結束的局：
+    沒判定的局只剩 1 局時，勝場數多出來的那隊就是勝方；或沒判定的局全部由同一隊拿下（例如 3:0）。其餘回 None。"""
+    try: book = json.load(open(SW, encoding="utf-8"))
+    except Exception: book = {}
+    known = book.setdefault(m["matchId"], {})
+    code = {t["id"]: t["code"] for t in md["teams"]}
+    wins = {code[t["id"]]: (t.get("result") or {}).get("gameWins") or 0 for t in md["teams"]}
+    done = [g["id"] for g in sorted(md["games"], key=lambda g: g["number"]) if g["state"] == "completed"]
+    left = {c: wins[c] - sum(1 for v in known.values() if v == c) for c in wins}
+    todo = [g for g in done if g not in known]
+    if todo and sum(left.values()) == len(todo) and min(left.values()) >= 0:
+        if len(todo) == 1: known[todo[0]] = max(left, key=left.get)
+        elif sum(1 for v in left.values() if v > 0) == 1:
+            for g in todo: known[g] = max(left, key=left.get)
+    json.dump(book, open(SW, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return known
+
+def cv_towers(gid):
+    """本服務在該局輸出的最後一筆塔命名（直播的局）。"""
+    p = f"{D}/statelog.jsonl"; last = None
+    if not os.path.exists(p): return None
+    for l in open(p, encoding="utf-8"):
+        if f'"{gid}"' not in l: continue
+        d = json.loads(l)
+        if d.get("game") == gid and d.get("towersLost") and d["status"] in ("in_game", "finished"): last = d["towersLost"]
+    return {s: last.get(s, []) for s in "BR"} if last else None
 
 def build_game(m, g, sched_entry):
     gid = g["id"]; rows = feed_rows(gid)
@@ -63,7 +98,9 @@ def build_game(m, g, sched_entry):
            "start": svc.iso(st0), "durationSec": int(end - st0), "duration": gclock(end - st0), "teams": sides, "sources": {}}
     lp = lp_find(sides["B"], sides["R"], st0)
     # 勝方
+    sw = series_winners(m, md).get(gid)
     if lp and lp.get("Winner") in ("1", "2"): rec["winner"] = "B" if lp["Winner"] == "1" else "R"; rec["sources"]["winner"] = "leaguepedia"
+    elif sw in sides.values(): rec["winner"] = next(s for s in "BR" if sides[s] == sw); rec["sources"]["winner"] = "api_series"
     else:
         # 備援：本服務的塔命名中，主堡塔被打掉的一方為輸家（Leaguepedia 限流時用；以系列賽比分交叉驗證）
         rec["winner"] = None; rec["sources"]["winner"] = "unknown"
@@ -94,6 +131,9 @@ def build_game(m, g, sched_entry):
         t4 = json.load(open(tp, encoding="utf-8"))
         rec["towersLost"] = {s: sorted(({"site": k[2:], "gameTime": gclock(v["onset"]), "sec": v["onset"]} for k, v in t4[s].items()), key=lambda x: x["sec"]) for s in "BR"}
         rec["sources"]["towersLost"] = "cv"
+    else:
+        tw = cv_towers(gid)
+        if tw: rec["towersLost"] = tw; rec["sources"]["towersLost"] = "cv_live"
     # 每分鐘經濟差（藍 − 紅）
     gd = []; nxt = 0
     for x in ig:
@@ -115,6 +155,12 @@ def main():
                 json.dump(r, open(f"{OUT}/games/{r['gameId']}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1); games.append(r)
                 print(r["gameId"], r["stage"], f"G{r['game']}", r["teams"]["B"], "vs", r["teams"]["R"], "勝", r["winner"], "| 來源", r["sources"])
             else: print(g["id"], "沒有 feed 記錄，略過")
+    # 彙整用所有的單局檔（這次沒重建的舊局也算；同一局以這次重建的為準）
+    rebuilt = {r["gameId"] for r in games}
+    for f in glob.glob(f"{OUT}/games/*.json"):
+        r = json.load(open(f, encoding="utf-8"))
+        if r.get("gameId") not in rebuilt: games.append(r)
+    games.sort(key=lambda r: r["start"])
     # 各隊 BP 歷史
     teams = defaultdict(list)
     for r in games:
