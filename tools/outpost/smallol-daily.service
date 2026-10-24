@@ -1,0 +1,8 @@
+[Unit]
+Description=SmalLoL daily upkeep (yt-dlp update, old frames)
+
+[Service]
+Type=oneshot
+User=smallol
+WorkingDirectory=/srv/smallol
+ExecStart=/bin/bash /srv/smallol/tools/outpost/daily.sh

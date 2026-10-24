@@ -1,0 +1,9 @@
+[Unit]
+Description=SmalLoL daily upkeep at 09:00 UTC (no matches then)
+
+[Timer]
+OnCalendar=*-*-* 09:00:00 UTC
+Persistent=true
+
+[Install]
+WantedBy=timers.target

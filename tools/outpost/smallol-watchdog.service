@@ -1,0 +1,9 @@
+[Unit]
+Description=SmalLoL watchdog (restart a stuck process of the live pipeline)
+After=smallol.service
+
+[Service]
+Type=oneshot
+User=smallol
+WorkingDirectory=/srv/smallol
+ExecStart=/srv/smallol/venv/bin/python /srv/smallol/tools/watchdog.py
