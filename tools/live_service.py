@@ -3,7 +3,7 @@
 # 塔「哪一座」：以 trigger_sim_clf4.py --live 重跑累積資料（命名是因果的，重跑等同即時）；feed 結束時把資料截在結束點並做補滿。
 # 龍（屬性、龍魂、遠古）、巴龍、水晶、擊殺、金錢：直接取自官方 feed。計時類（重生、buff 持續）尚未實作：規則需先對 16.20 版查證。
 # 用法：python tools/live_service.py [--dir data/live_worlds2026] [--port 8787] [--once <gameId>]
-import csv, glob, json, os, pickle, signal, socket, subprocess, sys, threading, time, datetime as dt
+import csv, glob, hashlib, json, os, pickle, secrets, signal, socket, subprocess, sys, threading, time, datetime as dt
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 # 先試 IPv4 再試 IPv6：伺服器連官方主機偶爾失敗（每天約 100 次 fetch failed；10/24 18:24 讓 BP 消失一次），兩種都還會用
 _gai = socket.getaddrinfo
@@ -696,6 +696,7 @@ class H(BaseHTTPRequestHandler):
             body = b'{"ok": true}'
         elif path in ("/", "/state.json"):
             with LOCK: body = json.dumps(STATE, ensure_ascii=False).encode("utf-8")
+            USAGE.seen(self.headers.get("X-Forwarded-For", self.client_address[0]).split(",")[0].strip(), self.headers.get("User-Agent", ""))
         elif path == "/teams.json":
             fp = os.path.join(ROOT, "data", "archive", "teamsheet.json")      # tools/build_teamsheet.py 產生
             if not os.path.exists(fp): self.send_response(404); self.end_headers(); return
@@ -719,6 +720,38 @@ class H(BaseHTTPRequestHandler):
         self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers(); self.wfile.write(body)
     def log_message(self, *a): pass
+
+class Usage:
+    """有多少個 App 在用：只算數，不留 IP（2026-10-25 維護者同意；網站隱私段落有寫）。
+    每個請求的「IP＋瀏覽器標頭」加上一個只存在記憶體、每天換一次的隨機鹽，雜湊成短碼放進當下這一小時（與這 5 分鐘）的集合；
+    一小時結束時只把集合的「個數」寫進 data/live_worlds2026/usage.jsonl（時段、不同的 App 數、5 分鐘內最多同時幾個、請求數），
+    集合本身丟掉。IP 從不寫進檔案；鹽不存檔，重啟或隔天就換，短碼無法跨時段、跨天對起來。"""
+    def __init__(self):
+        self.lock = threading.Lock(); self.salt = secrets.token_bytes(16); self.salt_day = time.strftime("%Y-%m-%d", time.gmtime())
+        self.hour = None; self.ids = set(); self.slot = None; self.slot_ids = set(); self.peak = 0; self.requests = 0
+
+    def _flush(self):
+        if self.hour is None: return
+        self.peak = max(self.peak, len(self.slot_ids))
+        rec = {"hour": self.hour, "apps": len(self.ids), "peak5min": self.peak, "requests": self.requests}
+        try:
+            with open(f"{D}/usage.jsonl", "a", encoding="utf-8") as f: f.write(json.dumps(rec) + "\n")
+        except Exception as e: print(iso(time.time()), "使用量寫檔失敗", repr(e), flush=True)
+
+    def seen(self, ip, ua):
+        now = time.gmtime(); hour = time.strftime("%Y-%m-%dT%H:00Z", now); slot = now.tm_min // 5; day = time.strftime("%Y-%m-%d", now)
+        with self.lock:
+            if day != self.salt_day: self.salt, self.salt_day = secrets.token_bytes(16), day
+            if hour != self.hour:
+                self._flush(); self.hour, self.ids, self.slot, self.slot_ids, self.peak, self.requests = hour, set(), slot, set(), 0, 0
+            if slot != self.slot: self.peak = max(self.peak, len(self.slot_ids)); self.slot, self.slot_ids = slot, set()
+            h = hashlib.sha256(self.salt + ip.encode() + b"|" + ua.encode()).hexdigest()[:12]
+            self.ids.add(h); self.slot_ids.add(h); self.requests += 1
+
+    def now(self):
+        with self.lock: return {"hour": self.hour, "apps": len(self.ids), "now5min": len(self.slot_ids), "peak5min": max(self.peak, len(self.slot_ids)), "requests": self.requests}
+
+USAGE = Usage()
 
 # 重啟不必從頭重算：畫面辨識的結果（BP 選角卡、禁用、計分列時鐘、塔名…）在結束時存檔、啟動時讀回。
 # 起因：2026-10-24 18:14 第 2 場 BP 中重啟，BP 要重讀 20 分鐘的畫面，空白了約 5 分鐘。
@@ -759,7 +792,7 @@ if __name__ == "__main__":
     if ONCE:
         print(json.dumps(update(ONCE), ensure_ascii=False, indent=1)); sys.exit()
     load_caches()
-    signal.signal(signal.SIGTERM, lambda *_: (save_caches(), os._exit(0)))
+    signal.signal(signal.SIGTERM, lambda *_: (save_caches(), USAGE._flush(), os._exit(0)))
     _saved_at = time.time()
     threading.Thread(target=lambda: ThreadingHTTPServer(("127.0.0.1", PORT), H).serve_forever(), daemon=True).start()
     threading.Thread(target=pick_worker, daemon=True).start()
