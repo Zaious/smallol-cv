@@ -726,6 +726,14 @@ class H(BaseHTTPRequestHandler):
 CACHE_FILE = os.path.join(D, "svc", "caches.pkl"); KEEP = 3000
 _PERSIST = ("_HUD_CACHE", "_BAN_CACHE", "_PICK_CARDS", "_OBJ_CACHE", "_ANN_CACHE", "_HERALD_FOUND", "_TOWER_STICKY")
 
+def prune_caches():
+    """記憶體裡的辨識快取也只留最新 KEEP 筆：原本只增不減，服務跑 17 小時長到 2 GB（2026-10-25 量測，前一天 825 MB）。
+    _TOWER_STICKY 以局為鍵、很小，不修。"""
+    for name in _PERSIST:
+        c = globals()[name]
+        if name == "_TOWER_STICKY" or len(c) <= KEEP: continue
+        for k in sorted(c, key=str)[:-KEEP]: c.pop(k, None)
+
 def save_caches():
     try:
         os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
@@ -774,7 +782,7 @@ if __name__ == "__main__":
                 sp = f'{D}/samples/waiting_{new.get("series", {}).get("matchId", "x")}_g{new.get("series", {}).get("game", 0)}.json'
                 if not os.path.exists(sp): json.dump(new, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             json.dump(new, open(f"{D}/state.json.tmp", "w", encoding="utf-8"), ensure_ascii=False); os.replace(f"{D}/state.json.tmp", f"{D}/state.json")
-            if time.time() - _saved_at > 600: save_caches(); _saved_at = time.time()
+            if time.time() - _saved_at > 600: prune_caches(); save_caches(); _saved_at = time.time()
         except Exception as e:
             with LOCK: STATE["error"] = repr(e)
             print(iso(time.time()), "例外", repr(e), flush=True)

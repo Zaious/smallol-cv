@@ -2,7 +2,9 @@
 # outpost_run.py 只在程序結束時重開；卡住的（還活著、但不再做事）它看不到——2026-10-24 第 1 場，
 # feed 記錄程式從 17:24 起問一次被拒一次，什麼都沒寫，直到手動重啟。
 # 檢查（都只結束那一個程序，outpost_run 10 秒後重開；同一個程序 10 分鐘內最多動一次）：
-#   服務：state.json 超過 60 秒沒更新 → 結束 live_service（主迴圈每 5 秒寫一次）。
+#   服務：state.json 超過 150 秒沒更新 → 結束 live_service（主迴圈每 5 秒寫一次）。
+#         原本 60 秒：2026-10-24 17:13 瑞士輪第 2 天第 1 場 BP 一開始，選角辨識一口氣讀 20 分鐘的畫面、主迴圈慢了 65 秒，
+#         被當成卡住重啟（快取讀回，BP 沒有空白）。真的卡住（第 1 天那種）是好幾分鐘起跳，150 秒仍抓得到。
 #   feed：比賽中（state 為 in_game、不是 paused）而本局 feed 檔超過 5 分鐘沒長 → 結束 live_feed_log。
 #   轉播：等待或比賽中，而轉播畫面（snap/）超過 3 分鐘沒有新檔 → 結束 live_watch。
 # 每次動作寫一行到 data/live_worlds2026/watchdog.log。
@@ -61,7 +63,7 @@ def restart(name, script, why):
 def main():
     st_path = os.path.join(D, "state.json")
     a = age(st_path)
-    if a is not None and a > 60: restart("service", "live_service.py", f"state.json {a:.0f} 秒沒更新")
+    if a is not None and a > 150: restart("service", "live_service.py", f"state.json {a:.0f} 秒沒更新")
     try: st = json.load(open(st_path, encoding="utf-8"))
     except Exception: st = {}
     status = st.get("status")
