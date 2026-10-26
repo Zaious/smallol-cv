@@ -4,11 +4,13 @@
 cp tools/outpost/smallol-*.service tools/outpost/smallol-*.timer /etc/systemd/system/
 mkdir -p /etc/systemd/system/apt-daily-upgrade.timer.d
 cp tools/outpost/apt-daily-upgrade.override.conf /etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
+cp tools/outpost/needrestart-smallol.conf /etc/needrestart/conf.d/smallol.conf
 systemctl daemon-reload
 systemctl enable --now smallol-watchdog.timer smallol-daily.timer
 ```
 
 - `smallol-watchdog`：每分鐘，卡住的程序自己重啟（tools/watchdog.py）。
-- `smallol-daily`：每天 09:00 UTC，更新 yt-dlp、刪 7 天前的轉播畫面（daily.sh）。
+- `smallol-daily`：每天 09:00 UTC，更新 yt-dlp、刪 7 天前的轉播畫面、重開資料服務（daily.sh）。
+- 系統套件更新不自動重開 smallol（needrestart-smallol.conf；Tailscale 自動更新也會觸發 apt）。
 - 系統自動更新固定在 09:30–10:00 UTC。
 - 手動重啟一律用 `tools/safe_restart.sh service|feed|watch`（先過 tools/deploy_gate.py：BP 中、開賽前 10 分鐘不准）。
