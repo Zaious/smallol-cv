@@ -6,6 +6,8 @@ It watches a live LoL Esports broadcast and the official live feed, and serves t
 
 > **Status: early.** Built and run during the 2026 World Championship Play-Ins, tuned on the 2026 Worlds broadcast layout at 1080p. Expect the readers to need retuning when the broadcast overlay changes.
 
+![How it works: the official stream, one frame a second, computer vision, lined up with the official live feed by the scoreboard clock, merged into state.json](docs/media/pipeline.png)
+
 ## What it reads, and from where
 
 | Piece | Source |
@@ -15,6 +17,16 @@ It watches a live LoL Esports broadcast and the official live feed, and serves t
 | Picks and bans while the draft is on | The broadcast's draft overlay (`tools/draft_picks.py`) |
 | Herald | The broadcast's kill banner (`tools/herald_banner2.py`) |
 | Schedule, series score, rosters, this event's history | LoL Esports API and Leaguepedia (`tools/archive.py`, `tools/build_teamsheet.py`) |
+
+The feed says how many towers a team has lost, but not which ones. The minimap does: each tower site is a small patch, and the share of the team's colour in it says whether the tower is standing, gone, or hidden under a champion or an effect. The service reads it once a second and names a tower when the feed's count goes up and the minimap has shown that site gone for long enough.
+
+![A minimap frame at 29:22 of a Worlds 2026 game, each tower site boxed: standing in the team's colour, gone crossed out, can't tell in orange](docs/media/minimap.png)
+
+During the draft, the broadcast's pick cards are read every second: which champion is on each card, and whether the player is still hovering it or has locked it in. The bans are read the same way.
+
+![The draft of one game read card by card over the last seven minutes before it started: hovering in amber, locked in the team's colour](docs/media/draft.png)
+
+Both figures come from one recorded game (`tools/readme_figures_data.py` on the server, `tools/readme_figures_plot.py` to draw).
 
 The format of `state.json` is in [docs/SERVICE_CONTRACT.md](docs/SERVICE_CONTRACT.md) (Chinese), with samples in `docs/samples/`.
 
@@ -54,7 +66,7 @@ LOL_API_KEY=... python tools/live_service.py --dir data/live_worlds2026 --port 8
 
 ## What is not here
 
-Recordings, extracted frames and Riot's champion art are not committed. `tools/` also holds the experiments that led to the current readers; the live path is the files named above.
+Recordings, extracted frames and Riot's champion art are not committed, apart from the one minimap frame in `docs/media/minimap.png`. `tools/` also holds the experiments that led to the current readers; the live path is the files named above.
 
 ## Licence
 
