@@ -10,7 +10,14 @@ sys.stdout.reconfigure(encoding="utf-8")
 CSV, EVENTS, G0, START_ISO, LEAD = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4], float(sys.argv[5])
 OUTJSON = sys.argv[sys.argv.index("--json") + 1] if "--json" in sys.argv else None
 ALIVE_T, DEAD_T = 0.12, 0.12
-ALIVE_RUN, NEED_DEAD_TOTAL, REVOKE_RUN = 4, 8, 5
+ALIVE_RUN = 4
+# Dead seconds a site needs (counted since it was last seen standing 4 s in a row) before it can be named.
+NEED_DEAD_TOTAL = int(sys.argv[sys.argv.index("--need-dead") + 1]) if "--need-dead" in sys.argv else 8
+REVOKE_RUN = int(sys.argv[sys.argv.index("--revoke-run") + 1]) if "--revoke-run" in sys.argv else 5
+# Only revoke a tower name within this many seconds of naming it (nexus turrets excepted: they respawn). A wrong name
+# shows itself soon, when the champions covering a standing tower move off; minutes later, "standing" is champions on
+# the rubble. 2026-10-26 TSW vs LOS game 2: bot outer revoked 300 s after naming, the freed slot went to a covered top inner.
+REVOKE_WINDOW = float(sys.argv[sys.argv.index("--revoke-window") + 1]) if "--revoke-window" in sys.argv else float("inf")
 TIERS = ["outer", "inner", "inhib_tower"]
 
 rows = list(csv.DictReader(open(CSV)))
@@ -64,7 +71,7 @@ for i, t in enumerate(t_all):
             if first_dead[s_] is None: first_dead[s_] = int(t)
     for team in "RB":
         for s_ in list(D[team]):                              # 撤銷：外／內／水晶塔不會重生；需連續 REVOKE_RUN 秒存活
-            if run_alive[s_] >= REVOKE_RUN and D[team][s_][0] < t - 2:
+            if run_alive[s_] >= REVOKE_RUN and D[team][s_][0] < t - 2 and ("_nexus_" in s_ or t - D[team][s_][0] <= REVOKE_WINDOW):
                 if "_nexus_" in s_ and t - D[team][s_][1] >= NEXUS_RESPAWN - 20:
                     # 主堡塔被摧毀 3 分鐘後會重生（26.1 起 40% 血量）：那次摧毀仍計入 feed 塔數，之後可再次命名（clf4 新增）
                     consumed[team] += 1; respawns.append((team, s_, D[team][s_][1], int(t)))
@@ -116,5 +123,7 @@ if respawns: print("  主堡塔重生：", [(tm, s_[2:], gt(a - G0), gt(b - G0))
 if delays: print(f"  命名延遲（從影片開始顯示消失到命名）：中位數 {int(np.median(delays))} 秒，最大 {int(max(delays))} 秒")
 if OUTJSON:
     out = {tm: {s: {"named": v[0] - G0, "onset": v[1] - G0} for s, v in D[tm].items()} for tm in "RB"}
+    # 撤銷後沒再被命名的站點：畫面確認還站著（即時服務據此把先前顯示過的名字拿掉）
+    out["revoked"] = {tm: sorted({s[2:] for t_, _, s, k, _ in events if t_ == tm and k == "撤銷"} - {s[2:] for s in D[tm]}) for tm in "RB"}
     out["respawns"] = [{"team": tm, "site": s_[2:], "destroyed": a - G0, "respawnSeen": b - G0} for tm, s_, a, b in respawns]
     json.dump(out, open(OUTJSON, "w"), ensure_ascii=False)

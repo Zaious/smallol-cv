@@ -16,6 +16,13 @@ D = arg("--dir", "data/live_worlds2026"); PORT = int(arg("--port", "8787")); ONC
 # outpost_run.py 依來源設 VIDEO_LAG（2026-10-19 Day 4：Twitch 用了 31，塔的歸屬對不上）。
 LAG, G0 = float(os.environ.get("VIDEO_LAG", "31")), 1000
 LAG_OK = (15, 90)   # 實測延遲的合理範圍（秒）；超出就當誤讀
+# 塔命名：命名後連續幾秒看到它站著才撤銷（trigger_sim --revoke-run），以及撤銷是否也拿掉已顯示的名字。
+# 驗收方式見 tools/naming_replay.py。
+# 2026-10-28 重播 32 局（naming_replay.py，以塔圖示形狀為準）：20 秒、120 秒內、拿掉已顯示名字 → 標錯 1 次 30 秒、閃動 4、
+# 時間誤差 > 60 秒 56/269；舊版 0 次、26、83/267。撤銷 5 秒會把剛推倒、英雄還站在廢墟上的塔撤掉（閃動 132）。
+REVOKE_RUN, REVOKE_STICKY = 20, True
+NEED_DEAD = 8       # 站點累積幾秒「消失」才能被命名（trigger_sim --need-dead）；提高到 20 也救不了 TSW vs LOS 第 2 局
+REVOKE_WINDOW = 120 # 命名後幾秒內才允許撤銷（主堡塔除外）；0 = 不限（trigger_sim --revoke-window）
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, "..")
 ts = lambda s: dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -34,18 +41,56 @@ RULES = {
     "inhibitorRespawn": 5 * 60, "nexusTurretRespawn": 3 * 60,       # 水晶 5 分鐘重生；主堡塔 3 分鐘以 40% 血量重生
 }
 
+def run_files():
+    """各擷取段的逐秒判讀檔（clf_live_<RUN>.csv），依時間排序。"""
+    return sorted(glob.glob(f"{D}/clf_live_*.csv"))
+
+def read_run(p):
+    """讀一個擷取段的逐秒判讀（每格一列：n、wall_utc、layout、各站點 A/D/O）。重播工具（tools/naming_replay.py）會換掉它。"""
+    return list(csv.DictReader(open(p, encoding="utf-8")))
+
+def snaps(kind, run):
+    """該擷取段存下的某類畫面（hud/off/obj/ann/mm），依格數排序。"""
+    return sorted(glob.glob(f"{D}/snap/{kind}_{run}_*.*"))
+
+def frame_clock(rows):
+    """格數 n → 畫面牆鐘（秒）：每格用自己記下的時間（wall_utc，前後 10 格取中位數去抖動）。
+    以前各處用一個固定錨點（整段或最後 600 格的中位數）：轉播斷線、重連會掉格，格數漸漸落後牆鐘
+    （2026-10-25 那段 6.75 小時落後 700 秒、一局 32 分鐘內落後 90 秒），固定錨點把較早的畫面放錯時間，
+    計分列時鐘與塔命名用的時間對不起來，塔被叫錯名字（50 筆隊伍×局有 17 筆順序與小地圖不符）。"""
+    if not rows: return lambda m: m
+    n = np.array([int(r["n"]) for r in rows]); off = np.array([ts(r["wall_utc"]) for r in rows]) - n
+    k = 10
+    if len(off) > 2 * k:
+        off = np.median(np.lib.stride_tricks.sliding_window_view(np.pad(off, k, mode="edge"), 2 * k + 1), axis=1)
+    return lambda m: float(m + np.interp(m, n, off))
+
+_REPLAY_CACHE = {}
+def replay_at(run, n):
+    """這一格是否在轉播重播中（tools/replay_banner.py：左上角「REPLAY」標籤；角落畫面每 5 格存一張，前後兩張任一是重播就算）。
+    重播時小地圖是過去的畫面：已倒的塔又「站著」（2026-10-25 GEN vs LYON 29:00–31:00 兩座內塔晚了 90 秒才命名），
+    計分列時鐘、物件計時框、公告也都是過去的。錄到的比賽裡重播且看得到小地圖的畫面約 53 分鐘。"""
+    import replay_banner as RB
+    for m in (n - n % 5, n - n % 5 + 5):
+        p = f"{D}/snap/obj_{run}_{m:07d}.png"
+        if p not in _REPLAY_CACHE:
+            if not os.path.exists(p): continue
+            _REPLAY_CACHE[p] = RB.is_replay(cv2.imread(p))
+        if _REPLAY_CACHE[p]: return True
+    return False
+
 _HUD_CACHE = {}
 def hud_clock_reads(st0, t_end):
-    """讀本局的計分列時鐘：回傳 [(畫面牆鐘 w, 遊戲時鐘 − w)]，依 w 排序。畫面牆鐘以格數 n 錨定；讀值有快取。"""
+    """讀本局的計分列時鐘：回傳 [(畫面牆鐘 w, 遊戲時鐘 − w)]，依 w 排序。畫面牆鐘見 frame_clock；讀值有快取。"""
     out = []
-    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+    for p in run_files():
         run = os.path.basename(p)[9:-4]
-        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        rows = read_run(p)
         if not rows: continue
-        off = np.array([ts(r["wall_utc"]) - int(r["n"]) for r in rows]); anchor = float(np.median(off[-600:]))
-        for hp in sorted(glob.glob(f"{D}/snap/hud_{run}_*.png")):
-            n = int(hp[-11:-4]); w = n + anchor
-            if not (st0 - 30 <= w <= t_end + 90): continue
+        wt = frame_clock(rows)
+        for hp in snaps("hud", run):
+            n = int(hp[-11:-4]); w = wt(n)
+            if not (st0 - 30 <= w <= t_end + 90) or replay_at(run, n): continue
             if hp not in _HUD_CACHE: _HUD_CACHE[hp] = read_clock_safe(cv2.imread(hp), x0=920 - 500)
             c = _HUD_CACHE[hp]
             if c is not None: out.append((w, c - w))
@@ -211,14 +256,14 @@ def recent_off_frames(t_from, t_to):
 def recent_off_frames_t(t_from, t_to):
     """同上，回傳 [(畫面時間, 路徑)]。"""
     out = []
-    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+    for p in run_files():
         run = os.path.basename(p)[9:-4]
-        offs = glob.glob(f"{D}/snap/off_{run}_*.jpg")
+        offs = snaps("off", run)
         if not offs: continue
-        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        rows = read_run(p)
         if not rows: continue
-        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows[-600:]]))
-        out += [(int(fp[-11:-4]) + anchor, fp) for fp in offs if t_from <= int(fp[-11:-4]) + anchor <= t_to]
+        wt = frame_clock(rows)
+        out += [(w, fp) for w, fp in ((wt(int(fp[-11:-4])), fp) for fp in offs) if t_from <= w <= t_to]
     return sorted(out)
 
 def feed_start(gid):
@@ -238,15 +283,15 @@ def draft_bans(t_from, t_to, final):
     回傳 {"B": [禁用 1–5], "R": [禁用 1–5]}（依禁用順序；左側隊伍＝藍方）或 None。"""
     import bans26 as BN
     frames = []
-    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+    for p in run_files():
         run = os.path.basename(p)[9:-4]
-        offs = sorted(glob.glob(f"{D}/snap/off_{run}_*.jpg"))
+        offs = snaps("off", run)
         if not offs: continue
-        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        rows = read_run(p)
         if not rows: continue
-        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows]))
+        wt = frame_clock(rows)
         for fp in offs:
-            w = int(fp[-11:-4]) + anchor
+            w = wt(int(fp[-11:-4]))
             if t_from <= w <= t_to: frames.append((w, fp))
     vis = []
     for w, fp in sorted(frames):
@@ -308,16 +353,16 @@ def broadcast_objectives(st0, t_end, lag):
     import objective_box as OB
     from collections import Counter
     reads = []
-    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
+    for p in run_files():
         run = os.path.basename(p)[9:-4]
-        objs = glob.glob(f"{D}/snap/obj_{run}_*.png")
+        objs = snaps("obj", run)
         if not objs: continue
-        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+        rows = read_run(p)
         if not rows: continue
-        anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows])); lay = {int(r["n"]): r["layout"] for r in rows}
-        for fp in sorted(objs):
-            n = int(fp[-11:-4]); w = n + anchor
-            if not (st0 + lag <= w <= t_end + lag + 30) or lay.get(n) != "1": continue
+        wt = frame_clock(rows); lay = {int(r["n"]): r["layout"] for r in rows}
+        for fp in objs:
+            n = int(fp[-11:-4]); w = wt(n)
+            if not (st0 + lag <= w <= t_end + lag + 30) or lay.get(n) != "1" or replay_at(run, n): continue
             if fp not in _OBJ_CACHE:
                 ob = OB.read(cv2.imread(fp)); hp = f"{D}/snap/hud_{run}_{n:07d}.png"
                 gr = OB.read_grubs(cv2.imread(hp), x_off=-500) if os.path.exists(hp) else {"B": None, "R": None}
@@ -343,12 +388,13 @@ def broadcast_objectives(st0, t_end, lag):
         try:
             import herald_banner2 as HB2
             T = HB2.load(os.path.join(ROOT, "assets", "herald_banner2.npz"))
-            for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
-                run = os.path.basename(p)[9:-4]; anns = glob.glob(f"{D}/snap/ann_{run}_*.png")
+            for p in run_files():
+                run = os.path.basename(p)[9:-4]; anns = snaps("ann", run)
                 if not anns: continue
-                rows = list(csv.DictReader(open(p, encoding="utf-8")))
-                anchor = float(np.median([ts(r["wall_utc"]) - int(r["n"]) for r in rows]))
-                win = sorted(fp for fp in anns if 14 * 60 <= int(fp[-11:-4]) + anchor - st0 - lag <= min(20 * 60 + 30, t_end - st0 + 30))
+                rows = read_run(p)
+                if not rows: continue
+                wt = frame_clock(rows)
+                win = [fp for fp in anns if 14 * 60 <= wt(int(fp[-11:-4])) - st0 - lag <= min(20 * 60 + 30, t_end - st0 + 30) and not replay_at(run, int(fp[-11:-4]))]
                 hits = []                                         # 每張只算一次：(分數, 藍, 紅)
                 for fp in win:
                     if fp not in _ANN_CACHE:
@@ -362,7 +408,7 @@ def broadcast_objectives(st0, t_end, lag):
                 for n0, _, b, r in segs:
                     team = "B" if b >= 100 and b >= 2 * r else "R" if r >= 100 and r >= 2 * b else None
                     if team:
-                        herald_team = team; herald_at = int(n0 + anchor - st0 - lag)
+                        herald_team = team; herald_at = int(wt(n0) - st0 - lag)
                         _HERALD_FOUND[st0] = (herald_team, herald_at); break
                 if herald_team: break
         except Exception as e:
@@ -393,14 +439,15 @@ def current_game():
 def cv_rows(st0, t_end, lag=LAG):
     """把所有 clf_live_*.csv 中落在本局的逐秒判讀，轉成 trigger_sim 的時間軸（畫面時間以格數 n 錨定）。"""
     out = {}
-    for p in sorted(glob.glob(f"{D}/clf_live_*.csv")):
-        rows = list(csv.DictReader(open(p, encoding="utf-8")))
+    for p in run_files():
+        rows = read_run(p)
         if not rows: continue
-        off = np.array([ts(r["wall_utc"]) - int(r["n"]) for r in rows])
+        wt = frame_clock(rows); run = os.path.basename(p)[9:-4]
         for i, r in enumerate(rows):
             if "R_top_outer_A" not in r: continue                # 缺塔欄位的列（例如只有版面欄位）不用，避免整個塔命名失效
-            w = int(r["n"]) + float(np.median(off[max(0, i - 300):i + 300])) - lag
+            w = wt(int(r["n"])) - lag
             if not (st0 - 60 <= w <= t_end): continue
+            if r.get("layout") == "1" and replay_at(run, int(r["n"])): continue   # 重播：小地圖是過去的畫面
             out[int(round(w - st0)) + G0] = r
     return out
 
@@ -422,12 +469,14 @@ def tower_naming(gid, feed, finished, lag=LAG):
                 for k in cur:
                     if cur[k] > prev[k]: f.write(f'{x["ts"]} {k} {prev[k]}->{cur[k]}\n')
             prev = cur
-    cmd = [sys.executable, os.path.join(HERE, "trigger_sim_clf4.py"), f"{tmp}/clf.csv", f"{tmp}/events.txt", str(G0), ig[0]["ts"], str(lag), "--thr", "0.7", "--live", "--json", f"{tmp}/named.json"]
+    cmd = [sys.executable, os.path.join(HERE, "trigger_sim_clf4.py"), f"{tmp}/clf.csv", f"{tmp}/events.txt", str(G0), ig[0]["ts"], str(lag), "--thr", "0.7", "--live", "--json", f"{tmp}/named.json",
+           "--revoke-run", str(REVOKE_RUN), "--need-dead", str(NEED_DEAD)] + (["--revoke-window", str(REVOKE_WINDOW)] if REVOKE_WINDOW else [])
     if finished: cmd.append("--complete")
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
     if r.returncode != 0: return None, (r.stderr or r.stdout or f"trigger_sim 結束碼 {r.returncode}")[-300:]
     named = json.load(open(f"{tmp}/named.json", encoding="utf-8"))
     out = {tm: sorted(({"site": s[2:], "gameTime": gclock(v["onset"]), "sec": v["onset"]} for s, v in named[tm].items()), key=lambda x: x["sec"]) for tm in "RB"}
+    out["revoked"] = named.get("revoked") or {"R": [], "B": []}
     # 主堡塔：被摧毀 3 分鐘後重生（26.1 起 40% 血量）；倒數以命名的消失時間 + 規則推算，重生由畫面確認後從已摧毀清單移除
     out["nexusTurretsDown"] = [{"teamLost": tm, "site": x["site"], "respawnAt": gclock(x["sec"] + RULES["nexusTurretRespawn"])} for tm in "RB" for x in out[tm] if x["site"].startswith("nexus")]
     out["nexusRespawnsSeen"] = [{**r, "destroyedAt": gclock(r["destroyed"]), "respawnSeenAt": gclock(r["respawnSeen"])} for r in named.get("respawns", [])]
@@ -443,6 +492,11 @@ def sticky_towers(gid, towers, last):
     for tm in "RB":
         new = {x["site"]: x for x in towers[tm]}
         for site in [k for k in keep[tm] if k.startswith("nexus") and k not in new]: keep[tm].pop(site)
+        # 例外：命名後畫面又看到它連續站著（trigger_sim 撤銷、且沒再命名）就拿掉。2026-10-26 TSW vs LOS 第 2 局：
+        # 上路內塔被英雄蓋住 10 秒先被命名、半分鐘後撤銷，這裡卻一直留著，App 上錯了 2 分鐘。
+        if REVOKE_STICKY:
+            for site in (towers.get("revoked") or {}).get(tm, []):
+                if not site.startswith("nexus"): keep[tm].pop(site, None)
         for site, x in new.items(): keep[tm].setdefault(site, x)
         towers[tm] = sorted(keep[tm].values(), key=lambda x: x["sec"])[:max(lost[tm], len(new))]
     return towers
@@ -581,7 +635,33 @@ def update(gid=None):
     except Exception as e:
         st["playersError"] = repr(e)[:200]
     ig = [x for x in feed if x["state"] == "in_game"]; st0 = ts(ig[0]["ts"]); end = ts(feed[-1]["ts"])
-    reads = hud_clock_reads(st0, end if finished else time.time())
+    L, measured, clock_of, nreads = game_clock(st0, end if finished else time.time())
+    if L is not None:
+        st["clockSource"] = f"計分列時鐘（{nreads} 張）"
+        if measured: st["measuredLagSec"] = round(L, 1)
+    else:
+        st["clockSource"] = "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）"
+    st.update(objectives(feed, clock_of))
+    try:
+        bo = broadcast_objectives(st0, end if finished else time.time(), st.get("measuredLagSec") or LAG)
+        if bo:
+            nd = st["timers"]["nextDragon"]
+            if bo["nextDragonElement"]:
+                if bo["nextDragonElement"] == "elder": nd["kind"] = "elder"
+                else: nd["element"] = bo["nextDragonElement"]; nd["elementNote"] = None
+                nd["elementSource"] = "broadcast"
+            else: nd["elementSource"] = "rules"
+            st["voidgrubs"] = bo["voidgrubs"]; st["herald"] = bo["herald"]; st["pitNext"] = bo["pitNext"]
+    except Exception as e:
+        st["broadcastError"] = repr(e)[:200]
+    towers, err = towers_named(gid, feed, finished, st.get("measuredLagSec") or LAG, clock_of, st0)
+    st["towersLost"] = towers                                  # 鍵為失去塔的隊伍（R/B），值為已命名的站點與影片顯示消失的遊戲時間
+    if err: st["towersError"] = err
+    return st
+
+def game_clock(st0, t_end):
+    """計分列時鐘 → (延遲 L 或 None, L 是否為實測, clock_of(feed 時間戳秒) -> 遊戲時鐘秒, 讀值張數)。"""
+    reads = hud_clock_reads(st0, t_end)
     L = None; hud_lag_default = False
     if len(reads) >= 5:
         offs = np.array([o for _, o in reads]); ws = np.array([w for w, _ in reads])
@@ -605,34 +685,19 @@ def update(gid=None):
             v = t + L                                          # feed 事件在畫面上出現的時間
             i = np.argsort(np.abs(ws - v))[:5]                 # 取最接近的 5 個讀值的偏移中位數（抗誤讀，跟得上暫停）
             return v + float(np.median(offs[i]))
-        st["clockSource"] = f"計分列時鐘（{len(reads)} 張）"
-        if not hud_lag_default: st["measuredLagSec"] = round(L, 1)
-    else:
-        clock_of = lambda t: t - st0
-        st["clockSource"] = "feed 時間戳（未讀到計分列時鐘；與畫面時鐘可能差數十秒）"
-    st.update(objectives(feed, clock_of))
-    try:
-        bo = broadcast_objectives(st0, end if finished else time.time(), st.get("measuredLagSec") or LAG)
-        if bo:
-            nd = st["timers"]["nextDragon"]
-            if bo["nextDragonElement"]:
-                if bo["nextDragonElement"] == "elder": nd["kind"] = "elder"
-                else: nd["element"] = bo["nextDragonElement"]; nd["elementNote"] = None
-                nd["elementSource"] = "broadcast"
-            else: nd["elementSource"] = "rules"
-            st["voidgrubs"] = bo["voidgrubs"]; st["herald"] = bo["herald"]; st["pitNext"] = bo["pitNext"]
-    except Exception as e:
-        st["broadcastError"] = repr(e)[:200]
-    towers, err = tower_naming(gid, feed, finished, st.get("measuredLagSec") or LAG)   # 直播落後秒數依來源不同（YouTube 約 31、Twitch 約 46），有實測就用實測
+        return L, not hud_lag_default, clock_of, len(reads)
+    return None, False, (lambda t: t - st0), len(reads)
+
+def towers_named(gid, feed, finished, lag, clock_of, st0):
+    """哪幾座塔倒了（已命名者不收回，時間換成遊戲時鐘）。回傳 (towers 或 None, 錯誤訊息或 None)。"""
+    towers, err = tower_naming(gid, feed, finished, lag)        # 直播落後秒數依來源不同（YouTube 約 31、Twitch 約 46），有實測就用實測
     if towers:
-        towers = sticky_towers(gid, towers, feed[-1])
+        towers = sticky_towers(gid, towers, feed[-1]); towers.pop("revoked", None)
         # 命名的時間是 feed 開局後的秒數；換成遊戲時鐘（開局暫停時兩者差好幾分鐘：瑞士輪第 1 場顯示 22:14，實際 15:05）
         for tm in "RB":
             towers[tm] = [{**x, "sec": round(clock_of(st0 + x["sec"])), "gameTime": gclock(round(clock_of(st0 + x["sec"])))} for x in towers[tm]]
         towers["nexusTurretsDown"] = [{"teamLost": tm, "site": x["site"], "respawnAt": gclock(x["sec"] + RULES["nexusTurretRespawn"])} for tm in "RB" for x in towers[tm] if x["site"].startswith("nexus")]
-    st["towersLost"] = towers                                  # 鍵為失去塔的隊伍（R/B），值為已命名的站點與影片顯示消失的遊戲時間
-    if err: st["towersError"] = err
-    return st
+    return towers, err
 
 def log_new_events(old, new):
     if not new.get("game"): return
@@ -757,7 +822,7 @@ USAGE = Usage()
 # 起因：2026-10-24 18:14 第 2 場 BP 中重啟，BP 要重讀 20 分鐘的畫面，空白了約 5 分鐘。
 # 每份最多留最新 KEEP 筆（鍵是畫面檔名，依序遞增），另每 10 分鐘存一次以防當機。
 CACHE_FILE = os.path.join(D, "svc", "caches.pkl"); KEEP = 3000
-_PERSIST = ("_HUD_CACHE", "_BAN_CACHE", "_PICK_CARDS", "_OBJ_CACHE", "_ANN_CACHE", "_HERALD_FOUND", "_TOWER_STICKY")
+_PERSIST = ("_HUD_CACHE", "_BAN_CACHE", "_PICK_CARDS", "_OBJ_CACHE", "_ANN_CACHE", "_HERALD_FOUND", "_TOWER_STICKY", "_REPLAY_CACHE")
 
 def prune_caches():
     """記憶體裡的辨識快取也只留最新 KEEP 筆：原本只增不減，服務跑 17 小時長到 2 GB（2026-10-25 量測，前一天 825 MB）。
